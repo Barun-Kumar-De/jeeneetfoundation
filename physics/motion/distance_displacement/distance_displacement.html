@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Motion: Distance vs Displacement | Speed vs Velocity</title>
+  <link rel="stylesheet" href="distance_displacement.css">
+</head>
+<body>
+
+<!-- ===================== INTRO SCREEN ===================== -->
+<div id="screen-intro" class="screen active">
+  <span class="screen-num-intro">Screen 1 / 13</span>
+  <div class="dot-row top-dots"></div>
+  <div class="intro-hero">
+    <h1 class="hero-title" id="intro-title">Motion</h1>
+    <p class="hero-sub" id="intro-sub">Distance vs Displacement | Speed vs Velocity</p>
+  </div>
+  <div class="dot-row mid-dots"></div>
+  <button class="btn-primary begin-btn" id="begin-btn" onclick="goToScreen('screen-1')">Begin &rarr;</button>
+</div>
+
+<!-- ===================== SCREEN 1: HOME ===================== -->
+<div id="screen-1" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 2 / 13</span>
+  </div>
+  <div class="screen-body">
+    <div class="s1-header" id="s1-header">
+      <h1 class="page-title">Walk Tracker</h1>
+      <p class="tagline">Move the dot. Watch distance and displacement update live.</p>
+    </div>
+    <div class="path-grid">
+      <div class="path-card" id="path-straight" data-path="straight" onclick="selectPath('straight')">
+        <div class="path-icon">
+          <svg viewBox="0 0 130 60"><line x1="12" y1="30" x2="100" y2="30" stroke="#2563eb" stroke-width="3"/><polygon points="100,23 118,30 100,37" fill="#2563eb"/></svg>
+        </div>
+        <h3>Straight</h3>
+      </div>
+      <div class="path-card" id="path-zigzag" data-path="zigzag" onclick="selectPath('zigzag')">
+        <div class="path-icon">
+          <svg viewBox="0 0 130 60"><polyline points="5,52 38,8 70,52 102,8 125,28" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Zig-Zag</h3>
+      </div>
+      <div class="path-card" id="path-circular" data-path="circular" onclick="selectPath('circular')">
+        <div class="path-icon">
+          <svg viewBox="0 0 130 60"><circle cx="65" cy="30" r="24" fill="none" stroke="#2563eb" stroke-width="3"/></svg>
+        </div>
+        <h3>Circular</h3>
+      </div>
+    </div>
+    <button class="btn-primary start-btn" id="start-btn" onclick="startSimulator()">&#9654; Start Walking</button>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-1">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-1"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-1" onclick="toggleNarration('screen-1')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-1')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 2: SIMULATOR ===================== -->
+<div id="screen-2" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 3 / 13</span>
+  </div>
+  <div class="sim-layout">
+    <div class="canvas-wrap" id="canvas-wrap-2">
+      <canvas id="sim-canvas" width="560" height="390"></canvas>
+      <p class="canvas-hint">[ DRAG THE CHARACTER ]</p>
+    </div>
+    <div class="readouts-panel">
+      <h3 class="panel-title">LIVE READOUTS</h3>
+      <div class="metric-card dist-card" id="sim-dist-card">
+        <div class="metric-label dist-label">DISTANCE</div>
+        <div class="metric-value" id="sim-distance">0.0 m</div>
+        <div class="metric-sub">total path length</div>
+      </div>
+      <div class="metric-card disp-card" id="sim-disp-card">
+        <div class="metric-label disp-label">DISPLACEMENT</div>
+        <div class="metric-value" id="sim-displacement">0.0 m</div>
+        <div class="metric-dir" id="sim-direction">at origin</div>
+        <div class="metric-sub">magnitude + direction</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="resetSim()">&#8635; Reset</button>
+        <button class="btn-primary" onclick="simNext()">Next &#9654;</button>
+      </div>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-2">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-2"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-2" onclick="toggleNarration('screen-2')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-2')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 3: ZERO DISPLACEMENT ===================== -->
+<div id="screen-3" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 4 / 13</span>
+  </div>
+  <div class="sim-layout">
+    <div class="canvas-wrap" id="canvas-wrap-3">
+      <canvas id="circle-canvas" width="560" height="390"></canvas>
+      <div class="circle-labels" id="circle-labels">
+        <p class="disp-zero-lbl">displacement = 0</p>
+        <p class="loop-lbl">[ ONE FULL LOOP ]</p>
+      </div>
+    </div>
+    <div class="readouts-panel">
+      <h3 class="panel-title">AFTER 1 FULL LAP</h3>
+      <div class="metric-card dist-card" id="circle-dist-card">
+        <div class="metric-label dist-label">DISTANCE</div>
+        <div class="metric-value" id="circle-distance">0.0 m</div>
+        <div class="metric-sub">full circumference</div>
+        <div class="circle-formula">r = 1.5 m &nbsp;&rarr;&nbsp; C = 2&pi;r &asymp; 9.42 m</div>
+      </div>
+      <div class="metric-card disp-card" id="circle-disp-card">
+        <div class="metric-label disp-label">DISPLACEMENT</div>
+        <div class="metric-value" id="circle-displacement" style="color:#16a34a">0 m</div>
+        <div class="metric-sub">you ended where you started</div>
+      </div>
+      <button class="btn-primary why-btn" id="why-btn" onclick="showWhy()">? Why is this 0?</button>
+      <div class="why-box hidden" id="why-box">
+        <p>Displacement only cares about start and end. You ended where you started, so it&rsquo;s zero.</p>
+        <button class="btn-primary" onclick="goToScreen('screen-4')" style="margin-top:10px">Next: Challenge &#9654;</button>
+      </div>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-3">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-3"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-3" onclick="toggleNarration('screen-3')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-3')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 4: CHALLENGE ===================== -->
+<div id="screen-4" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 5 / 13</span>
+  </div>
+  <div class="screen-body challenge-body">
+    <div class="challenge-header" id="challenge-header">
+      <h2 class="page-title">Challenge Questions</h2>
+      <p class="tagline">Inline MCQs &mdash; active recall tool</p>
+    </div>
+
+    <div class="question-card" id="q1-card">
+      <div class="q-tag">Q1 &middot; conceptual</div>
+      <h3 class="q-text">Can displacement be zero while distance is non-zero?</h3>
+      <div class="mcq-grid">
+        <button class="mcq-btn" data-correct="true" onclick="answerMCQ(this,'q1')">A. Yes &mdash; e.g. one full circle</button>
+        <button class="mcq-btn" onclick="answerMCQ(this,'q1')">B. No &mdash; they are always equal</button>
+        <button class="mcq-btn" onclick="answerMCQ(this,'q1')">C. Only on a straight line</button>
+        <button class="mcq-btn" onclick="answerMCQ(this,'q1')">D. Only when speed is zero</button>
+      </div>
+      <div class="q-feedback hidden" id="q1-feedback"></div>
+    </div>
+
+    <div class="question-card" id="q2-card">
+      <div class="q-tag">Q2 &middot; exploration</div>
+      <h3 class="q-text">For a path of total length 10 m, what is the maximum possible displacement?</h3>
+      <div class="numeric-row">
+        <input type="number" id="q2-input" placeholder="type answer" min="0" max="10" step="0.1" />
+        <span class="unit-label">m</span>
+        <button class="btn-primary" onclick="checkQ2()">Check</button>
+        <button class="btn-secondary hint-btn" onclick="showHint()">&#128161; Hint</button>
+      </div>
+      <p class="hint-text hidden" id="hint-text">Try walking a straight line &mdash; what happens to the two numbers?</p>
+      <div class="q-feedback hidden" id="q2-feedback"></div>
+    </div>
+
+    <button class="btn-primary challenge-next hidden" id="challenge-next" onclick="goToScreen('screen-5')">
+      Next: Vector Decomposition &#9654;
+    </button>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-4">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-4"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-4" onclick="toggleNarration('screen-4')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-4')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 5: ADVANCED / VECTOR ===================== -->
+<div id="screen-5" class="screen">
+  <div class="advanced-top">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <div class="advanced-badge" id="advanced-badge">&#9881; ADVANCED <span class="dot-on">&#9679;</span></div>
+    <span class="screen-num">Screen 6 / 13</span>
+  </div>
+  <div class="sim-layout">
+    <div class="canvas-wrap" id="canvas-wrap-5">
+      <canvas id="vector-canvas" width="560" height="360"></canvas>
+      <p class="canvas-hint">[ DRAG THE ARROW TIP TO EXPLORE ]</p>
+    </div>
+    <div class="readouts-panel">
+      <h3 class="panel-title">VECTOR BREAKDOWN</h3>
+      <div class="metric-card comp-card" id="dx-card">
+        <div class="metric-label comp-label">x-component</div>
+        <div class="metric-value" id="dx-value">d&#x2093; = 6.0 m</div>
+      </div>
+      <div class="metric-card comp-card" id="dy-card">
+        <div class="metric-label comp-label">y-component</div>
+        <div class="metric-value" id="dy-value">d_y = 4.0 m</div>
+      </div>
+      <div class="metric-card comp-card mag-card" id="mag-card">
+        <div class="metric-label comp-label">magnitude</div>
+        <div class="formula-text">|d&#x20D7;| = &radic;(d&#x2093;&sup2; + d_y&sup2;)</div>
+        <div class="metric-value" id="mag-value">= 7.21 m</div>
+      </div>
+      <div class="metric-card outline-card" id="theta-card">
+        <div class="metric-value theta-val" id="theta-value">&theta; = tan&#x207B;&sup1;(4/6) &asymp; 33.7&deg;</div>
+      </div>
+      <button class="btn-primary" onclick="goToScreen('screen-6')">Next &#9654;</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-5">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-5"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-5" onclick="toggleNarration('screen-5')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-5')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 6: RECAP ===================== -->
+<div id="screen-6" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 7 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title recap-title" id="recap-title">Session complete &#10003;</h2>
+    <p class="tagline">Here&rsquo;s what you locked in today.</p>
+    <div class="recap-grid">
+      <div class="recap-card" id="recap-1">
+        <div class="recap-num">1</div>
+        <div class="recap-content">
+          <h3>Distance is scalar.</h3>
+          <p>It only cares about how much path you covered. Always &ge; 0.</p>
+        </div>
+      </div>
+      <div class="recap-card" id="recap-2">
+        <div class="recap-num">2</div>
+        <div class="recap-content">
+          <h3>Displacement is a vector.</h3>
+          <p>It has magnitude AND direction. Start &rarr; End straight line.</p>
+        </div>
+      </div>
+      <div class="recap-card" id="recap-3">
+        <div class="recap-num">3</div>
+        <div class="recap-content">
+          <h3>They can disagree.</h3>
+          <p>Walk a circle: distance = 2&pi;r, displacement = 0. Same path, different answers.</p>
+        </div>
+      </div>
+    </div>
+    <div class="recap-btns">
+      <button class="btn-secondary" onclick="goToScreen('screen-1')">&#8635; Start Over</button>
+      <button class="btn-primary" onclick="goToScreen('screen-7')">Next: Speed &amp; Velocity &#9654;</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-6">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-6"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-6" onclick="toggleNarration('screen-6')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-6')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 7: SPEED & VELOCITY ===================== -->
+<div id="screen-7" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 8 / 13</span>
+  </div>
+  <div class="s7-header" id="s7-header">
+    <h2 class="page-title">Add time &mdash; now you can compute speed &amp; velocity</h2>
+    <p class="tagline">Move the character. Type how long the walk took. The four numbers update live.</p>
+  </div>
+  <div class="s7-main">
+    <div class="s7-canvas-col">
+      <div class="canvas-wrap" id="s7-canvas-wrap">
+        <canvas id="speed-canvas" width="560" height="310"></canvas>
+        <p class="canvas-hint">[ DRAG THE CHARACTER ]</p>
+      </div>
+      <div class="s7-time-section" id="s7-time-section">
+        <div class="s7-time-label">
+          <span class="time-icon">&#9201;</span>
+          <div>
+            <div class="time-title">TIME TAKEN</div>
+            <div class="time-sub">(type how long the walk took)</div>
+          </div>
+        </div>
+        <div class="s7-time-input-wrap">
+          <input type="number" id="s7-time-input" value="4.0" min="0.1" max="9999" step="0.1" oninput="updateSpeedSim()">
+          <span class="time-unit">s</span>
+        </div>
+        <div class="time-hint">&#8593; try 2 s, then 8 s &mdash; watch speed change</div>
+      </div>
+    </div>
+  </div>
+  <div class="s7-metrics">
+    <div class="metric-card dist-card s7-metric-card" id="s7-dist-card">
+      <div class="metric-label dist-label">DISTANCE</div>
+      <div class="s7-metric-sub">sum of segments</div>
+      <div class="metric-value s7-metric-value" id="s7-distance">0.0 m</div>
+      <div class="metric-sub">scalar &middot; total path length</div>
+    </div>
+    <div class="metric-card disp-card s7-metric-card" id="s7-disp-card">
+      <div class="metric-label disp-label">DISPLACEMENT</div>
+      <div class="s7-metric-sub">vector(start &rarr; now)</div>
+      <div class="metric-value s7-metric-value" id="s7-displacement">0.0 m</div>
+      <div class="metric-dir" id="s7-direction">at origin</div>
+      <div class="metric-sub">vector &middot; magnitude + direction</div>
+    </div>
+    <div class="metric-card s7-metric-card s7-speed-card" id="s7-speed-card">
+      <div class="metric-label s7-speed-label">SPEED</div>
+      <div class="s7-metric-sub" id="s7-speed-formula">0.0 m &divide; 4.0 s</div>
+      <div class="metric-value s7-metric-value s7-speed-val" id="s7-speed">0.00 m/s</div>
+      <div class="metric-sub">scalar &middot; distance &divide; time</div>
+    </div>
+    <div class="metric-card s7-metric-card s7-velocity-card" id="s7-velocity-card">
+      <div class="metric-label s7-velocity-label">VELOCITY</div>
+      <div class="s7-metric-sub" id="s7-velocity-formula">0.0 m &divide; 4.0 s</div>
+      <div class="metric-value s7-metric-value s7-velocity-val" id="s7-velocity">0.00 m/s</div>
+      <div class="metric-dir" id="s7-vel-direction">at origin</div>
+      <div class="metric-sub">vector &middot; displacement &divide; time</div>
+    </div>
+  </div>
+  <div class="s7-next-row">
+    <button class="btn-primary" onclick="goToScreen('screen-8')">Next: How the four numbers connect &#9654;</button>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-7">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-7"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-7" onclick="toggleNarration('screen-7')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-7')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 8: HOW THE FOUR NUMBERS CONNECT ===================== -->
+<div id="screen-8" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 9 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title" id="s8-header">How the four numbers connect</h2>
+    <p class="tagline">Two divisions, three lines each. Scalar in &rarr; scalar out. Vector in &rarr; vector out.</p>
+    <div class="s8-panels">
+      <div class="s8-panel s8-speed-panel" id="s8-speed-panel">
+        <h3 class="s8-panel-title">Speed</h3>
+        <div class="s8-formula-box s8-speed-formula-box" id="s8-speed-formula">
+          speed = <span class="s8-dist-word">distance</span> &divide; <strong>time</strong>
+        </div>
+        <div class="s8-worked">
+          <div class="s8-worked-label">WORKED EXAMPLE</div>
+          <div class="s8-worked-line">speed &nbsp;= <span class="s8-dist-word">12.4 m</span> &divide; <strong>4.0 s</strong></div>
+          <div class="s8-worked-result s8-speed-result">= 3.1 m/s</div>
+        </div>
+        <hr class="s8-hr">
+        <div class="s8-words-label">In words</div>
+        <p class="s8-words">&ldquo;On average, you covered 3.1 metres of path every second.&rdquo; No direction &mdash; just a rate.</p>
+      </div>
+      <div class="s8-panel s8-velocity-panel" id="s8-velocity-panel">
+        <h3 class="s8-panel-title">Velocity</h3>
+        <div class="s8-formula-box s8-velocity-formula-box" id="s8-velocity-formula">
+          velocity = <span class="s8-disp-word">displacement</span> &divide; <strong>time</strong>
+        </div>
+        <div class="s8-worked">
+          <div class="s8-worked-label">WORKED EXAMPLE</div>
+          <div class="s8-worked-line">velocity = <span class="s8-disp-word">7.1 m &rarr; 28&deg; NE</span> &divide; <strong>4.0 s</strong></div>
+          <div class="s8-worked-result s8-velocity-result">= 1.8 m/s &rarr; 28&deg; NE</div>
+        </div>
+        <hr class="s8-hr">
+        <div class="s8-words-label">In words</div>
+        <p class="s8-words">&ldquo;On average, you moved 1.8 metres NE every second.&rdquo; Magnitude AND direction.</p>
+      </div>
+    </div>
+    <div class="s8-shortcut why-box" id="s8-shortcut">
+      <strong>The shortcut to remember</strong><br>
+      Dividing a <span class="s8-scalar-word">scalar</span> by time gives a <span class="s8-scalar-word">scalar.</span>&nbsp;&nbsp;
+      Dividing a <span class="s8-vector-word">vector</span> by time gives a <span class="s8-vector-word">vector.</span>&nbsp;
+      Time itself is just a number &mdash; it never adds direction.
+    </div>
+    <div style="margin-top:16px">
+      <button class="btn-primary" onclick="goToScreen('screen-9')">Next: Scalar vs Vector &#9654;</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-8">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-8"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-8" onclick="toggleNarration('screen-8')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-8')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 9: SCALAR VS VECTOR ===================== -->
+<div id="screen-9" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 10 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title" id="s9-header">Scalar vs Vector &mdash; the pattern behind it all</h2>
+    <p class="tagline">One question unlocks both pairs: does direction matter?</p>
+    <div class="s9-panels">
+      <div class="s9-panel s9-scalar-panel" id="s9-scalar-panel">
+        <div class="s9-panel-tag s9-scalar-tag">SCALAR</div>
+        <h3 class="s9-panel-title">Magnitude only</h3>
+        <p class="s9-panel-desc">A number with a unit. No arrow, no compass &mdash; just &ldquo;how much.&rdquo;</p>
+        <hr class="s9-hr">
+        <div class="s9-entry">
+          <div class="s9-entry-tag dist-label">DISTANCE</div>
+          <div class="s9-entry-visual">
+            <span class="s9-dist-dashes">&#8212; &#8212; &#8212;</span>
+            <strong>12.4 m</strong>
+          </div>
+          <div class="s9-entry-desc">&ldquo;how much path you walked&rdquo;</div>
+        </div>
+        <hr class="s9-hr">
+        <div class="s9-entry">
+          <div class="s9-entry-tag s9-speed-label">SPEED</div>
+          <div class="s9-entry-visual">
+            <span class="s9-dist-dashes">&#8212; &#8212; &#8212;</span>
+            <strong>3.1 m/s</strong>
+          </div>
+          <div class="s9-entry-desc">&ldquo;how fast you moved&rdquo;</div>
+        </div>
+        <div class="s9-note s9-scalar-note">Cannot be negative. Adds like ordinary numbers: 5 m + 3 m = 8 m.</div>
+      </div>
+      <div class="s9-panel s9-vector-panel" id="s9-vector-panel">
+        <div class="s9-panel-tag s9-vector-tag">VECTOR</div>
+        <h3 class="s9-panel-title">Magnitude + Direction</h3>
+        <p class="s9-panel-desc">A number, a unit, AND a direction. The arrow matters.</p>
+        <hr class="s9-hr">
+        <div class="s9-entry">
+          <div class="s9-entry-tag disp-label">DISPLACEMENT</div>
+          <div class="s9-entry-visual">
+            <span class="s9-disp-arrow">&#8212;&#8212;&#8212;&#8594;</span>
+            <strong>7.1 m &rarr; 28&deg; NE</strong>
+          </div>
+          <div class="s9-entry-desc">&ldquo;start to end, straight line&rdquo;</div>
+        </div>
+        <hr class="s9-hr">
+        <div class="s9-entry">
+          <div class="s9-entry-tag s9-velocity-label">VELOCITY</div>
+          <div class="s9-entry-visual">
+            <span class="s9-disp-arrow">&#8212;&#8212;&#8212;&#8594;</span>
+            <strong>1.8 m/s &rarr; 28&deg; NE</strong>
+          </div>
+          <div class="s9-entry-desc">&ldquo;how fast AND which way&rdquo;</div>
+        </div>
+        <div class="s9-note s9-vector-note">Adds head-to-tail. 3 m east + 4 m north = 5 m at 53&deg; NE.</div>
+      </div>
+    </div>
+    <div class="s9-pattern" id="s9-pattern">
+      <span class="s9-pattern-label">THE PATTERN</span>
+      <span class="s9-scalar-eq"><span class="s9-scalar-term">scalar</span> &divide; <span class="s9-time-term">time</span> = <span class="s9-scalar-term">scalar</span></span>
+      <span class="s9-pattern-sep">(distance &rarr; speed)</span>
+      &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+      <span class="s9-vector-eq"><span class="s9-vector-term">vector</span> &divide; <span class="s9-time-term">time</span> = <span class="s9-vector-term">vector</span></span>
+      <span class="s9-pattern-sep">(displacement &rarr; velocity)</span>
+    </div>
+    <div class="s9-end-btns">
+      <button class="btn-secondary" onclick="goToScreen('screen-1')">&#8635; Start Over</button>
+      <button class="btn-primary" onclick="goToScreen('screen-10')">Next: Speed &amp; Velocity Question &#9654;</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-9">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-9"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-9" onclick="toggleNarration('screen-9')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-9')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 10: Q3 – SPEED vs VELOCITY ===================== -->
+<div id="screen-10" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 11 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title" id="s10-header">Question on Speed &ndash; Velocity</h2>
+    <div class="s10-layout">
+      <div class="s10-q-col">
+        <div class="q-tag">Q3 &middot; average velocity on a curved path</div>
+        <p class="s10-q-text">A particle moves at constant speed v along a semicircular arc of radius R, from A to B. Find the magnitude of its average velocity.</p>
+        <canvas id="s10-canvas" width="300" height="185"></canvas>
+      </div>
+      <div class="s10-mcq-col">
+        <div class="s10-choose">CHOOSE ONE</div>
+        <div class="s10-mcq-list" id="s10-mcq">
+          <button class="s10-mcq-btn" onclick="answerS10(this, false)">
+            <span class="s10-opt-label">A.</span>
+            <span class="s10-opt-value"><strong>v</strong></span>
+            <span class="s10-opt-hint">the speed itself</span>
+          </button>
+          <button class="s10-mcq-btn" onclick="answerS10(this, false)">
+            <span class="s10-opt-label">B.</span>
+            <span class="s10-opt-value"><strong>&pi;v/2</strong></span>
+            <span class="s10-opt-hint">&asymp; 1.57 v</span>
+          </button>
+          <button class="s10-mcq-btn" data-correct="true" onclick="answerS10(this, true)">
+            <span class="s10-opt-label">C.</span>
+            <span class="s10-opt-value"><strong>2v/&pi;</strong></span>
+            <span class="s10-opt-hint">&asymp; 0.64 v</span>
+          </button>
+          <button class="s10-mcq-btn" onclick="answerS10(this, false)">
+            <span class="s10-opt-label">D.</span>
+            <span class="s10-opt-value"><strong>v/&pi;</strong></span>
+            <span class="s10-opt-hint">&asymp; 0.32 v</span>
+          </button>
+        </div>
+        <div class="s10-solution hidden" id="s10-solution">
+          <div class="s10-sol-label">SOLUTION</div>
+          <p class="s10-sol-text">time on arc = &pi;R / v &nbsp;&middot;&nbsp; |avg velocity| = displacement &divide; time = 2R &divide; (&pi;R/v) = <strong>2v/&pi;</strong></p>
+          <button class="btn-primary" onclick="goToScreen('screen-11')" style="margin-top:10px">See step-by-step &#9654;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-10">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-10"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-10" onclick="toggleNarration('screen-10')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-10')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 11: SOLUTION ===================== -->
+<div id="screen-11" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 12 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title" id="s11-header">Solution</h2>
+    <div class="s11-layout">
+      <div class="s11-steps" id="s11-steps">
+        <div class="s11-step-card" id="s11-step1">
+          <div class="s11-step-num s11-num-orange">1</div>
+          <div class="s11-step-body">
+            <h4>Path length (the arc)</h4>
+            <p>A semicircle is half a full circumference.</p>
+            <div class="s11-formula">path = &frac12; &times; 2&pi;R = <strong class="s11-red">&pi;R</strong></div>
+          </div>
+        </div>
+        <div class="s11-step-card" id="s11-step2">
+          <div class="s11-step-num s11-num-orange">2</div>
+          <div class="s11-step-body">
+            <h4>Time taken</h4>
+            <p>Speed is constant, so time = path &divide; speed.</p>
+            <div class="s11-formula">t = path &divide; v = <strong class="s11-red">&pi;R / v</strong></div>
+          </div>
+        </div>
+        <div class="s11-step-card" id="s11-step3">
+          <div class="s11-step-num s11-num-blue">3</div>
+          <div class="s11-step-body">
+            <h4>Displacement (A &rarr; B)</h4>
+            <p>Straight line from start to end = the diameter.</p>
+            <div class="s11-formula">displacement = <strong class="s11-blue">2R</strong></div>
+          </div>
+        </div>
+        <div class="s11-step-card" id="s11-step4">
+          <div class="s11-step-num s11-num-purple">4</div>
+          <div class="s11-step-body">
+            <h4>Average velocity (step 3 &divide; step 2)</h4>
+            <div class="s11-formula s11-formula-block">
+              |v&#x20D7;<sub>avg</sub>| = 2R &divide; (&pi;R/v)<br>
+              = 2R &times; (v / &pi;R)<br>
+              = <strong class="s11-purple">2v / &pi;</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s11-picture-col">
+        <div class="s11-pic-label">THE PICTURE</div>
+        <canvas id="s11-canvas" width="250" height="175"></canvas>
+        <div class="s11-pattern" id="s11-pattern">
+          <strong>The pattern</strong> &mdash; Whenever the path <em>curves</em>, path &gt; displacement, so <strong>average speed &gt; average velocity</strong>. Equality only happens on a perfectly straight path.
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <button class="btn-primary" onclick="goToScreen('screen-12')">Next: Activity &#9654;</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-11">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-11"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-11" onclick="toggleNarration('screen-11')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-11')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 12: ACTIVITY ===================== -->
+<div id="screen-12" class="screen">
+  <div class="screen-topnav">
+    <button class="btn-back" onclick="goBack()">&#8592; Back</button>
+    <span class="screen-num">Screen 13 / 13</span>
+  </div>
+  <div class="screen-body">
+    <h2 class="page-title" id="s12-header">Activity &mdash; pick any arc angle, see the velocity</h2>
+    <p class="tagline">Tap any of 7 angles. The diagram, the formulas, and all four numbers update together.</p>
+    <div class="s12-layout">
+      <div class="s12-left-col">
+        <div class="s12-canvas-card">
+          <div class="s12-canvas-meta">activity canvas &middot; speed v held constant at 5 m/s, R = 2 m</div>
+          <canvas id="s12-canvas" width="380" height="250"></canvas>
+          <div class="s12-angle-section">
+            <div class="s12-angle-label">&#9900; ARC ANGLE &theta; &middot; pick one</div>
+            <div class="s12-angle-grid" id="s12-angle-grid"></div>
+          </div>
+        </div>
+        <div class="s12-trythis">
+          <strong>Try this</strong> &nbsp;Tap 360&deg;: displacement = 0, so |v&#x20D7;<sub>avg</sub>| = 0 even though speed is still 5&nbsp;m/s.
+          Tap 60&deg;: chord &asymp; arc, so velocity &asymp; speed. The smaller the arc, the closer they get.
+        </div>
+      </div>
+      <div class="s12-calc-col" id="s12-calc-col">
+        <div class="s12-calc-section">
+          <div class="s12-calc-heading">CALCULATION</div>
+          <div class="s12-calc-block">
+            <div class="s12-block-label">INPUTS</div>
+            <div class="s12-input-line"><span id="s12-theta-rad" class="s12-val-orange">&theta; = 90&deg; = &pi;/2 rad</span></div>
+            <div class="s12-input-line">R = 2&nbsp;m &nbsp;&nbsp;&nbsp;&nbsp; v = 5&nbsp;m/s</div>
+          </div>
+          <div class="s12-calc-block">
+            <div class="s12-block-label">STEP-BY-STEP</div>
+            <div class="s12-step-line">path = R&theta; = 2 &times; <span id="s12-theta-frac">&pi;/2</span> &asymp; <span id="s12-path-val" class="s12-val-red">3.14 m</span></div>
+            <div class="s12-step-line">t = path / v = <span id="s12-path-num">3.14</span> / 5 &asymp; <span id="s12-time-val" class="s12-val-red">0.63 s</span></div>
+            <div class="s12-step-line">displacement = 2R&middot;sin(&theta;/2)</div>
+            <div class="s12-step-line s12-step-indent">= 2&middot;2&middot;sin(<span id="s12-half-deg">45</span>&deg;) &asymp; <span id="s12-disp-val" class="s12-val-blue">2.83 m</span></div>
+          </div>
+          <div class="s12-calc-block s12-vel-block">
+            <div class="s12-block-label">AVERAGE VELOCITY</div>
+            <div class="s12-vel-line">|v&#x20D7;<sub>avg</sub>| = <span id="s12-disp-num">2.83</span> / <span id="s12-time-num">0.63</span> &asymp; <span id="s12-vel-result" class="s12-val-purple">4.49 m/s</span></div>
+          </div>
+          <div class="s12-calc-block">
+            <div class="s12-block-label">AVERAGE SPEED</div>
+            <div class="s12-vel-line">avg speed = path / t &asymp; <span id="s12-speed-result" class="s12-val-red">5.00 m/s</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <button class="btn-primary" onclick="goToScreen('screen-1')">&#8635; Start Over</button>
+    </div>
+  </div>
+  <div class="narration-bar">
+    <span class="narr-icon">&#128266;</span>
+    <div class="narr-body">
+      <div class="narr-text" id="narration-screen-12">Loading narration&hellip;</div>
+      <div class="narr-track"><div class="narr-fill" id="fill-screen-12"></div></div>
+    </div>
+    <div class="narr-btns">
+      <button class="btn-narr" id="playbtn-screen-12" onclick="toggleNarration('screen-12')">&#9658; Play</button>
+      <button class="btn-narr" onclick="restartNarration('screen-12')">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="distance_displacement.js"></script>
+</body>
+</html>
