@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probability Studio</title>
+  <link rel="stylesheet" href="probability_studio.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 1 — COVER  (#screen-intro)
+     User says "Screen 1" → HTML id screen-intro
+     ═══════════════════════════════════════════════════════════ -->
+<div id="screen-intro" class="screen screen-dark">
+  <div class="cover-inner">
+    <div class="dotgrid"></div>
+
+    <div class="cover-eyebrow">Probability Studio &nbsp;·&nbsp; v1 &nbsp;·&nbsp; May 2026</div>
+
+    <h1 class="cover-title">Probability<br>Studio.</h1>
+
+    <p class="cover-subtitle">Class 9 CBSE &rarr; JEE, one syllabus, three tiers.</p>
+
+    <!-- 6×6 dice sum grid — cells injected by JS on DOMContentLoaded -->
+    <div id="dice-grid"></div>
+
+    <button id="btn-start" onclick="nextScreen()">Start &rarr; Activity Lab</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 2 — ACTIVITY LAB  (#screen-1)
+     User says "Screen 2" → HTML id screen-1
+     ═══════════════════════════════════════════════════════════ -->
+<div id="screen-1" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 1 / 5 &nbsp;·&nbsp; EMPIRICAL PLAYGROUND</div>
+    </div>
+    <h1 class="screen-title">Activity Lab — run the experiment first.</h1>
+    <p class="screen-kicker">Pick a physical setup, batch trials, watch relative frequency drift toward theoretical.</p>
+  </div>
+
+  <div class="screen-content">
+    <div class="lab-layout">
+
+      <!-- LEFT RAIL: experiment list + run controls -->
+      <div class="lab-rail">
+        <div class="lbl">Experiments</div>
+        <div class="exp-list">
+          <div class="exp-item" data-exp="coin" onclick="selectExperiment('coin')">
+            <span class="pin sm">1</span> Toss a Coin
+          </div>
+          <div class="exp-item selected" data-exp="dice" onclick="selectExperiment('dice')">
+            <span class="pin sm yellow">✓</span> Roll a Dice
+          </div>
+        </div>
+
+        <hr class="rail-divider">
+
+        <div class="lbl">Run</div>
+        <div class="run-controls">
+          <div class="run-field">
+            <div class="cap">trials</div>
+            <input class="run-input" id="lab-trial-input" type="number" min="1" max="10000" value="100">
+          </div>
+          <div class="run-field">
+            <div class="cap">speed</div>
+            <div class="speed-btns">
+              <button class="speed-btn" data-speed="slow"   onclick="selectSpeed('slow')">Slow</button>
+              <button class="speed-btn active" data-speed="medium" onclick="selectSpeed('medium')">Med</button>
+              <button class="speed-btn" data-speed="fast"   onclick="selectSpeed('fast')">Fast</button>
+            </div>
+          </div>
+          <div class="run-btns">
+            <button class="btn-reset" onclick="resetLab()" title="Reset">&#8635;</button>
+            <button class="btn-run" id="btn-run" onclick="runSimulation()">&#9654; Run</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN AREA: die visual + histogram | trial log -->
+      <div class="lab-main">
+
+        <!-- Center column: die display + histogram -->
+        <div class="lab-center">
+          <div class="dwg die-display" style="position:relative;">
+            <div id="die-svg-wrap"></div>
+            <div class="die-info">
+              <span class="last-roll-lbl">Last roll</span>
+              <span class="last-roll-val" id="last-roll-val">—</span>
+              <span class="trial-cap" id="trial-cap"></span>
+            </div>
+          </div>
+
+          <div class="panel histogram-panel">
+            <div class="histogram-title">P&#x0302;(face) &nbsp;&middot;&nbsp; empirical probability</div>
+            <div class="histogram-chart" id="histogram-chart"></div>
+          </div>
+        </div>
+
+        <!-- Right column: trial log -->
+        <div style="display:flex;flex-direction:column;">
+          <div class="panel trial-log-panel" style="flex:1;">
+            <div class="lbl" style="margin-bottom:6px;">Trial log</div>
+            <table class="trial-table">
+              <thead><tr><th>#</th><th>face</th></tr></thead>
+              <tbody id="trial-log-body"></tbody>
+            </table>
+          </div>
+          <button class="btn-export" onclick="exportCSV()">&#8659; Export CSV</button>
+        </div>
+
+      </div><!-- /lab-main -->
+    </div><!-- /lab-layout -->
+  </div><!-- /screen-content -->
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Concept Module</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 3 — CONCEPT MODULE  (#screen-2)
+     User says "Screen 3" → HTML id screen-2
+     ═══════════════════════════════════════════════════════════ -->
+<div id="screen-2" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 2 / 5 &nbsp;·&nbsp; SAMPLE SPACE &amp; EVENTS</div>
+    </div>
+    <h1 class="screen-title">Concept Module — explore the sample space.</h1>
+    <p class="screen-kicker">Two dice produce thirty-six equally likely outcomes. Click each event to see its probability.</p>
+  </div>
+
+  <div class="screen-content">
+    <div class="concept-section-title">Two dice — the role of the sample space</div>
+    <div id="concept-tab-body"></div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Visualization Studio</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 4 — VISUALIZATION STUDIO  (#screen-3)
+     User says "Screen 4" → HTML id screen-3
+     ═══════════════════════════════════════════════════════════ -->
+<div id="screen-3" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 3 / 5 &nbsp;·&nbsp; TREE DIAGRAM WORKBENCH</div>
+    </div>
+    <h1 class="screen-title">Visualization Studio — pick events, pick an operation, read the answer.</h1>
+    <p class="screen-kicker">Tree diagram for <strong>two draws, no replacement</strong> from a configurable urn.</p>
+  </div>
+
+  <div class="screen-content">
+    <div class="studio-layout">
+
+      <!-- LEFT: setup + event controls -->
+      <div class="studio-left" id="studio-left">
+
+        <!-- Urn setup -->
+        <div>
+          <div class="lbl" style="margin-bottom:6px;">Urn &middot; two draws &middot; no replacement</div>
+          <div class="urn-display" id="urn-balls"></div>
+          <div class="urn-controls" style="margin-top:8px;">
+            <div class="urn-ctrl">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block;border:1px solid #00000033;"></span>
+              <button class="urn-btn" onclick="adjustUrn('red',-1)">−</button>
+              <span id="urn-r-count" style="font-family:Consolas,monospace;font-size:12px;min-width:14px;text-align:center;">4</span>
+              <button class="urn-btn" onclick="adjustUrn('red',1)">+</button>
+            </div>
+            <div class="urn-ctrl" style="margin-left:10px;">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--blue);display:inline-block;border:1px solid #00000033;"></span>
+              <button class="urn-btn" onclick="adjustUrn('blue',-1)">−</button>
+              <span id="urn-b-count" style="font-family:Consolas,monospace;font-size:12px;min-width:14px;text-align:center;">3</span>
+              <button class="urn-btn" onclick="adjustUrn('blue',1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event A + B -->
+        <div id="event-sections">
+          <div class="event-controls">
+            <div class="lbl" style="margin-bottom:6px;">Event A &middot; <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400;">composition</span></div>
+            <div class="event-options" id="event-A-options"></div>
+          </div>
+
+          <div>
+            <div class="lbl" style="margin-bottom:6px;">Event B &middot; <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400;">position</span></div>
+            <div class="event-options" id="event-B-options"></div>
+          </div>
+        </div>
+
+        <!-- Operation -->
+        <div id="operation-section">
+          <div class="lbl" style="margin-bottom:6px;">Operation</div>
+          <div class="operation-btns">
+            <button class="op-btn" data-op="A" onclick="setOperation('A')">A</button>
+            <button class="op-btn" data-op="complement-A" onclick="setOperation('complement-A')">A&prime;</button>
+            <button class="op-btn active" data-op="A-given-B" onclick="setOperation('A-given-B')">A | B</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: tree canvas + result -->
+      <div class="studio-right">
+        <div class="tree-header">
+          <span style="font-family:Georgia,serif;font-size:14px;font-weight:700;" id="tree-title">Tree &nbsp;&middot;&nbsp; 4R + 3B, no replacement</span>
+          <span style="font-family:Consolas,monospace;font-size:11px;color:var(--muted);">P(leaf) = branch&#x2081; &times; branch&#x2082;</span>
+        </div>
+
+        <div class="tree-canvas">
+          <svg id="tree-svg" viewBox="0 0 460 285" aria-label="Probability tree diagram"></svg>
+        </div>
+
+        <div class="result-readout" id="result-readout"></div>
+      </div>
+
+    </div><!-- /studio-layout -->
+  </div><!-- /screen-content -->
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Problem Arena</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCREEN 5 — PROBLEM ARENA  (#screen-4)
+     User says "Screen 5" → HTML id screen-4
+     ═══════════════════════════════════════════════════════════ -->
+<div id="screen-4" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 4 / 5 &nbsp;·&nbsp; PRACTICE SURFACE</div>
+    </div>
+    <h1 class="screen-title">Problem Arena — pick an answer, learn from the explanation.</h1>
+    <p class="screen-kicker">MCQ format &middot; Submit to check, or Show Answer to reveal &middot; full explanation on every attempt.</p>
+  </div>
+
+  <div class="screen-content" style="display:flex;flex-direction:column;">
+    <div id="arena-content" style="flex:1;display:flex;flex-direction:column;"></div>
+  </div>
+</div>
+
+
+<!-- ─── GLOBAL NARRATION BAR ─── -->
+<div id="narration-bar" class="narration-bar">
+  <div class="narr-progress-track">
+    <div class="narr-progress-fill" id="narr-progress-fill"></div>
+  </div>
+  <div class="narr-main">
+    <span class="narr-text" id="narr-text"></span>
+    <div class="narr-buttons">
+      <button class="btn-narr" id="btn-narr-toggle" onclick="narrToggle()">&#9654; Play</button>
+      <button class="btn-narr" id="btn-narr-restart" onclick="narrRestart()">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="probability_studio.js"></script>
+</body>
+</html>
