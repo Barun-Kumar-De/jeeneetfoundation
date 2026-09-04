@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinematics — Acceleration, Motion Graphs &amp; MCQs</title>
+  <link rel="stylesheet" href="kinematics_graph.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN INTRO  (Screen 1 in user terms)
+══════════════════════════════════════════════ -->
+<div id="screen-intro" class="screen active" style="position:relative;">
+  <div style="padding:60px 80px;">
+    <div class="intro-label">Physics · Kinematics</div>
+    <div class="intro-title">Kinematics</div>
+    <div class="intro-sub">Acceleration, motion graphs, and MCQs</div>
+    <div class="intro-graphs">
+      <div class="intro-graph-box"><svg id="intro-d" width="220" height="140"></svg></div>
+      <div class="intro-graph-box"><svg id="intro-v" width="220" height="140"></svg></div>
+      <div class="intro-graph-box"><svg id="intro-a" width="220" height="140"></svg></div>
+    </div>
+    <button class="start-btn" onclick="nextScreen()">Start &rarr;</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 1  (Section 1 — Acceleration concept)
+══════════════════════════════════════════════ -->
+<div id="screen-1" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 1 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Acceleration and deceleration</h1>
+    <div class="screen-subtitle">How quickly is the velocity changing?</div>
+  </div>
+  <div class="screen-content">
+    <div class="concept-grid">
+      <!-- Left: definition card -->
+      <div id="s1-def" class="card">
+        <div class="card-label">Definition</div>
+        <div id="s1-def-title" class="card-title">Acceleration is the rate of change of velocity.</div>
+        <ul>
+          <li id="s1-def-unit">Symbol: <strong>a</strong> &nbsp; Unit: m/s²</li>
+          <li id="s1-def-pos">Velocity rising &rarr; +a</li>
+          <li id="s1-def-neg">Velocity falling &rarr; &minus;a (deceleration)</li>
+          <li id="s1-def-vector">Acceleration is a vector — direction matters.</li>
+        </ul>
+        <p><strong>Examples:</strong></p>
+        <ul>
+          <li id="s1-def-ex-car1">Car speeding up &rarr; +a</li>
+          <li id="s1-def-ex-car2">Car braking &rarr; &minus;a</li>
+          <li id="s1-def-ex-ball1">Ball going up &rarr; &minus;a (decelerating)</li>
+          <li id="s1-def-ex-ball2">Ball falling back &rarr; +a (accelerating)</li>
+        </ul>
+      </div>
+
+      <!-- Right top: formula + illustration stacked -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div id="s1-formula" class="formula-card">
+          <div class="card-label">Formula</div>
+          <div class="formula-big">a = (v &minus; u) / t</div>
+          <div class="formula-sub">u = initial v,&nbsp; v = final v.</div>
+        </div>
+        <div id="s1-illus" class="graph-panel">
+          <div class="card-label">Illustration</div>
+          <svg id="s1-illus-canvas" width="420" height="270" style="width:100%;"></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Velocity from rest</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 2  (Section 2 — Starts from rest)
+══════════════════════════════════════════════ -->
+<div id="screen-2" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 2 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Velocity and displacement — starts from rest</h1>
+    <div class="screen-subtitle">A particle moves with uniform acceleration a, starting at rest (u = 0).</div>
+  </div>
+  <div class="screen-content">
+    <div class="concept-grid">
+      <div id="s2-setup" class="card">
+        <div class="card-label">Setup</div>
+        <div class="card-title">Uniform acceleration, starting from rest</div>
+        <ul>
+          <li id="s2-setup-rest">Particle starts at rest at t = 0 (u = 0)</li>
+          <li id="s2-setup-accel">Acceleration a is constant throughout</li>
+        </ul>
+        <p id="s2-setup-vderiv"><strong>Velocity:</strong><br>v = a·t &nbsp;(from a = v / t)</p>
+        <p id="s2-setup-dderiv"><strong>Distance:</strong><br>d = average speed × time<br>d = (0 + v)/2 × t<br>d = ½ · a · t²</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div id="s2-vformula" class="formula-card">
+          <div class="card-label">Velocity</div>
+          <div class="formula-big">v = a · t</div>
+        </div>
+        <div id="s2-dformula" class="formula-card">
+          <div class="card-label">Displacement</div>
+          <div class="formula-big">d = ½ · a · t²</div>
+        </div>
+        <div id="s2-graphs" style="display:flex;gap:12px;">
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s2-vt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">v–t : line through origin</div>
+          </div>
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s2-dt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">d–t : upward parabola</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Non-zero initial velocity</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 3  (Section 3 — Non-zero initial velocity)
+══════════════════════════════════════════════ -->
+<div id="screen-3" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 3 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Velocity and displacement — non-zero initial velocity</h1>
+    <div class="screen-subtitle">Same particle, but it already has some velocity u when the clock starts.</div>
+  </div>
+  <div class="screen-content">
+    <div class="concept-grid">
+      <div id="s3-setup" class="card">
+        <div class="card-label">Setup</div>
+        <div class="card-title">Uniform acceleration, initial velocity u</div>
+        <ul>
+          <li>At t = 0, particle is moving at velocity u</li>
+          <li>Acceleration a stays constant</li>
+        </ul>
+        <p><strong>Velocity:</strong><br>v = u + a·t</p>
+        <p><strong>Distance:</strong><br>d = u·t + ½·a·t²<br>(trapezoid area under v–t)</p>
+        <p><strong>Compare with §2:</strong></p>
+        <ul>
+          <li>v–t slope = a, intercept = u</li>
+          <li>d–t climbs from t = 0</li>
+        </ul>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div id="s3-vformula" class="formula-card">
+          <div class="card-label">Velocity</div>
+          <div class="formula-big">v = u + a · t</div>
+        </div>
+        <div id="s3-dformula" class="formula-card">
+          <div class="card-label">Displacement</div>
+          <div class="formula-big">d = u·t + ½·a·t²</div>
+        </div>
+        <div id="s3-graphs" style="display:flex;gap:12px;">
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s3-vt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">v–t : starts at u, slope = a</div>
+          </div>
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s3-dt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">d–t : tilted parabola</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Deceleration</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 4  (Section 4 — Deceleration)
+══════════════════════════════════════════════ -->
+<div id="screen-4" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 4 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Deceleration — negative acceleration</h1>
+    <div class="screen-subtitle">When a is negative, the particle slows down. Eventually v reaches zero.</div>
+  </div>
+  <div class="screen-content">
+    <div class="concept-grid">
+      <div id="s4-key" class="card">
+        <div class="card-label">Key Idea</div>
+        <div class="card-title">Deceleration is just negative acceleration</div>
+        <ul>
+          <li>Initial velocity u</li>
+          <li>Acceleration &minus;a (where a &gt; 0)</li>
+          <li>Each second, lose a m/s of speed</li>
+          <li>Formulas don't change — just plug in a negative a</li>
+        </ul>
+        <p><strong>Velocity:</strong> v = u &minus; a·t</p>
+        <p><strong>Distance:</strong> d = u·t &minus; ½·a·t²</p>
+        <p>Stops when v = 0 &rArr; t<sub>stop</sub> = u/a</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div id="s4-vformula" class="formula-card">
+          <div class="card-label">Velocity</div>
+          <div class="formula-big">v = u &minus; a · t</div>
+        </div>
+        <div id="s4-dformula" class="formula-card">
+          <div class="card-label">Displacement</div>
+          <div class="formula-big">d = u·t &minus; ½·a·t²</div>
+        </div>
+        <div id="s4-graphs" style="display:flex;gap:12px;">
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s4-vt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">v–t : drops to zero</div>
+          </div>
+          <div class="graph-panel" style="flex:1;">
+            <svg id="s4-dt" width="200" height="110" style="width:100%;"></svg>
+            <div class="graph-caption">d–t : rises, levels off</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Kinetic friction</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 5  (Section 5 — Kinetic friction)
+══════════════════════════════════════════════ -->
+<div id="screen-5" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 5 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Kinetic friction — a built-in deceleration</h1>
+    <div class="screen-subtitle">Friction between two sliding surfaces opposes motion. It produces a constant deceleration.</div>
+  </div>
+  <div class="screen-content">
+    <div class="friction-layout">
+      <div id="s5-key" class="card">
+        <div class="card-label">Key Idea</div>
+        <div class="card-title">Friction = constant deceleration</div>
+        <ul>
+          <li>Push a block on a rough floor, then let go.</li>
+          <li>Kinetic friction acts opposite to motion:<br><strong>f = μ<sub>k</sub> · N</strong></li>
+          <li>Constant force &rArr; constant deceleration:<br><strong>a = μ<sub>k</sub> · g</strong><br>(on a horizontal surface)</li>
+        </ul>
+        <p>The block slows at a constant rate until it stops. After stopping, static friction holds it in place — v stays at 0.</p>
+        <p>Same as §4, but with the deceleration set by μ<sub>k</sub>.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div id="s5-illus" class="illus-panel">
+          <div class="card-label">Illustration</div>
+          <svg id="s5-illus-canvas" width="400" height="120" style="width:100%;"></svg>
+        </div>
+        <div id="s5-graph" class="graph-panel">
+          <svg id="s5-graph-canvas" width="400" height="160" style="width:100%;"></svg>
+          <div class="graph-caption">v–t under kinetic friction: linear decel to rest</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Slope relationships</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 6  (Section 6 — Slope of one graph)
+══════════════════════════════════════════════ -->
+<div id="screen-6" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 6 / 6 · CONCEPT</div>
+    </div>
+    <h1 class="screen-title">Slope of one graph = the next graph</h1>
+    <div class="screen-subtitle">Velocity is the slope of d–t. Acceleration is the slope of v–t.</div>
+  </div>
+  <div class="screen-content">
+    <div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:10px;margin-top:8px;" id="s6-key">
+      <!-- Left pair: d-t → v-t -->
+      <div id="s6-left-pair" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel">
+          <svg id="s6-dt-left" width="300" height="120" style="width:100%;"></svg>
+          <div class="graph-caption">d–t : slope grows</div>
+        </div>
+        <div class="graph-panel">
+          <svg id="s6-vt-left" width="300" height="120" style="width:100%;"></svg>
+          <div class="graph-caption">v–t : line, slope = a</div>
+        </div>
+      </div>
+      <!-- Arrow -->
+      <div style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#2563eb;">&#9658;</div>
+      <!-- Right pair: v-t → a-t -->
+      <div id="s6-right-pair" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel">
+          <svg id="s6-vt-right" width="300" height="120" style="width:100%;"></svg>
+          <div class="graph-caption">v–t : slope constant</div>
+        </div>
+        <div class="graph-panel">
+          <svg id="s6-at-right" width="300" height="120" style="width:100%;"></svg>
+          <div class="graph-caption">a–t : horizontal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="card-label">Key Idea</div>
+      <div class="card-title">Read motion off any one graph</div>
+      <ul>
+        <li>Slope of d–t at any moment = v</li>
+        <li>Slope of v–t at any moment = a</li>
+        <li>Steep d–t &rArr; large v &nbsp;|&nbsp; Flat d–t &rArr; v ≈ 0</li>
+        <li>d–t bending up &rArr; +a &nbsp;|&nbsp; d–t bending down &rArr; &minus;a</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 1</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 7  (Section 7 — MCQ 1 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-7" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 7 · MCQ 1 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Ball thrown vertically upwards</h1>
+    <div class="screen-subtitle">It rises, slows, momentarily stops at the apex, then falls back to the thrower's hand. Ignore air resistance.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <!-- Scenario -->
+      <div id="mcq1-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t, v–t, a–t combination.</div>
+        <svg id="mcq1-scene-canvas" width="200" height="200" style="width:100%;margin-top:8px;"></svg>
+      </div>
+
+      <!-- Options grid -->
+      <div id="mcq1-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq-option" onclick="selectMCQ(1,'A')">
+            <div class="mcq-option-label">A</div>
+            <svg id="mcq1-opt-a" width="200" height="120" style="width:100%;margin-top:28px;"></svg>
+          </div>
+          <div class="mcq-option" onclick="selectMCQ(1,'B')">
+            <div class="mcq-option-label">B</div>
+            <svg id="mcq1-opt-b" width="200" height="120" style="width:100%;margin-top:28px;"></svg>
+          </div>
+          <div class="mcq-option" onclick="selectMCQ(1,'C')">
+            <div class="mcq-option-label">C</div>
+            <svg id="mcq1-opt-c" width="200" height="120" style="width:100%;margin-top:28px;"></svg>
+          </div>
+          <div class="mcq-option" onclick="selectMCQ(1,'D')">
+            <div class="mcq-option-label">D</div>
+            <svg id="mcq1-opt-d" width="200" height="120" style="width:100%;margin-top:28px;"></svg>
+          </div>
+        </div>
+        <div id="mcq1-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t, v–t, a–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ(1)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq1-next" disabled onclick="goToScreen('screen-8')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq1-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 8  (Section 8 — MCQ 1 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-8" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 8 · MCQ 1 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Ball thrown vertically upwards</h1>
+    <div class="screen-subtitle">Answer: Option B. Arch for d, linear-crossing-zero for v, flat negative for a.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <!-- scenario with steps -->
+      <div id="ans1-scenario" class="mcq-scenario" style="max-height:320px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans1-scene-canvas" width="180" height="200" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <!-- graphs -->
+      <div id="ans1-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans1-step1">
+          <svg id="ans1-dt" width="400" height="120" style="width:100%;"></svg>
+        </div>
+        <div class="graph-panel" id="ans1-step2">
+          <svg id="ans1-vt" width="400" height="120" style="width:100%;"></svg>
+        </div>
+        <div class="graph-panel" id="ans1-step3">
+          <svg id="ans1-at" width="400" height="120" style="width:100%;"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 2</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 9  (Section 9 — MCQ 2 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-9" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 9 · MCQ 2 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Ball released on a frictionless incline</h1>
+    <div class="screen-subtitle">Released from rest at the top. Slides down with constant acceleration g·sinθ.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <div id="mcq2-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t, v–t, a–t combination.</div>
+        <svg id="mcq2-scene-canvas" width="200" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="mcq2-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq-option" onclick="selectMCQ(2,'A')"><div class="mcq-option-label">A</div><svg id="mcq2-opt-a" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(2,'B')"><div class="mcq-option-label">B</div><svg id="mcq2-opt-b" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(2,'C')"><div class="mcq-option-label">C</div><svg id="mcq2-opt-c" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(2,'D')"><div class="mcq-option-label">D</div><svg id="mcq2-opt-d" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+        </div>
+        <div id="mcq2-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t, v–t, a–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ(2)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq2-next" disabled onclick="goToScreen('screen-10')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq2-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 10  (Section 10 — MCQ 2 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-10" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 10 · MCQ 2 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Ball released on a frictionless incline</h1>
+    <div class="screen-subtitle">Answer: Option A. d-t parabola, v-t linear rise, a-t flat positive.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <div id="ans2-scenario" class="mcq-scenario" style="max-height:320px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans2-scene-canvas" width="180" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="ans2-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans2-step1"><svg id="ans2-dt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans2-step2"><svg id="ans2-vt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans2-step3"><svg id="ans2-at" width="400" height="110" style="width:100%;"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 3</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 11  (Section 11 — MCQ 3 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-11" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 11 · MCQ 3 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Car: accelerate from rest, cruise, then brake to rest</h1>
+    <div class="screen-subtitle">Three distinct phases. Starts at rest and ends at rest.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <div id="mcq3-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t, v–t, a–t combination.</div>
+        <svg id="mcq3-scene-canvas" width="200" height="160" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="mcq3-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq-option" onclick="selectMCQ(3,'A')"><div class="mcq-option-label">A</div><svg id="mcq3-opt-a" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(3,'B')"><div class="mcq-option-label">B</div><svg id="mcq3-opt-b" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(3,'C')"><div class="mcq-option-label">C</div><svg id="mcq3-opt-c" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(3,'D')"><div class="mcq-option-label">D</div><svg id="mcq3-opt-d" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+        </div>
+        <div id="mcq3-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t, v–t, a–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ(3)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq3-next" disabled onclick="goToScreen('screen-12')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq3-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 12  (Section 12 — MCQ 3 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-12" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 12 · MCQ 3 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Car: accelerate from rest, cruise, then brake to rest</h1>
+    <div class="screen-subtitle">Answer: Option C. d grows always; v is a trapezoid; a steps +, 0, &minus;, 0.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <div id="ans3-scenario" class="mcq-scenario" style="max-height:320px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans3-scene-canvas" width="180" height="160" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="ans3-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans3-step1"><svg id="ans3-dt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans3-step2"><svg id="ans3-vt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans3-step3"><svg id="ans3-at" width="400" height="110" style="width:100%;"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 4</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 13  (Section 13 — MCQ 4 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-13" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 13 · MCQ 4 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Ball dropped from a height onto a hard floor</h1>
+    <div class="screen-subtitle">The ball bounces several times. Each bounce reaches a lower peak. Ignore air resistance.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <div id="mcq4-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t and v–t combination.</div>
+        <svg id="mcq4-scene-canvas" width="200" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="mcq4-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq4-option" onclick="selectMCQ4('A')"><div class="mcq-option-label">A</div><svg id="mcq4-opt-a" width="200" height="100" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq4-option" onclick="selectMCQ4('B')"><div class="mcq-option-label">B</div><svg id="mcq4-opt-b" width="200" height="100" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq4-option" onclick="selectMCQ4('C')"><div class="mcq-option-label">C</div><svg id="mcq4-opt-c" width="200" height="100" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq4-option" onclick="selectMCQ4('D')"><div class="mcq-option-label">D</div><svg id="mcq4-opt-d" width="200" height="100" style="width:100%;margin-top:28px;"></svg></div>
+        </div>
+        <div id="mcq4-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t and v–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ4()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq4-next" disabled onclick="goToScreen('screen-14')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq4-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 14  (Section 14 — MCQ 4 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-14" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 14 · MCQ 4 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Ball dropped from a height onto a hard floor</h1>
+    <div class="screen-subtitle">Answer: Option B. d shows decreasing humps; v is a signed sawtooth.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <div id="ans4-scenario" class="mcq-scenario" style="max-height:300px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans4-scene-canvas" width="180" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="ans4-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans4-step1"><svg id="ans4-dt" width="400" height="140" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans4-step2"><svg id="ans4-vt" width="400" height="140" style="width:100%;"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 5</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 15  (Section 15 — MCQ 5 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-15" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 15 · MCQ 5 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Pendulum released from one extreme</h1>
+    <div class="screen-subtitle">It swings back and forth. Take d as the signed horizontal displacement from the equilibrium (centre) position.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <div id="mcq5-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t, v–t, a–t combination.</div>
+        <svg id="mcq5-scene-canvas" width="200" height="200" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="mcq5-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq-option" onclick="selectMCQ(5,'A')"><div class="mcq-option-label">A</div><svg id="mcq5-opt-a" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(5,'B')"><div class="mcq-option-label">B</div><svg id="mcq5-opt-b" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(5,'C')"><div class="mcq-option-label">C</div><svg id="mcq5-opt-c" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(5,'D')"><div class="mcq-option-label">D</div><svg id="mcq5-opt-d" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+        </div>
+        <div id="mcq5-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t, v–t, a–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ(5)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq5-next" disabled onclick="goToScreen('screen-16')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq5-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 16  (Section 16 — MCQ 5 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-16" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 16 · MCQ 5 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Pendulum released from one extreme</h1>
+    <div class="screen-subtitle">Answer: Option D. All three are sinusoids — d, v, a successively 90° apart.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <div id="ans5-scenario" class="mcq-scenario" style="max-height:320px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans5-scene-canvas" width="180" height="200" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="ans5-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans5-step1"><svg id="ans5-dt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans5-step2"><svg id="ans5-vt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans5-step3"><svg id="ans5-at" width="400" height="110" style="width:100%;"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; MCQ 6</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 17  (Section 17 — MCQ 6 Question)
+══════════════════════════════════════════════ -->
+<div id="screen-17" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 17 · MCQ 6 QUESTION</div>
+    </div>
+    <h1 class="screen-title">Frictional incline, then an adjacent upward incline</h1>
+    <div class="screen-subtitle">Ball slides down a rough slope, then onto an adjacent upward slope (also rough). It eventually stops. d = distance travelled along the path.</div>
+  </div>
+  <div class="screen-content">
+    <div class="mcq-main">
+      <div id="mcq6-scenario" class="mcq-scenario">
+        <div class="mcq-scenario-label">Scenario</div>
+        <div class="mcq-scenario-title">Pick the matching d–t, v–t, a–t combination.</div>
+        <svg id="mcq6-scene-canvas" width="200" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="mcq6-options" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="mcq-option" onclick="selectMCQ(6,'A')"><div class="mcq-option-label">A</div><svg id="mcq6-opt-a" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(6,'B')"><div class="mcq-option-label">B</div><svg id="mcq6-opt-b" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(6,'C')"><div class="mcq-option-label">C</div><svg id="mcq6-opt-c" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+          <div class="mcq-option" onclick="selectMCQ(6,'D')"><div class="mcq-option-label">D</div><svg id="mcq6-opt-d" width="200" height="120" style="width:100%;margin-top:28px;"></svg></div>
+        </div>
+        <div id="mcq6-hint" style="font-size:0.8rem;color:#64748b;font-style:italic;padding:4px 0;">[ Hint: read each row — does the d–t, v–t, a–t pair tell a consistent story? ]</div>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ(6)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq6-next" disabled onclick="goToScreen('screen-18')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="mcq6-feedback"></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 18  (Section 18 — MCQ 6 Answer)
+══════════════════════════════════════════════ -->
+<div id="screen-18" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 18 · MCQ 6 ANSWER</div>
+    </div>
+    <h1 class="screen-title">Frictional incline, then an adjacent upward incline</h1>
+    <div class="screen-subtitle">Answer: Option A. d grows then plateaus; v is a triangle peaking at the joint; a steps +, &minus;, 0.</div>
+  </div>
+  <div class="screen-content">
+    <div class="answer-main">
+      <div id="ans6-scenario" class="mcq-scenario" style="max-height:320px;">
+        <div class="mcq-scenario-label">Scenario · With Steps</div>
+        <div class="mcq-scenario-title">Same motion — numbered 1 &rarr; 2 &rarr; 3.</div>
+        <svg id="ans6-scene-canvas" width="180" height="180" style="width:100%;margin-top:8px;"></svg>
+      </div>
+      <div id="ans6-graphs" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="graph-panel" id="ans6-step1"><svg id="ans6-dt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans6-step2"><svg id="ans6-vt" width="400" height="110" style="width:100%;"></svg></div>
+        <div class="graph-panel" id="ans6-step3"><svg id="ans6-at" width="400" height="110" style="width:100%;"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Acceleration Sandbox</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 19  (Section 19 — Acceleration Sandbox)
+══════════════════════════════════════════════ -->
+<div id="screen-19" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 19 · INTERACTIVE</div>
+    </div>
+    <h1 class="screen-title">Sandbox — draw a–t, watch v–t and d–t respond</h1>
+    <div class="screen-subtitle">Click grid points on the a–t graph to add straight-line segments. v–t and d–t update live.</div>
+  </div>
+  <div class="screen-content">
+    <div class="sb-toolbar">
+      <button class="sb-btn sb-btn-active" id="sb-btn-draw" onclick="sbToggleDraw()">&#9998; Draw</button>
+      <button class="sb-btn" onclick="sbUndo()">&#8630; Undo</button>
+      <button class="sb-btn" onclick="sbClear()">&#8635; Clear</button>
+    </div>
+    <div id="sb-at-panel" class="sb-panel">
+      <div class="sb-graph-label">ACCELERATION · click grid points to add segments (snap on)</div>
+      <svg id="sb-at-svg" width="900" height="280" style="width:100%;cursor:crosshair;"
+           onclick="sbHandleClick(event)"
+           onmousemove="sbHandleHover(event)"
+           onmouseleave="sbHandleMouseLeave()"></svg>
+    </div>
+    <div class="sb-bottom-row">
+      <div id="sb-vt-panel" class="sb-panel">
+        <div class="sb-graph-label">VELOCITY · area under a–t</div>
+        <svg id="sb-vt-svg" width="440" height="180" style="width:100%;"></svg>
+      </div>
+      <div id="sb-dt-panel" class="sb-panel">
+        <div class="sb-graph-label">DISPLACEMENT · area under v–t</div>
+        <svg id="sb-dt-svg" width="440" height="180" style="width:100%;"></svg>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-intro')" style="background:#16a34a;">&#10003; All done — Back to start</button>
+  </div>
+</div>
+
+<!-- ─── GLOBAL NARRATION BAR ─── -->
+<div id="narration-bar" class="narration-bar">
+  <div class="narr-progress-track">
+    <div class="narr-progress-fill" id="narr-progress-fill"></div>
+  </div>
+  <div class="narr-main">
+    <span class="narr-text" id="narr-text"></span>
+    <div class="narr-buttons">
+      <button class="btn-narr" id="btn-narr-toggle" onclick="narrToggle()">&#9654; Play</button>
+      <button class="btn-narr" id="btn-narr-restart" onclick="narrRestart()">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="kinematics_graph.js"></script>
+</body>
+</html>
