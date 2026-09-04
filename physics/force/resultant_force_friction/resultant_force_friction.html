@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultant Force and Friction</title>
+  <link rel="stylesheet" href="resultant_force_friction.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN INTRO                                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-intro" class="screen screen-dark">
+  <div class="intro-body">
+    <div class="intro-tag">Wireframe · Interactive Lesson</div>
+    <h1 class="intro-title">Resultant Force<br>and Friction</h1>
+    <p class="intro-subtitle">A web app that teaches resultant force and friction through live, draggable simulations.</p>
+    <button class="btn-primary" onclick="nextScreen()">Start &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 1 — Resultant force — what is it?                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-1" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 1 / 21</div>
+    </div>
+    <h1 class="screen-title">Resultant force — what is it?</h1>
+  </div>
+  <p class="screen-subtitle">Forces don't act alone. The block only 'feels' the sum.</p>
+
+  <div class="screen-content">
+    <div class="force-cases-box">
+
+      <!-- Case 1: Equal & Opposite -->
+      <div class="force-case" id="case-equal">
+        <div class="force-case-label">Equal &amp; Opposite</div>
+        <svg viewBox="0 0 680 70" style="width:100%;max-height:56px" aria-label="Equal and opposite forces">
+          <title>Equal and opposite forces — net zero</title>
+          <defs>
+            <marker id="eq1r" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="eq1l" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <!-- ground -->
+          <line x1="10" y1="52" x2="670" y2="52" stroke="#9ca3af" stroke-width="1.5"/>
+          <!-- block -->
+          <rect x="300" y="22" width="80" height="30" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <!-- 10N left arrow (going right toward block) -->
+          <text x="90" y="36" font-size="12" fill="#3b82f6" font-weight="600">10 N →</text>
+          <line x1="145" y1="38" x2="296" y2="38" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#eq1r)"/>
+          <!-- 10N right arrow (going left toward block) -->
+          <text x="530" y="36" font-size="12" fill="#3b82f6" font-weight="600">← 10 N</text>
+          <line x1="524" y1="38" x2="384" y2="38" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#eq1l)"/>
+          <!-- result text -->
+          <text x="400" y="64" font-size="11" fill="#6b7280" font-style="italic">Net = 0 N · block at rest</text>
+        </svg>
+      </div>
+
+      <!-- Case 2: Unequal & Opposite -->
+      <div class="force-case" id="case-unequal">
+        <div class="force-case-label">Unequal &amp; Opposite</div>
+        <svg viewBox="0 0 680 80" style="width:100%;max-height:68px" aria-label="Unequal and opposite forces">
+          <title>Unequal opposite forces — net 5N right</title>
+          <defs>
+            <marker id="uq1" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="uq2" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="uqr" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="52" x2="670" y2="52" stroke="#9ca3af" stroke-width="1.5"/>
+          <g id="block-unequal-g">
+            <rect x="300" y="22" width="80" height="30" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          </g>
+          <!-- 15N left arrow -->
+          <text x="60" y="36" font-size="12" fill="#3b82f6" font-weight="600">15 N →</text>
+          <line x1="115" y1="38" x2="296" y2="38" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#uq1)"/>
+          <!-- 10N right arrow (shorter) -->
+          <text x="500" y="36" font-size="12" fill="#3b82f6" font-weight="600">← 10 N</text>
+          <line x1="494" y1="38" x2="384" y2="38" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#uq2)"/>
+          <!-- Resultant arrow -->
+          <line x1="340" y1="62" x2="388" y2="62" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#uqr)"/>
+          <text x="398" y="67" font-size="11" fill="#6b7280" font-style="italic">Net = 5 N → · block accelerates →</text>
+        </svg>
+      </div>
+
+      <!-- Case 3: Unequal & Same Direction -->
+      <div class="force-case" id="case-same">
+        <div class="force-case-label">Unequal &amp; Same Direction</div>
+        <svg viewBox="0 0 680 72" style="width:100%;max-height:68px" aria-label="Unequal same-direction forces">
+          <title>Unequal same-direction forces — net 7N right</title>
+          <defs>
+            <marker id="sd1" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="sd2" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="sdr" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <!-- ground -->
+          <line x1="10" y1="52" x2="670" y2="52" stroke="#9ca3af" stroke-width="1.5"/>
+          <!-- animated block -->
+          <g id="block-same-g">
+            <rect x="290" y="20" width="74" height="32" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          </g>
+          <!-- 4N right arrow (upper, longer — represents 4 N) -->
+          <text x="14" y="31" font-size="12" fill="#3b82f6" font-weight="600">4 N →</text>
+          <line x1="58" y1="28" x2="286" y2="28" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#sd1)"/>
+          <!-- 3N right arrow (lower, shorter — 3/4 the length of 4N arrow) -->
+          <text x="72" y="48" font-size="12" fill="#3b82f6" font-weight="600">3 N →</text>
+          <line x1="114" y1="45" x2="286" y2="45" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#sd2)"/>
+          <!-- Resultant arrow (7N right from block) -->
+          <line x1="368" y1="36" x2="456" y2="36" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#sdr)"/>
+          <!-- Result label -->
+          <text x="400" y="67" font-size="11" fill="#6b7280" font-style="italic">Net = 7 N → · block accelerates →</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Force at an angle</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 2 — Force at an angle                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-2" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 2 / 21</div>
+    </div>
+    <h1 class="screen-title">Force at an angle — only cos &theta; pulls the block</h1>
+  </div>
+  <p class="screen-subtitle">Pick an angle. Watch how much of the force actually slides the block.</p>
+
+  <div class="screen-content">
+    <!-- Angle chooser -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">CHOOSE ANGLE &theta;</div>
+      <div class="angle-pills">
+        <button id="s2-pill-0" class="pill" onclick="selectAngle(0)">0°</button>
+        <button id="s2-pill-30" class="pill active" onclick="selectAngle(30)">30°</button>
+        <button id="s2-pill-45" class="pill" onclick="selectAngle(45)">45°</button>
+        <button id="s2-pill-60" class="pill" onclick="selectAngle(60)">60°</button>
+        <button id="s2-pill-90" class="pill" onclick="selectAngle(90)">90°</button>
+      </div>
+    </div>
+
+    <!-- Two column layout: diagram left | components+table right -->
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;">
+      <!-- Left: diagram -->
+      <div style="border:1.5px solid var(--border);border-radius:8px;background:#fff;padding:14px;width:fit-content;">
+        <svg id="s2-diagram" viewBox="0 0 240 130" style="width:480px;max-width:100%;height:auto;display:block;" aria-label="Force angle diagram"></svg>
+      </div>
+
+      <!-- Right: Live Components + Table side by side -->
+      <div style="display:flex;flex-direction:row;gap:14px;align-items:flex-start;">
+        <!-- Live Components cards -->
+        <div style="flex:0 0 auto;">
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">LIVE COMPONENTS</div>
+          <div class="comp-cards">
+            <div class="comp-card" id="card-fcos">
+              <div class="comp-card-label">F COS &theta;</div>
+              <div class="comp-card-value" id="val-fcos">17.3 N</div>
+              <div class="comp-card-desc">horizontal · slides the block</div>
+              <div class="comp-card-formula" id="formula-fcos">F · cos 30° = 20 · 0.866</div>
+            </div>
+            <div class="comp-card" id="card-fsin">
+              <div class="comp-card-label">F SIN &theta;</div>
+              <div class="comp-card-value" id="val-fsin">10.0 N</div>
+              <div class="comp-card-desc">vertical · lifts the block</div>
+              <div class="comp-card-formula" id="formula-fsin">F · sin 30° = 20 · 0.500</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Values table -->
+        <div id="s2-table" style="flex:0 0 auto;font-size:0.72rem;">
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">VALUES FOR F = 20 N</div>
+          <div class="data-table-wrap">
+            <table class="data-table" style="font-size:0.72rem;">
+              <colgroup><col style="width:32px"><col style="width:64px"><col style="width:64px"></colgroup>
+              <thead><tr><th style="padding:5px 6px;">&theta;</th><th style="padding:5px 6px;">F cos &theta;</th><th style="padding:5px 6px;">F sin &theta;</th></tr></thead>
+              <tbody>
+                <tr id="s2-row-0"><td style="padding:4px 6px;">0°</td><td style="padding:4px 6px;">20.0 N</td><td style="padding:4px 6px;">0.0 N</td></tr>
+                <tr id="s2-row-30" class="row-active"><td style="padding:4px 6px;">30°</td><td style="padding:4px 6px;">17.3 N</td><td style="padding:4px 6px;">10.0 N</td></tr>
+                <tr id="s2-row-45"><td style="padding:4px 6px;">45°</td><td style="padding:4px 6px;">14.1 N</td><td style="padding:4px 6px;">14.1 N</td></tr>
+                <tr id="s2-row-60"><td style="padding:4px 6px;">60°</td><td style="padding:4px 6px;">10.0 N</td><td style="padding:4px 6px;">17.3 N</td></tr>
+                <tr id="s2-row-90"><td style="padding:4px 6px;">90°</td><td style="padding:4px 6px;">0.0 N</td><td style="padding:4px 6px;">20.0 N</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Force in 3D</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 3 — Force in 3D                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-3" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 3 / 21</div>
+    </div>
+    <h1 class="screen-title">Force in 3D — one angle per axis</h1>
+  </div>
+  <p class="screen-subtitle">Each component is the same operation: F times the cosine of the angle between F and that axis.</p>
+
+  <div class="screen-content">
+    <div class="s3-main-grid">
+      <!-- Left: controls -->
+      <div class="panel-3d" id="panel-3d">
+        <div class="panel-3d-title">FORCE F IN 3D</div>
+
+        <div class="field-label">Magnitude (N)</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div class="stepper">
+            <span class="stepper-val" id="s3-mag">20</span>
+            <div class="stepper-btns">
+              <button class="stepper-btn" onclick="stepS3Mag(1)">&#9650;</button>
+              <button class="stepper-btn" onclick="stepS3Mag(-1)">&#9660;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-label">&alpha; — x-axis angle</div>
+        <div class="angle-pills" id="alpha-pills" style="margin-bottom:12px;">
+          <button id="alpha-pill-0" class="pill" onclick="select3DAngle('alpha',0)">0°</button>
+          <button id="alpha-pill-30" class="pill" onclick="select3DAngle('alpha',30)">30°</button>
+          <button id="alpha-pill-45" class="pill" onclick="select3DAngle('alpha',45)">45°</button>
+          <button id="alpha-pill-60" class="pill active" onclick="select3DAngle('alpha',60)">60°</button>
+          <button id="alpha-pill-90" class="pill" onclick="select3DAngle('alpha',90)">90°</button>
+        </div>
+
+        <div class="field-label">&beta; — y-axis angle</div>
+        <div class="angle-pills" id="beta-pills" style="margin-bottom:12px;">
+          <button id="beta-pill-0" class="pill" onclick="select3DAngle('beta',0)">0°</button>
+          <button id="beta-pill-30" class="pill" onclick="select3DAngle('beta',30)">30°</button>
+          <button id="beta-pill-45" class="pill" onclick="select3DAngle('beta',45)">45°</button>
+          <button id="beta-pill-60" class="pill active" onclick="select3DAngle('beta',60)">60°</button>
+          <button id="beta-pill-90" class="pill" onclick="select3DAngle('beta',90)">90°</button>
+        </div>
+
+        <div class="field-label">&gamma; — z-axis (auto-computed)</div>
+        <div class="angle-pills" id="gamma-pills" style="margin-bottom:12px;">
+          <button id="gamma-pill-0" class="pill" disabled>0°</button>
+          <button id="gamma-pill-30" class="pill" disabled>30°</button>
+          <button id="gamma-pill-45" class="pill active" disabled>45°</button>
+          <button id="gamma-pill-60" class="pill" disabled>60°</button>
+          <button id="gamma-pill-90" class="pill" disabled>90°</button>
+        </div>
+
+        <div class="constraint-display" id="constraint-display">0.25 + 0.25 + 0.50 = 1.00 ✓</div>
+      </div>
+
+      <!-- Centre: live components stacked -->
+      <div class="s3-right-col">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;">LIVE COMPONENTS</div>
+        <div id="s3-cards" style="display:flex;flex-direction:column;gap:8px;">
+          <div class="readout-card">
+            <div class="readout-label">F_x · x-axis</div>
+            <div class="readout-value" id="val-fx">10.00 N</div>
+            <div class="readout-formula" id="formula-fx">F cos α = 20·cos 60°</div>
+          </div>
+          <div class="readout-card">
+            <div class="readout-label">F_y · y-axis</div>
+            <div class="readout-value" id="val-fy">10.00 N</div>
+            <div class="readout-formula" id="formula-fy">F cos β = 20·cos 60°</div>
+          </div>
+          <div class="readout-card">
+            <div class="readout-label">F_z · z-axis</div>
+            <div class="readout-value" id="val-fz">14.14 N</div>
+            <div class="readout-formula" id="formula-fz">F cos γ = 20·cos 45°</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: 3D diagram with user-controlled rotation -->
+      <div style="border:1.5px solid var(--border);border-radius:8px;background:#fff;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px;width:fit-content;">
+        <svg id="s3-diagram" viewBox="0 0 360 280" style="width:360px;max-width:100%;height:auto;" aria-label="3D force diagram"></svg>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-secondary" onclick="stepS3Rotate(-1)" style="padding:4px 14px;font-size:0.8rem;">&#8634; Rotate Left</button>
+          <button class="btn-secondary" onclick="stepS3Rotate(1)" style="padding:4px 14px;font-size:0.8rem;">Rotate Right &#8635;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Force Tug Simulator</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 4 — Activity: Force Tug Simulator                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-4" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 4 / 21</div>
+    </div>
+    <h1 class="screen-title">Activity — Force Tug Simulator</h1>
+  </div>
+  <p class="screen-subtitle">Set magnitude and angle for both forces. Watch the horizontal components and the resultant update live.</p>
+
+  <div class="screen-content">
+    <!-- Two force panels -->
+    <div class="tug-panels">
+      <div class="force-panel" id="force-panel-1">
+        <div class="force-panel-title">FORCE F&#8321;</div>
+        <div class="field-label">Magnitude (N)</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div class="stepper">
+            <span class="stepper-val" id="tug-mag1">20</span>
+            <div class="stepper-btns">
+              <button class="stepper-btn" onclick="stepTug(1,1)">&#9650;</button>
+              <button class="stepper-btn" onclick="stepTug(1,-1)">&#9660;</button>
+            </div>
+          </div>
+        </div>
+        <div class="field-label">Angle &theta;&#8321;</div>
+        <div class="angle-pills">
+          <button id="tug-pill-1-0" class="pill" onclick="selectTugAngle(1,0)">0°</button>
+          <button id="tug-pill-1-30" class="pill active" onclick="selectTugAngle(1,30)">30°</button>
+          <button id="tug-pill-1-45" class="pill" onclick="selectTugAngle(1,45)">45°</button>
+          <button id="tug-pill-1-60" class="pill" onclick="selectTugAngle(1,60)">60°</button>
+          <button id="tug-pill-1-90" class="pill" onclick="selectTugAngle(1,90)">90°</button>
+        </div>
+      </div>
+
+      <div class="force-panel" id="force-panel-2">
+        <div class="force-panel-title">FORCE F&#8322;</div>
+        <div class="field-label">Magnitude (N)</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div class="stepper">
+            <span class="stepper-val" id="tug-mag2">15</span>
+            <div class="stepper-btns">
+              <button class="stepper-btn" onclick="stepTug(2,1)">&#9650;</button>
+              <button class="stepper-btn" onclick="stepTug(2,-1)">&#9660;</button>
+            </div>
+          </div>
+        </div>
+        <div class="field-label">Angle &theta;&#8322;</div>
+        <div class="angle-pills">
+          <button id="tug-pill-2-0" class="pill active" onclick="selectTugAngle(2,0)">0°</button>
+          <button id="tug-pill-2-30" class="pill" onclick="selectTugAngle(2,30)">30°</button>
+          <button id="tug-pill-2-45" class="pill" onclick="selectTugAngle(2,45)">45°</button>
+          <button id="tug-pill-2-60" class="pill" onclick="selectTugAngle(2,60)">60°</button>
+          <button id="tug-pill-2-90" class="pill" onclick="selectTugAngle(2,90)">90°</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagram + Live Components side by side -->
+    <div class="s4-bottom-grid">
+      <div style="border:1.5px solid var(--border);border-radius:8px;background:#fff;padding:10px;width:fit-content;">
+        <svg id="s4-diagram" viewBox="0 0 440 150" style="width:440px;max-width:100%;height:auto;display:block;" aria-label="Force tug diagram"></svg>
+      </div>
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">LIVE COMPONENTS</div>
+        <div class="s4-readouts-col">
+          <div class="readout-card">
+            <div class="readout-label">F&#8321; COS &theta;&#8321;</div>
+            <div class="readout-value" id="tug-c1">17.3 N</div>
+          </div>
+          <div class="readout-card">
+            <div class="readout-label">F&#8322; COS &theta;&#8322;</div>
+            <div class="readout-value" id="tug-c2">15.0 N</div>
+          </div>
+          <div class="readout-card">
+            <div class="readout-label">RESULTANT</div>
+            <div class="readout-value" id="tug-res">2.3 N →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 1</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 5 — Question 1                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-5" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 5 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 1 — angled force vs horizontal force</h1>
+  </div>
+  <p class="screen-subtitle">Use what you saw in the simulator. Decompose first, then add.</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <!-- Question -->
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 20 N force is applied at 30° above the horizontal (forward + up). A 15 N force is applied horizontally in the opposite direction. The block has mass 2 kg. In which direction does the block move, and at what acceleration?</p>
+        </div>
+        <!-- Options -->
+        <div class="mcq-options-grid">
+          <button id="mcq1-opt-A" class="mcq-option" onclick="selectMCQ('mcq1','A')">
+            <span class="mcq-badge">A</span>2.5 m/s² in the 20 N's horizontal direction
+          </button>
+          <button id="mcq1-opt-B" class="mcq-option" onclick="selectMCQ('mcq1','B')">
+            <span class="mcq-badge">B</span>1.16 m/s² in the 15 N's direction
+          </button>
+          <button id="mcq1-opt-C" class="mcq-option" onclick="selectMCQ('mcq1','C')">
+            <span class="mcq-badge">C</span>1.16 m/s² in the 20 N's horizontal direction
+          </button>
+          <button id="mcq1-opt-D" class="mcq-option" onclick="selectMCQ('mcq1','D')">
+            <span class="mcq-badge">D</span>Zero — the forces balance
+          </button>
+        </div>
+      </div>
+
+      <!-- Diagram -->
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 240 160" style="width:100%;height:auto;" aria-label="Question 1 force diagram">
+          <title>20N force at 30 degrees and 15N opposing force on 2kg block</title>
+          <defs>
+            <marker id="q1f1" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="q1f2" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="115" x2="230" y2="115" stroke="#9ca3af" stroke-width="1.5"/>
+          <rect x="120" y="82" width="60" height="33" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <!-- 20N at 30° -->
+          <line x1="180" y1="98" x2="218" y2="66" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q1f1)"/>
+          <text x="200" y="62" font-size="11" fill="#3b82f6" font-weight="700">20 N</text>
+          <!-- 15N left -->
+          <line x1="120" y1="98" x2="65" y2="98" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q1f2)"/>
+          <text x="28" y="102" font-size="11" fill="#3b82f6" font-weight="700">15 N</text>
+          <!-- mass label -->
+          <text x="128" y="104" font-size="10" fill="#6b7280">m = 2 kg</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq1','screen-6')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq1-next" disabled onclick="goToScreen('screen-6')">Next &rarr; Guided Practice</button>
+    <span class="mcq-feedback" id="mcq1-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 6 — Guided Practice Q1                             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-6" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 6 / 21</div>
+    </div>
+    <h1 class="screen-title">Guided Practice — Question 1</h1>
+  </div>
+  <p class="screen-subtitle">Choose the correct workflow for solving this problem.</p>
+
+  <div class="screen-content">
+    <p class="gp-problem-recap">A 20 N force at 30° above horizontal and a 15 N horizontal opposing force act on a 2 kg block. Which sequence of steps correctly finds the block's acceleration?</p>
+
+    <div class="gp-workflow-cards" id="gp1-workflows">
+
+      <!-- Workflow A — Wrong: skips decomposition -->
+      <button class="gp-workflow-card" id="gp1-wf-A" onclick="selectWorkflow('A')">
+        <div class="gp-wf-badge">A</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Both forces are horizontal</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Net force = 20 &minus; 15 = 5 N (forward)</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Acceleration = 5 &divide; 2 = <strong>2.5 m/s²</strong></div>
+        </div>
+      </button>
+
+      <!-- Workflow B — Correct -->
+      <button class="gp-workflow-card" id="gp1-wf-B" onclick="selectWorkflow('B')">
+        <div class="gp-wf-badge">B</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Decompose 20 N at 30°: horizontal component = 20 &times; cos 30° = 17.32 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>15 N opposes → net force = 17.32 &minus; 15 = 2.32 N (forward)</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Acceleration = 2.32 &divide; 2 = <strong>1.16 m/s²</strong></div>
+        </div>
+      </button>
+
+      <!-- Workflow C — Wrong: decompose but add forces -->
+      <button class="gp-workflow-card" id="gp1-wf-C" onclick="selectWorkflow('C')">
+        <div class="gp-wf-badge">C</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Decompose 20 N at 30°: horizontal component = 20 &times; cos 30° = 17.32 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Both forces are horizontal → add them: 17.32 + 15 = 32.32 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Acceleration = 32.32 &divide; 2 = <strong>16.16 m/s²</strong></div>
+        </div>
+      </button>
+
+    </div>
+
+    <div class="gp-wf-controls">
+      <button class="btn-primary" onclick="submitWorkflow()">&#10003; Submit</button>
+      <span class="gp-feedback" id="gp1-wf-feedback"></span>
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Answer 1</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 7 — Answer 1                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-7" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 7 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 1 — option C</h1>
+  </div>
+  <p class="screen-subtitle">1.16 m/s² in the 20 N's horizontal direction. Here's the working.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">C &middot; 1.16 m/s² toward the 20 N's horizontal</div>
+    </div>
+
+    <div class="s6-layout">
+      <div class="answer-steps">
+        <div class="answer-step" id="step6-1">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <div class="step-title">Decompose 20 N at 30°</div>
+            <div class="step-code">F₁ cos θ = 20 × cos 30° = 20 × 0.866 = 17.32 N (horizontal, forward)</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step6-2">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <div class="step-title">15 N is horizontal but opposing</div>
+            <div class="step-code">F₂ = 15 N (horizontal, backward)</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step6-3">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <div class="step-title">Net horizontal force (subtract)</div>
+            <div class="step-code">F_net = 17.32 − 15 = 2.32 N → forward</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step6-4">
+          <div class="step-badge">4</div>
+          <div class="step-content">
+            <div class="step-title">Apply Newton's 2nd Law</div>
+            <div class="step-code">a = F_net / m = 2.32 / 2 = 1.16 m/s² →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Force diagram -->
+      <div class="s6-diagram-panel">
+        <svg id="s6-diagram" viewBox="0 0 340 260" style="width:403px;max-width:100%;height:auto;" aria-label="Force diagram for Answer 1">
+          <title>Free body diagram: 20 N at 30° and 15 N opposing on 2 kg block</title>
+          <defs>
+            <marker id="s6-ab" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/>
+            </marker>
+            <marker id="s6-ar" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+            </marker>
+            <marker id="s6-ag" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#059669"/>
+            </marker>
+            <marker id="s6-au" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#f59e0b"/>
+            </marker>
+          </defs>
+
+          <!-- Ground -->
+          <line x1="20" y1="185" x2="320" y2="185" stroke="#9ca3af" stroke-width="1.5"/>
+          <line x1="25"  y1="185" x2="33"  y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="55"  y1="185" x2="63"  y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="85"  y1="185" x2="93"  y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="220" y1="185" x2="228" y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="250" y1="185" x2="258" y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="280" y1="185" x2="288" y2="193" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="310" y1="185" x2="318" y2="193" stroke="#9ca3af" stroke-width="1"/>
+
+          <!-- Block -->
+          <rect x="145" y="152" width="60" height="33" fill="#e8edf5" stroke="#1a2e44" stroke-width="2" rx="2"/>
+          <text x="175" y="173" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2e44">2 kg</text>
+
+          <!-- 20 N angled force -->
+          <g id="diag6-angled" style="display:none">
+            <line x1="205" y1="168" x2="264" y2="133" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#s6-ab)"/>
+            <path d="M 227,168 A 22,22 0 0,0 224,157" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+            <text x="232" y="164" font-size="9" fill="#3b82f6">30°</text>
+            <text x="250" y="123" text-anchor="middle" font-size="10" font-weight="700" fill="#3b82f6">20 N</text>
+          </g>
+
+          <!-- Component decomposition (dashed) -->
+          <g id="diag6-decomp" style="display:none">
+            <line x1="205" y1="168" x2="263" y2="168" stroke="#059669" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#s6-ag)"/>
+            <text x="234" y="178" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">17.32 N →</text>
+            <text x="234" y="187" text-anchor="middle" font-size="8" fill="#6b7280">(F cos 30°)</text>
+            <line x1="265" y1="168" x2="265" y2="135" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#s6-au)"/>
+            <text x="278" y="153" font-size="9" font-weight="600" fill="#f59e0b">10 N ↑</text>
+            <text x="278" y="162" font-size="8" fill="#6b7280">(F sin 30°)</text>
+            <path d="M 259,168 L 259,162 L 265,162" fill="none" stroke="#9ca3af" stroke-width="1"/>
+          </g>
+
+          <!-- 15 N opposing force -->
+          <g id="diag6-f15" style="display:none">
+            <line x1="145" y1="168" x2="94" y2="168" stroke="#dc2626" stroke-width="2.5" marker-end="url(#s6-ar)"/>
+            <text x="119" y="161" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">← 15 N</text>
+          </g>
+
+          <!-- Separator -->
+          <line x1="20" y1="197" x2="320" y2="197" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- Net force -->
+          <g id="diag6-net" style="display:none">
+            <text x="170" y="213" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">17.32 − 15 = 2.32 N net →</text>
+            <line x1="138" y1="222" x2="180" y2="222" stroke="#059669" stroke-width="2" marker-end="url(#s6-ag)"/>
+          </g>
+
+          <!-- Acceleration result -->
+          <g id="diag6-acc" style="display:none">
+            <text x="170" y="242" text-anchor="middle" font-size="10" font-weight="700" fill="#f59e0b">a = 2.32 ÷ 2 = 1.16 m/s²</text>
+            <text x="170" y="254" text-anchor="middle" font-size="9" fill="#6b7280">(Newton's 2nd Law)</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 2</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 7 — Question 2                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-8" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 8 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 2 — three forces in 2D</h1>
+  </div>
+  <p class="screen-subtitle">Cancel along one axis first. Then combine perpendicular components.</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 5 kg block sits on a smooth horizontal floor. Three horizontal forces act on it simultaneously: 10 N due East, 6&radic;3 N due North, and 4 N due West. What is the magnitude and direction of the block's acceleration?</p>
+        </div>
+        <div class="mcq-options-grid">
+          <button id="mcq2-opt-A" class="mcq-option" onclick="selectMCQ('mcq2','A')">
+            <span class="mcq-badge">A</span>2.4 m/s² at 30° North of East
+          </button>
+          <button id="mcq2-opt-B" class="mcq-option" onclick="selectMCQ('mcq2','B')">
+            <span class="mcq-badge">B</span>2.4 m/s² at 60° North of East
+          </button>
+          <button id="mcq2-opt-C" class="mcq-option" onclick="selectMCQ('mcq2','C')">
+            <span class="mcq-badge">C</span>4.0 m/s² at 60° North of East
+          </button>
+          <button id="mcq2-opt-D" class="mcq-option" onclick="selectMCQ('mcq2','D')">
+            <span class="mcq-badge">D</span>2.4 m/s² at 30° East of North
+          </button>
+        </div>
+      </div>
+
+      <!-- Diagram: top view -->
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 240 200" style="width:100%;height:auto;" aria-label="Question 2 force diagram top view">
+          <title>Top view: 10N East, 6√3N North, 4N West on 5kg block</title>
+          <defs>
+            <marker id="q2n" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="q2e" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="q2w" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <!-- block (top view) -->
+          <rect x="96" y="86" width="48" height="48" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <!-- North arrow -->
+          <line x1="120" y1="86" x2="120" y2="26" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q2n)"/>
+          <text x="125" y="22" font-size="11" fill="#3b82f6" font-weight="700">6√3 N N</text>
+          <!-- East arrow -->
+          <line x1="144" y1="110" x2="210" y2="110" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q2e)"/>
+          <text x="214" y="114" font-size="11" fill="#3b82f6" font-weight="700">10 N E</text>
+          <!-- West arrow -->
+          <line x1="96" y1="110" x2="30" y2="110" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q2w)"/>
+          <text x="4" y="114" font-size="11" fill="#3b82f6" font-weight="700">4 N W</text>
+          <!-- label -->
+          <text x="88" y="148" font-size="10" fill="#6b7280">m = 5 kg · top view</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq2','screen-9')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq2-next" disabled onclick="goToScreen('screen-9')">Next &rarr; Guided Practice 2</button>
+    <span class="mcq-feedback" id="mcq2-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 9 — Guided Practice Q2                             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-9" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 9 / 21</div>
+    </div>
+    <h1 class="screen-title">Guided Practice — Question 2</h1>
+  </div>
+  <p class="screen-subtitle">Choose the correct workflow for solving this problem.</p>
+
+  <div class="screen-content">
+    <p class="gp-problem-recap">Three horizontal forces act on a 5 kg block: 10 N East, 6&radic;3 N North, and 4 N West. Which workflow correctly finds the magnitude and direction of the acceleration?</p>
+
+    <div class="gp-workflow-cards" id="gp2-workflows">
+
+      <!-- Workflow A — Correct: cancel E-W then Pythagoras -->
+      <button class="gp-workflow-card" id="gp2-wf-A" onclick="selectWorkflow2('A')">
+        <div class="gp-wf-badge">A</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Cancel East &amp; West: net East = 10 &minus; 4 = 6 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Two perpendicular components remain: 6 N East, 6&radic;3 N North</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Resultant: &radic;(6&sup2; + (6&radic;3)&sup2;) = &radic;144 = 12 N at arctan(&radic;3) = 60° N of E</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">4</span>Acceleration = 12 &divide; 5 = <strong>2.4 m/s² at 60° N of E</strong></div>
+        </div>
+      </button>
+
+      <!-- Workflow B — Wrong: ignores West force -->
+      <button class="gp-workflow-card" id="gp2-wf-B" onclick="selectWorkflow2('B')">
+        <div class="gp-wf-badge">B</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Use East and North only — the 4 N West force is small and can be ignored</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Resultant: &radic;(10&sup2; + (6&radic;3)&sup2;) = &radic;208 &approx; 14.4 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Direction: arctan(6&radic;3 / 10) &approx; 46° N of E</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">4</span>Acceleration = 14.4 &divide; 5 = <strong>&approx; 2.88 m/s² at 46° N of E</strong></div>
+        </div>
+      </button>
+
+      <!-- Workflow C — Wrong: adds E and W instead of subtracting -->
+      <button class="gp-workflow-card" id="gp2-wf-C" onclick="selectWorkflow2('C')">
+        <div class="gp-wf-badge">C</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Combine East &amp; West by adding: 10 + 4 = 14 N East</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Resultant: &radic;(14&sup2; + (6&radic;3)&sup2;) = &radic;304 &approx; 17.4 N</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Direction: arctan(6&radic;3 / 14) &approx; 37° N of E</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">4</span>Acceleration = 17.4 &divide; 5 = <strong>&approx; 3.48 m/s² at 37° N of E</strong></div>
+        </div>
+      </button>
+
+    </div>
+
+    <div class="gp-wf-controls">
+      <button class="btn-primary" onclick="submitWorkflow2()">&#10003; Submit</button>
+      <span class="gp-feedback" id="gp2-wf-feedback"></span>
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Answer 2</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 10 — Answer 2                                      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-10" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 10 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 2 — option B</h1>
+  </div>
+  <p class="screen-subtitle">2.4 m/s² at 60° North of East.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">B &middot; 2.4 m/s² at 60° North of East</div>
+    </div>
+
+    <div class="s6-layout">
+      <div class="answer-steps">
+        <div class="answer-step" id="step8-1">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <div class="step-title">Cancel East-West forces</div>
+            <div class="step-code">Net East = 10 − 4 = 6 N</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step8-2">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <div class="step-title">North component</div>
+            <div class="step-code">Net North = 6√3 ≈ 10.39 N</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step8-3">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <div class="step-title">Magnitude (Pythagoras)</div>
+            <div class="step-code">|F| = √(6² + (6√3)²) = √(36 + 108) = √144 = 12 N</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step8-4">
+          <div class="step-badge">4</div>
+          <div class="step-content">
+            <div class="step-title">Acceleration</div>
+            <div class="step-code">a = 12 / 5 = 2.4 m/s²</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step8-5">
+          <div class="step-badge">5</div>
+          <div class="step-content">
+            <div class="step-title">Direction angle</div>
+            <div class="step-code">tan θ = 6√3 / 6 = √3  →  θ = 60° from East toward North</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progressive force diagram -->
+      <div class="s6-diagram-panel">
+        <svg id="s8-diagram" viewBox="0 0 300 215" style="width:360px;max-width:100%;height:auto;" aria-label="Force diagram for Answer 2">
+          <title>Progressive top-view force diagram: 10N East, 4N West, 6√3N North on 5kg block</title>
+          <defs>
+            <marker id="s8-ab" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/>
+            </marker>
+            <marker id="s8-ar" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+            </marker>
+            <marker id="s8-ag" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#059669"/>
+            </marker>
+            <marker id="s8-au" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#f59e0b"/>
+            </marker>
+          </defs>
+
+          <!-- Block (top view) -->
+          <rect x="110" y="108" width="50" height="50" fill="#e8edf5" stroke="#1a2e44" stroke-width="2" rx="2"/>
+          <text x="135" y="136" text-anchor="middle" font-size="11" font-weight="700" fill="#1a2e44">5 kg</text>
+          <text x="135" y="149" text-anchor="middle" font-size="8" fill="#6b7280">top view</text>
+
+          <!-- diag8-east: 10N East (blue) -->
+          <g id="diag8-east" style="display:none">
+            <line x1="160" y1="133" x2="220" y2="133" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#s8-ab)"/>
+            <text x="226" y="129" font-size="10" font-weight="700" fill="#3b82f6">10 N →</text>
+            <text x="226" y="141" font-size="8" fill="#6b7280">East</text>
+          </g>
+
+          <!-- diag8-west: 4N West (red) -->
+          <g id="diag8-west" style="display:none">
+            <line x1="110" y1="133" x2="86" y2="133" stroke="#dc2626" stroke-width="2.5" marker-end="url(#s8-ar)"/>
+            <text x="80" y="129" text-anchor="end" font-size="10" font-weight="700" fill="#dc2626">← 4 N</text>
+            <text x="80" y="141" text-anchor="end" font-size="8" fill="#6b7280">West</text>
+          </g>
+
+          <!-- diag8-neteast: 6N net East (green, dashed) -->
+          <g id="diag8-neteast" style="display:none">
+            <line x1="160" y1="133" x2="196" y2="133" stroke="#059669" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#s8-ag)"/>
+            <text x="178" y="125" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">6 N →</text>
+            <text x="178" y="160" text-anchor="middle" font-size="8" fill="#6b7280">(10 − 4)</text>
+          </g>
+
+          <!-- diag8-north: 6√3N North (blue) -->
+          <g id="diag8-north" style="display:none">
+            <line x1="135" y1="108" x2="135" y2="46" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#s8-ab)"/>
+            <text x="140" y="43" font-size="9" font-weight="700" fill="#3b82f6">6√3 N ↑</text>
+            <text x="140" y="54" font-size="8" fill="#6b7280">North</text>
+          </g>
+
+          <!-- diag8-pyth: Pythagoras right triangle construction -->
+          <g id="diag8-pyth" style="display:none">
+            <!-- North arm from tip of net-east (tip-to-tail addition) -->
+            <line x1="196" y1="133" x2="196" y2="71" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <text x="202" y="104" font-size="8" font-weight="600" fill="#3b82f6">6√3 N</text>
+            <!-- Right angle marker at (196,133) -->
+            <path d="M 189,133 L 189,126 L 196,126" fill="none" stroke="#9ca3af" stroke-width="1"/>
+            <!-- Hypotenuse (amber) = resultant 12N -->
+            <line x1="160" y1="133" x2="196" y2="71" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#s8-au)"/>
+            <text x="190" y="96" text-anchor="start" font-size="10" font-weight="700" fill="#f59e0b">12 N</text>
+          </g>
+
+          <!-- Separator -->
+          <line x1="20" y1="175" x2="280" y2="175" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- diag8-acc: Acceleration result -->
+          <g id="diag8-acc" style="display:none">
+            <text x="150" y="192" text-anchor="middle" font-size="10" font-weight="700" fill="#f59e0b">a = 12 ÷ 5 = 2.4 m/s²</text>
+            <text x="150" y="206" text-anchor="middle" font-size="9" fill="#6b7280">(Newton's 2nd Law)</text>
+          </g>
+
+          <!-- diag8-angle: 60° angle annotation on hypotenuse -->
+          <g id="diag8-angle" style="display:none">
+            <path d="M 180,133 A 20,20 0 0,0 170,116" fill="none" stroke="#1a2e44" stroke-width="1.5"/>
+            <text x="184" y="120" font-size="9" font-weight="600" fill="#1a2e44">60°</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 3</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 9 — Question 3                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-11" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 11 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 3 — angled vs opposing</h1>
+  </div>
+  <p class="screen-subtitle">Which way does the net horizontal force point?</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 10 N force is applied to a block at 60° above the horizontal (pulling upward and forward). A second force of 6 N is applied horizontally in the opposite direction. What is the net horizontal force on the block?</p>
+        </div>
+        <div class="mcq-options-grid">
+          <button id="mcq3-opt-A" class="mcq-option" onclick="selectMCQ('mcq3','A')">
+            <span class="mcq-badge">A</span>4 N in the direction of the 10 N force
+          </button>
+          <button id="mcq3-opt-B" class="mcq-option" onclick="selectMCQ('mcq3','B')">
+            <span class="mcq-badge">B</span>1 N in the direction of the 6 N force
+          </button>
+          <button id="mcq3-opt-C" class="mcq-option" onclick="selectMCQ('mcq3','C')">
+            <span class="mcq-badge">C</span>4 N in the direction of the 6 N force
+          </button>
+          <button id="mcq3-opt-D" class="mcq-option" onclick="selectMCQ('mcq3','D')">
+            <span class="mcq-badge">D</span>Zero — the forces balance
+          </button>
+        </div>
+      </div>
+
+      <!-- Diagram -->
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 240 180" style="width:100%;height:auto;" aria-label="Question 3 force diagram">
+          <title>10N at 60 degrees and 6N opposing on block</title>
+          <defs>
+            <marker id="q3f1" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="q3f2" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="130" x2="230" y2="130" stroke="#9ca3af" stroke-width="1.5"/>
+          <rect x="110" y="98" width="55" height="32" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <!-- 10N at 60° -->
+          <line x1="165" y1="114" x2="202" y2="78" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q3f1)"/>
+          <text x="204" y="74" font-size="11" fill="#3b82f6" font-weight="700">10 N</text>
+          <!-- 6N left -->
+          <line x1="110" y1="114" x2="56" y2="114" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q3f2)"/>
+          <text x="20" y="118" font-size="11" fill="#3b82f6" font-weight="700">6 N</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq3','screen-12')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq3-next" disabled onclick="nextScreen()">Next &rarr; Guided Practice 3</button>
+    <span class="mcq-feedback" id="mcq3-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 12 — Guided Practice Q3                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-12" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 12 / 21</div>
+    </div>
+    <h1 class="screen-title">Guided Practice — Question 3</h1>
+  </div>
+  <p class="screen-subtitle">Choose the correct workflow for solving this problem.</p>
+  <div class="screen-content">
+    <p class="gp-problem-recap">A 10 N force acts at 60° above the horizontal (forward). A 6 N force acts horizontally in the opposite direction. Which workflow correctly finds the net horizontal force?</p>
+    <div class="gp-workflow-cards" id="gp3-workflows">
+      <button class="gp-workflow-card" id="gp3-wf-A" onclick="selectWorkflow3('A')">
+        <div class="gp-wf-badge">A</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Use the 10 N force directly (no decomposition)</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Subtract: 10 &minus; 6 = <strong>4 N forward</strong></div>
+        </div>
+      </button>
+      <button class="gp-workflow-card" id="gp3-wf-B" onclick="selectWorkflow3('B')">
+        <div class="gp-wf-badge">B</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Find horizontal component: 10 &times; cos 60° = 10 &times; 0.5 = 5 N forward</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>6 N is already horizontal — backward</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">3</span>Net = 6 &minus; 5 = <strong>1 N backward</strong></div>
+        </div>
+      </button>
+      <button class="gp-workflow-card" id="gp3-wf-C" onclick="selectWorkflow3('C')">
+        <div class="gp-wf-badge">C</div>
+        <div class="gp-wf-steps">
+          <div class="gp-wf-step"><span class="gp-wf-num">1</span>Find component: 10 &times; sin 60° &approx; 8.66 N forward</div>
+          <div class="gp-wf-step"><span class="gp-wf-num">2</span>Subtract: 8.66 &minus; 6 = <strong>2.66 N forward</strong></div>
+        </div>
+      </button>
+    </div>
+    <div class="gp-wf-controls">
+      <button class="btn-primary" onclick="submitWorkflow3()">&#10003; Submit</button>
+      <span class="gp-feedback" id="gp3-wf-feedback"></span>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Answer 3</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 10 — Answer 3 — option B                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-13" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 13 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 3 — option B</h1>
+  </div>
+  <p class="screen-subtitle">1 N in the direction of the 6 N force.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">B &middot; 1 N in the direction of the 6 N force</div>
+    </div>
+    <div class="s6-layout">
+      <div class="answer-steps">
+        <div class="answer-step" id="step10-1">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <div class="step-title">Horizontal component of 10 N</div>
+            <div class="step-code">10 × cos 60° = 10 × 0.5 = 5 N (forward)</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step10-2">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <div class="step-title">Opposing 6 N is fully horizontal</div>
+            <div class="step-code">6 N (backward)</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step10-3">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <div class="step-title">Subtract — opposing direction</div>
+            <div class="step-code">Net = 6 &minus; 5 = 1 N in the 6 N's direction</div>
+          </div>
+        </div>
+        <div class="answer-step" id="step10-4">
+          <div class="step-badge">4</div>
+          <div class="step-content">
+            <div class="step-title">Note: vertical sin &theta; part</div>
+            <div class="step-code">10 × sin 60° ≈ 8.66 N — lifts the block but doesn't slide it</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progressive side-view force diagram -->
+      <div class="s6-diagram-panel">
+        <svg id="s10-diagram" viewBox="0 0 300 220" style="width:340px;max-width:100%;height:auto;" aria-label="Force diagram for Answer 3">
+          <title>Progressive side-view force diagram: 10N at 60° and 6N opposing on block</title>
+          <defs>
+            <marker id="s10-ab" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/>
+            </marker>
+            <marker id="s10-ar" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#dc2626"/>
+            </marker>
+            <marker id="s10-ag" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#059669"/>
+            </marker>
+            <marker id="s10-au" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#f59e0b"/>
+            </marker>
+            <marker id="s10-agr" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L8,3.5 z" fill="#9ca3af"/>
+            </marker>
+          </defs>
+
+          <!-- Ground -->
+          <line x1="10" y1="155" x2="290" y2="155" stroke="#9ca3af" stroke-width="1.5"/>
+
+          <!-- Block (side view) -->
+          <rect x="110" y="115" width="60" height="40" fill="#e8edf5" stroke="#1a2e44" stroke-width="2" rx="2"/>
+          <text x="140" y="139" text-anchor="middle" font-size="11" font-weight="700" fill="#1a2e44">block</text>
+          <text x="140" y="151" text-anchor="middle" font-size="7" fill="#6b7280">side view</text>
+
+          <!-- diag10-angled: 10N at 60° (blue) — from right edge at (170,135) -->
+          <g id="diag10-angled" style="display:none">
+            <line x1="170" y1="135" x2="202" y2="79" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#s10-ab)"/>
+            <text x="208" y="76" font-size="10" font-weight="700" fill="#3b82f6">10 N</text>
+            <text x="208" y="89" font-size="8" fill="#6b7280">at 60°</text>
+          </g>
+
+          <!-- diag10-arc: 60° angle annotation -->
+          <g id="diag10-arc" style="display:none">
+            <path d="M 186,135 A 16,16 0 0,0 178,121" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+            <text x="190" y="123" font-size="8" fill="#9ca3af">60°</text>
+          </g>
+
+          <!-- diag10-hcomp: 5N horizontal component (green dashed) -->
+          <g id="diag10-hcomp" style="display:none">
+            <line x1="170" y1="135" x2="202" y2="135" stroke="#059669" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#s10-ag)"/>
+            <text x="186" y="128" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">5 N →</text>
+            <text x="186" y="148" text-anchor="middle" font-size="7" fill="#6b7280">cos 60°</text>
+          </g>
+
+          <!-- diag10-oppose: 6N backward (red) -->
+          <g id="diag10-oppose" style="display:none">
+            <line x1="110" y1="135" x2="72" y2="135" stroke="#dc2626" stroke-width="2.5" marker-end="url(#s10-ar)"/>
+            <text x="68" y="131" text-anchor="end" font-size="10" font-weight="700" fill="#dc2626">← 6 N</text>
+            <text x="68" y="143" text-anchor="end" font-size="7" fill="#6b7280">backward</text>
+          </g>
+
+          <!-- Separator -->
+          <line x1="20" y1="168" x2="280" y2="168" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- diag10-net: Net 1N result -->
+          <g id="diag10-net" style="display:none">
+            <text x="150" y="184" text-anchor="middle" font-size="10" font-weight="700" fill="#f59e0b">Net = 6 &minus; 5 = 1 N &larr; (backward)</text>
+          </g>
+
+          <!-- diag10-vcomp: 8.66N vertical — dashed gray distractor -->
+          <g id="diag10-vcomp" style="display:none">
+            <line x1="140" y1="115" x2="140" y2="53" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#s10-agr)"/>
+            <text x="146" y="78" font-size="8" fill="#9ca3af">8.66 N ↑</text>
+            <text x="146" y="90" font-size="7" fill="#9ca3af">sin 60°</text>
+            <text x="146" y="102" font-size="7" fill="#9ca3af">lifts block</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next section &rarr; Friction</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 11 — Friction: the surface pushes back             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-14" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 14 / 21</div>
+    </div>
+    <h1 class="screen-title">Friction — the surface pushes back</h1>
+  </div>
+  <p class="screen-subtitle">Friction isn't a fixed number. It depends on the surface (μ) and how hard the block presses down (N).</p>
+
+  <div class="screen-content">
+    <div class="two-col two-col-right-sm" style="gap:18px;margin-bottom:16px;">
+      <!-- Left: friction diagram -->
+      <div style="border:1.5px solid var(--border);border-radius:8px;background:#fff;padding:14px;display:flex;gap:16px;align-items:flex-start;" id="friction-diagram">
+        <div style="flex:0 0 auto;">
+        <svg viewBox="0 0 480 200" style="max-width:300px;width:100%;height:auto;" aria-label="Friction force diagram">
+          <title>Friction force body diagram showing N, W, F_applied and friction</title>
+          <defs>
+            <marker id="fr-app" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+            <marker id="fr-fri" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#ef4444"/></marker>
+            <marker id="fr-nrm" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#374151"/></marker>
+            <marker id="fr-wgt" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#374151"/></marker>
+          </defs>
+          <!-- ground -->
+          <line x1="20" y1="138" x2="460" y2="138" stroke="#9ca3af" stroke-width="1.5"/>
+          <!-- block -->
+          <rect x="192" y="88" width="96" height="50" fill="none" stroke="#1a2e44" stroke-width="2.5"/>
+          <!-- Normal force up -->
+          <line x1="240" y1="88" x2="240" y2="34" stroke="#374151" stroke-width="2" marker-end="url(#fr-nrm)"/>
+          <text x="246" y="28" font-size="11" fill="#374151">N = m·g</text>
+          <!-- Weight down -->
+          <line x1="240" y1="138" x2="240" y2="188" stroke="#374151" stroke-width="2" marker-end="url(#fr-wgt)"/>
+          <text x="246" y="196" font-size="11" fill="#374151">W = m·g</text>
+          <!-- Applied force right -->
+          <line x1="288" y1="113" x2="360" y2="113" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#fr-app)"/>
+          <text x="308" y="107" font-size="11" fill="#3b82f6" font-weight="700">F_applied</text>
+          <!-- Friction left (dashed red) -->
+          <line x1="192" y1="113" x2="108" y2="113" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#fr-fri)"/>
+          <text x="108" y="107" font-size="11" fill="#ef4444" font-weight="700" text-anchor="end">f = μ·N</text>
+        </svg>
+
+        <!-- Animated friction story -->
+        <div id="fr14-anim-panel" style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px;">
+          <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">FRICTION IN ACTION</div>
+          <svg id="fr14-anim-svg" viewBox="0 0 280 155" style="max-width:300px;width:100%;height:auto;display:block;" aria-label="Animated friction diagram">
+            <title>Animation: friction grows equal to applied force until max, then block slides</title>
+            <defs>
+              <marker id="fr14-ab" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                <path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/>
+              </marker>
+              <marker id="fr14-ar" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                <path d="M0,0 L0,7 L8,3.5 z" fill="#ef4444"/>
+              </marker>
+              <marker id="fr14-agr" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                <path d="M0,0 L0,7 L8,3.5 z" fill="#6b7280"/>
+              </marker>
+            </defs>
+
+            <!-- Ground -->
+            <line x1="5" y1="110" x2="275" y2="110" stroke="#9ca3af" stroke-width="1.5"/>
+
+            <!-- Block group: translates rightward when block slides -->
+            <g id="fr14-block-group">
+            <!-- Block -->
+            <rect x="115" y="80" width="50" height="30" fill="#e8edf5" stroke="#1a2e44" stroke-width="2" rx="2"/>
+            <text x="140" y="99" text-anchor="middle" font-size="10" font-weight="700" fill="#1a2e44">block</text>
+
+            <!-- Normal force (always visible) -->
+            <line x1="140" y1="80" x2="140" y2="44" stroke="#6b7280" stroke-width="1.8" marker-end="url(#fr14-agr)"/>
+            <text x="146" y="41" font-size="8" fill="#6b7280">N</text>
+            <!-- Weight (always visible) -->
+            <line x1="140" y1="110" x2="140" y2="146" stroke="#6b7280" stroke-width="1.8" marker-end="url(#fr14-agr)"/>
+            <text x="146" y="153" font-size="8" fill="#6b7280">W</text>
+
+            <!-- Push arrow (blue, rightward): x1=165 fixed, x2 grows -->
+            <line id="fr14-push" x1="165" y1="95" x2="165" y2="95" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#fr14-ab)" style="display:none"/>
+            <text id="fr14-push-lbl" x="200" y="88" text-anchor="middle" font-size="9" font-weight="700" fill="#3b82f6" style="display:none">F</text>
+
+            <!-- Friction arrow (red, leftward): x1=115 fixed, x2 grows left -->
+            <line id="fr14-fric" x1="115" y1="95" x2="115" y2="95" stroke="#ef4444" stroke-width="2.5" marker-end="url(#fr14-ar)" style="display:none"/>
+            <text id="fr14-fric-lbl" x="80" y="88" text-anchor="middle" font-size="9" font-weight="700" fill="#ef4444" style="display:none">f</text>
+
+            <!-- f_max marker: dashed vertical at x=60 (115-55) -->
+            <g id="fr14-maxmark" style="display:none">
+              <line x1="60" y1="70" x2="60" y2="110" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3,2"/>
+              <text x="60" y="67" text-anchor="middle" font-size="8" fill="#ef4444">f_max</text>
+            </g>
+
+            <!-- Velocity indicator (shown when sliding) -->
+            <g id="fr14-slide" style="display:none">
+              <text x="140" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#f59e0b">&#8594; &#8594;</text>
+            </g>
+            </g>
+
+            <!-- Separator -->
+            <line x1="10" y1="118" x2="270" y2="118" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3,2"/>
+
+            <!-- Status text -->
+            <text id="fr14-status" x="140" y="133" text-anchor="middle" font-size="9" font-weight="600" fill="#374151"></text>
+            <text id="fr14-status2" x="140" y="147" text-anchor="middle" font-size="8" fill="#6b7280"></text>
+          </svg>
+        </div>
+        </div><!-- /SVG column -->
+        <div id="friction-formula-box" style="flex:1;min-width:120px;margin-bottom:0;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;text-align:center;">Maximum static friction</div>
+          <div class="friction-formula-text">f_max = μ · N</div>
+          <div class="friction-formula-sub">μ = coefficient of friction &nbsp;|&nbsp; N = normal force = m · g</div>
+        </div>
+      </div>
+
+      <!-- Right: surface cards -->
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">COEFFICIENT μ — A FEW SURFACES</div>
+        <div id="surface-cards" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="surface-card">
+            <div class="surface-color-bar" style="background:#bfdbfe;"></div>
+            <div class="surface-card-body">
+              <div class="surface-card-name">Ice</div>
+              <div class="surface-mu-label">μ</div>
+              <div class="surface-mu-value">0.05</div>
+              <div class="surface-mu-desc">Slips with almost any push</div>
+            </div>
+          </div>
+          <div class="surface-card">
+            <div class="surface-color-bar" style="background:#d4a574;"></div>
+            <div class="surface-card-body">
+              <div class="surface-card-name">Polished wood</div>
+              <div class="surface-mu-label">μ</div>
+              <div class="surface-mu-value">0.20</div>
+              <div class="surface-mu-desc">Moderate</div>
+            </div>
+          </div>
+          <div class="surface-card">
+            <div class="surface-color-bar" style="background:#b45309;"></div>
+            <div class="surface-card-body">
+              <div class="surface-card-name">Carpet</div>
+              <div class="surface-mu-label">μ</div>
+              <div class="surface-mu-value">0.45</div>
+              <div class="surface-mu-desc">Stubborn</div>
+            </div>
+          </div>
+          <div class="surface-card">
+            <div class="surface-color-bar" style="background:#9ca3af;"></div>
+            <div class="surface-card-body">
+              <div class="surface-card-name">Sandpaper</div>
+              <div class="surface-mu-label">μ</div>
+              <div class="surface-mu-value">0.80</div>
+              <div class="surface-mu-desc">Very hard to move</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Friction Lab</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 12 — Activity: Friction Lab                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-15" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 15 / 21</div>
+    </div>
+    <h1 class="screen-title">Activity — Friction Lab</h1>
+  </div>
+  <p class="screen-subtitle">Pick a surface. Set the mass. Push harder and harder. Find the breaking point.</p>
+
+  <div class="screen-content">
+    <!-- Surface tabs -->
+    <div class="fl-tabs" id="fl-tabs">
+      <button id="fl-tab-ice"       class="fl-tab" onclick="selectFlSurface('ice')">
+        Ice<span class="fl-tab-mu">μ = 0.05</span>
+      </button>
+      <button id="fl-tab-wood"      class="fl-tab fl-tab-active" onclick="selectFlSurface('wood')">
+        Polished wood<span class="fl-tab-mu">μ = 0.20</span>
+      </button>
+      <button id="fl-tab-carpet"    class="fl-tab" onclick="selectFlSurface('carpet')">
+        Carpet<span class="fl-tab-mu">μ = 0.45</span>
+      </button>
+      <button id="fl-tab-sandpaper" class="fl-tab" onclick="selectFlSurface('sandpaper')">
+        Sandpaper<span class="fl-tab-mu">μ = 0.80</span>
+      </button>
+    </div>
+
+    <!-- Controls -->
+    <div class="fl-controls">
+      <div class="fl-control-group" id="fl-mass-control">
+        <div class="fl-control-label">MASS (kg)</div>
+        <div class="stepper">
+          <span class="stepper-val" id="fl-mass-val">5</span>
+          <div class="stepper-btns">
+            <button class="stepper-btn" onclick="stepFlMass(1)">&#9650;</button>
+            <button class="stepper-btn" onclick="stepFlMass(-1)">&#9660;</button>
+          </div>
+        </div>
+      </div>
+      <div class="fl-control-group" id="fl-slider-control">
+        <div class="fl-control-label">APPLIED FORCE (N) &nbsp;<span class="fl-slider-val" id="fl-force-val">6.5 N</span></div>
+        <input type="range" class="fl-slider" id="fl-slider" min="0" max="500" step="0.5" value="6.5"
+               oninput="setFlForce(this.value)">
+        <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-muted);">
+          <span>0</span><span>500</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live formula row -->
+    <div class="fl-formula-row">
+      <span class="fl-formula-N"    id="fl-formula-N">N = m·g = 5 × 9.8 = 49.0 N</span>
+      <span class="fl-formula-fmax" id="fl-formula-fmax">f_max = μ·N = 0.20 × 49.0 = 9.8 N</span>
+      <span class="fl-formula-app"  id="fl-formula-app">F_applied = 6.5 N</span>
+    </div>
+
+    <!-- Main area: diagram + gauge -->
+    <div class="fl-main" style="margin-bottom:10px;">
+      <div style="border:1.5px solid var(--border);border-radius:8px;background:#fff;padding:10px 10px 4px;">
+        <svg id="fl-diagram" viewBox="0 0 420 180" overflow="hidden" style="width:100%;max-width:315px;height:auto;display:block;" aria-label="Friction lab block diagram"></svg>
+        <div class="fl-status fl-status-rest" id="fl-status">STATUS: at rest · friction adjusting</div>
+      </div>
+      <!-- Gauge -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 0;" id="fl-gauge">
+        <div class="fl-gauge-label-top">f_max</div>
+        <div class="fl-gauge-track" style="position:relative;flex:1;width:28px;">
+          <div class="fl-gauge-fill" id="fl-gauge-fill" style="height:66%;"></div>
+          <div class="fl-gauge-fmax-line" id="fl-gauge-fmax-line" style="bottom:100%;"></div>
+          <div class="fl-gauge-fmax-label" id="fl-gauge-fmax-label" style="bottom:100%;">f_max</div>
+        </div>
+        <div class="fl-gauge-label-bot">0</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 1</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 13 — Question 1: find the minimum push             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-16" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 16 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 1 — find the minimum push</h1>
+  </div>
+  <p class="screen-subtitle">Use f_max = μ · m · g. Take g = 9.8 m/s².</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 5 kg block sits on polished wood with coefficient of friction μ = 0.20. What is the minimum horizontal force needed to just start it moving?</p>
+        </div>
+        <div class="mcq-options-grid">
+          <button id="mcq4-opt-A" class="mcq-option" onclick="selectMCQ('mcq4','A')">
+            <span class="mcq-badge">A</span>1.0 N
+          </button>
+          <button id="mcq4-opt-B" class="mcq-option" onclick="selectMCQ('mcq4','B')">
+            <span class="mcq-badge">B</span>9.8 N
+          </button>
+          <button id="mcq4-opt-C" class="mcq-option" onclick="selectMCQ('mcq4','C')">
+            <span class="mcq-badge">C</span>10.0 N
+          </button>
+          <button id="mcq4-opt-D" class="mcq-option" onclick="selectMCQ('mcq4','D')">
+            <span class="mcq-badge">D</span>49 N
+          </button>
+        </div>
+      </div>
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 220 130" style="width:100%;height:auto;" aria-label="5 kg block on polished wood">
+          <title>5kg block with unknown force F on polished wood</title>
+          <defs>
+            <marker id="q4f" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="96" x2="210" y2="96" stroke="#9ca3af" stroke-width="1.5"/>
+          <rect x="84" y="60" width="70" height="36" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <text x="119" y="83" text-anchor="middle" font-size="11" fill="#6b7280">5 kg</text>
+          <line x1="154" y1="78" x2="196" y2="78" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q4f)"/>
+          <text x="160" y="70" font-size="11" fill="#3b82f6" font-weight="700">F = ?</text>
+          <text x="50" y="112" font-size="10" fill="#6b7280">μ = 0.20 · polished wood</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq4','screen-17')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq4-next" disabled onclick="nextScreen()">Next &rarr; Answer 1</button>
+    <span class="mcq-feedback" id="mcq4-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 14 — Answer 1: 9.8 N                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-17" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 17 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 1 — option B</h1>
+  </div>
+  <p class="screen-subtitle">9.8 N. Just enough to overcome maximum static friction.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">B &middot; 9.8 N</div>
+    </div>
+    <div class="answer-steps">
+      <div class="answer-step" id="step14-1">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Normal force</div>
+          <div class="step-code">N = m · g = 5 × 9.8 = 49 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step14-2">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Maximum static friction</div>
+          <div class="step-code">f_max = μ · N = 0.20 × 49 = 9.8 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step14-3">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">Minimum force to start moving</div>
+          <div class="step-code">F just greater than f_max  →  F_min ≈ 9.8 N</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 2</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 15 — Question 2: friction adjusts                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-18" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 18 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 2 — friction adjusts</h1>
+  </div>
+  <p class="screen-subtitle">What does friction do BEFORE the block starts moving?</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 5 kg block sits on a surface with coefficient of friction μ = 0.40. A student gradually increases the horizontal pulling force from 0 N. At what applied force does the block just start to move, and what is the friction force on the block when the applied force is 15 N? (Take g = 10 m/s².)</p>
+        </div>
+        <div class="mcq-options-grid">
+          <button id="mcq5-opt-A" class="mcq-option" onclick="selectMCQ('mcq5','A')">
+            <span class="mcq-badge">A</span>Starts at 15 N &middot; friction at 15 N = 15 N
+          </button>
+          <button id="mcq5-opt-B" class="mcq-option" onclick="selectMCQ('mcq5','B')">
+            <span class="mcq-badge">B</span>Starts at 20 N &middot; friction at 15 N = 20 N
+          </button>
+          <button id="mcq5-opt-C" class="mcq-option" onclick="selectMCQ('mcq5','C')">
+            <span class="mcq-badge">C</span>Starts at 20 N &middot; friction at 15 N = 15 N
+          </button>
+          <button id="mcq5-opt-D" class="mcq-option" onclick="selectMCQ('mcq5','D')">
+            <span class="mcq-badge">D</span>Starts at 20 N &middot; friction at 15 N = 0 N
+          </button>
+        </div>
+      </div>
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 220 130" style="width:100%;height:auto;" aria-label="5 kg block with F=15N">
+          <title>5kg block with 15N applied force, mu 0.40</title>
+          <defs>
+            <marker id="q5f" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="96" x2="210" y2="96" stroke="#9ca3af" stroke-width="1.5"/>
+          <rect x="70" y="60" width="72" height="36" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <text x="106" y="83" text-anchor="middle" font-size="11" fill="#6b7280">5 kg</text>
+          <line x1="142" y1="78" x2="196" y2="78" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q5f)"/>
+          <text x="148" y="70" font-size="11" fill="#3b82f6" font-weight="700">F = 15 N</text>
+          <text x="30" y="114" font-size="10" fill="#6b7280">μ = 0.40 · g = 10</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq5','screen-19')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq5-next" disabled onclick="nextScreen()">Next &rarr; Answer 2</button>
+    <span class="mcq-feedback" id="mcq5-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 16 — Answer 2: option C                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-19" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 19 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 2 — option C</h1>
+  </div>
+  <p class="screen-subtitle">Starts at 20 N. Friction at 15 N applied is 15 N — it adjusts to match the push.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">C &middot; Starts at 20 N &middot; friction at 15 N = 15 N</div>
+    </div>
+    <div class="answer-steps">
+      <div class="answer-step" id="step16-1">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Normal force</div>
+          <div class="step-code">N = m·g = 5 × 10 = 50 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step16-2">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Maximum friction</div>
+          <div class="step-code">f_max = μ·N = 0.40 × 50 = 20 N  →  block just starts to move when F > 20 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step16-3">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">At F = 15 N (below threshold)</div>
+          <div class="step-code">Friction adjusts to exactly cancel the push: f = 15 N. Block stays still.</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step16-4">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <div class="step-title">Net force on the block</div>
+          <div class="step-code">F_net = 15 − 15 = 0 N  →  no acceleration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Question 3</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 17 — Question 3: angled pull reduces friction      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-20" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 20 / 21</div>
+    </div>
+    <h1 class="screen-title">Question 3 — angled pull reduces friction</h1>
+  </div>
+  <p class="screen-subtitle">When the force is angled upward, what happens to the normal force?</p>
+
+  <div class="screen-content">
+    <div class="mcq-main-grid">
+      <div class="mcq-left">
+        <div class="mcq-question-panel">
+          <div class="mcq-q-label">QUESTION</div>
+          <p class="mcq-q-text">A 10 N force is applied to a 2 kg block at 30° above the horizontal (so the force has both a forward pull and an upward lift). The coefficient of friction between block and floor is μ = 0.50. Does the block move? (Take g = 10 m/s².)</p>
+        </div>
+        <div class="mcq-options-grid">
+          <button id="mcq6-opt-A" class="mcq-option" onclick="selectMCQ('mcq6','A')">
+            <span class="mcq-badge">A</span>Yes — horizontal pull 8.7 N exceeds friction
+          </button>
+          <button id="mcq6-opt-B" class="mcq-option" onclick="selectMCQ('mcq6','B')">
+            <span class="mcq-badge">B</span>No — horizontal is 8.7 N but friction can reach 10 N
+          </button>
+          <button id="mcq6-opt-C" class="mcq-option" onclick="selectMCQ('mcq6','C')">
+            <span class="mcq-badge">C</span>Yes — horizontal is 8.7 N and friction is only 7.5 N
+          </button>
+          <button id="mcq6-opt-D" class="mcq-option" onclick="selectMCQ('mcq6','D')">
+            <span class="mcq-badge">D</span>No — horizontal component is 5 N and friction is 10 N
+          </button>
+        </div>
+      </div>
+      <div class="mcq-diagram-panel">
+        <svg viewBox="0 0 220 160" style="width:100%;height:auto;" aria-label="2 kg block with 10N at 30 degrees">
+          <title>2kg block with 10N force at 30 degrees, mu 0.50</title>
+          <defs>
+            <marker id="q6f" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#3b82f6"/></marker>
+          </defs>
+          <line x1="10" y1="120" x2="210" y2="120" stroke="#9ca3af" stroke-width="1.5"/>
+          <rect x="88" y="82" width="62" height="38" fill="none" stroke="#1a2e44" stroke-width="2"/>
+          <text x="119" y="106" text-anchor="middle" font-size="11" fill="#6b7280">2 kg</text>
+          <line x1="150" y1="101" x2="196" y2="66" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#q6f)"/>
+          <text x="192" y="60" font-size="11" fill="#3b82f6" font-weight="700">10 N @ 30°</text>
+          <text x="14" y="140" font-size="10" fill="#6b7280">μ = 0.50 · g = 10</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="checkMCQ('mcq6','screen-21')">&#10003; Submit</button>
+    <button class="btn-secondary" id="mcq6-next" disabled onclick="nextScreen()">Next &rarr; Answer 3</button>
+    <span class="mcq-feedback" id="mcq6-feedback"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 18 — Answer 3: option C (final screen)             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="screen-21" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 21 / 21</div>
+    </div>
+    <h1 class="screen-title">Answer 3 — option C</h1>
+  </div>
+  <p class="screen-subtitle">Block moves. Lift from F sin &theta; reduces normal force &rarr; friction max is only 7.5 N.</p>
+
+  <div class="screen-content">
+    <div class="answer-banner">
+      <div class="answer-banner-label">CORRECT</div>
+      <div class="answer-banner-text">C &middot; Yes — block moves</div>
+    </div>
+    <div class="answer-steps">
+      <div class="answer-step" id="step18-1">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">Horizontal component (the push)</div>
+          <div class="step-code">F cos θ = 10 × cos 30° ≈ 8.7 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step18-2">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">Vertical component (the lift)</div>
+          <div class="step-code">F sin θ = 10 × sin 30° = 5 N (upward)</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step18-3">
+        <div class="step-badge">3</div>
+        <div class="step-content">
+          <div class="step-title">New normal force</div>
+          <div class="step-code">N = mg − F sin θ = (2 × 10) − 5 = 15 N  (not 20 N!)</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step18-4">
+        <div class="step-badge">4</div>
+        <div class="step-content">
+          <div class="step-title">Maximum friction with new N</div>
+          <div class="step-code">f_max = μ · N = 0.50 × 15 = 7.5 N</div>
+        </div>
+      </div>
+      <div class="answer-step" id="step18-5">
+        <div class="step-badge">5</div>
+        <div class="step-content">
+          <div class="step-title">Compare push vs friction</div>
+          <div class="step-code">8.7 N (push) > 7.5 N (friction)  →  block moves</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-intro')" style="background:#059669;">&#10003; Finish — Restart lesson</button>
+  </div>
+</div>
+
+<!-- ─── GLOBAL NARRATION BAR ─── -->
+<div id="narration-bar" class="narration-bar">
+  <div class="narr-progress-track">
+    <div class="narr-progress-fill" id="narr-progress-fill"></div>
+  </div>
+  <div class="narr-main">
+    <span class="narr-text" id="narr-text"></span>
+    <div class="narr-buttons">
+      <button class="btn-narr" id="btn-narr-toggle" onclick="narrToggle()">&#9654; Play</button>
+      <button class="btn-narr" id="btn-narr-restart" onclick="narrRestart()">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="resultant_force_friction.js"></script>
+</body>
+</html>
+
