@@ -1,1 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion Lab — Uniform vs Non-uniform Motion</title>
+  <link rel="stylesheet" href="uniform_nonuniform_motion.css">
+</head>
+<body>
 
+<!-- ─── INTRO ─── -->
+<div id="screen-intro" class="screen screen-dark active">
+  <div class="intro-eyebrow">INTERACTIVE LEARNING MODULE &nbsp;·&nbsp; CLASS 9 SCIENCE</div>
+  <div class="intro-body">
+    <h1 class="intro-title">Motion Lab</h1>
+    <p class="intro-subtitle">Uniform vs Non-uniform Motion</p>
+  </div>
+  <button class="intro-start btn-primary" onclick="goToScreen('screen-1')">Start &rarr;</button>
+</div>
+
+<!-- ─── SCREEN 1: Concept — uniform vs non-uniform ─── -->
+<div id="screen-1" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 1 / 19</div>
+    </div>
+    <h1 class="screen-title">Concept — what makes motion 'uniform'?</h1>
+  </div>
+  <div class="screen-content s1-layout">
+    <div class="two-col-cards">
+      <div class="concept-card blue-card" id="uniform-card">
+        <div class="card-label blue-label">UNIFORM MOTION</div>
+        <div class="card-heading">Equal distance in equal intervals of time.</div>
+        <ul class="card-bullets">
+          <li>Speed stays constant.</li>
+          <li>The distance-time graph is a straight line.</li>
+          <li>Example: a car on cruise control on a flat road.</li>
+        </ul>
+        <svg class="card-mini-graph" id="c-s1-unif" width="300" height="95" viewBox="0 0 300 95" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="concept-card red-card" id="nonuniform-card">
+        <div class="card-label red-label">NON-UNIFORM MOTION</div>
+        <div class="card-heading">Unequal distances in equal intervals.</div>
+        <ul class="card-bullets">
+          <li>Speed changes — even if direction does not.</li>
+          <li>The distance-time graph is a curve.</li>
+          <li>Example: a car in city traffic, a falling stone.</li>
+        </ul>
+        <svg class="card-mini-graph" id="c-s1-nonunif" width="300" height="95" viewBox="0 0 300 95" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+    <div class="test-section" id="test-section">
+      <div class="test-label">THE TEST &nbsp;—&nbsp; read it off the data table</div>
+      <div class="test-rule">If &Delta;s is the same for every equal &Delta;t &rarr; <strong>uniform.</strong> &nbsp;&nbsp;Otherwise &rarr; <strong>non-uniform.</strong></div>
+      <div class="test-examples">
+        <span class="test-interval">t = 0 &rarr; 1 s</span><span class="test-delta">&Delta;s = 5 m</span>
+        <span class="test-interval">t = 1 &rarr; 2 s</span><span class="test-delta">&Delta;s = 5 m</span>
+        <span class="test-interval">t = 2 &rarr; 3 s</span><span class="test-delta">&Delta;s = 5 m</span>
+      </div>
+      <div class="test-conclusion">&rarr; <em>uniform: every &Delta;s equals 5 m for every 1-s interval.</em></div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Graph shapes</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 2: Graph shapes + JEE bridge ─── -->
+<div id="screen-2" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 2 / 19</div>
+    </div>
+    <h1 class="screen-title">Concept — read the graph, name the motion</h1>
+  </div>
+  <div class="screen-content s2-layout">
+    <div class="graph-cards-row">
+      <div class="graph-card" id="straight-card">
+        <div class="card-label blue-label">STRAIGHT LINE</div>
+        <div class="graph-card-heading">= uniform motion</div>
+        <svg class="mini-graph" id="c-straight" width="180" height="105" viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="graph-card" id="concave-card">
+        <div class="card-label red-label">CONCAVE-UP CURVE</div>
+        <div class="graph-card-heading">= speeding up</div>
+        <svg class="mini-graph" id="c-concave" width="180" height="105" viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="graph-card" id="speeddown-card">
+        <div class="card-label red-label">CONCAVE-DOWN CURVE</div>
+        <div class="graph-card-heading">= speeding down</div>
+        <svg class="mini-graph" id="c-speeddown" width="180" height="105" viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+    <div class="jee-bridge" id="jee-bridge">
+      <div class="jee-bridge-label">JEE BRIDGE &nbsp;·&nbsp; from average speed to instantaneous speed</div>
+      <div class="jee-bridge-body">
+        <canvas id="c-jee" width="340" height="190"></canvas>
+        <div class="jee-text">
+          <div class="jee-subsection">
+            <div class="jee-sub-label">AVERAGE SPEED OVER AN INTERVAL</div>
+            <div class="jee-formula">v_avg &nbsp;=&nbsp; &Delta;s / &Delta;t</div>
+            <p class="jee-explain">&Delta;s = change in distance over the interval &Delta;t. This is the slope of a chord (blue line) between two points on the curve.</p>
+          </div>
+          <div class="jee-subsection">
+            <div class="jee-sub-label">NOW SHRINK &Delta;t TOWARDS ZERO</div>
+            <p class="jee-explain"><em>ds = &Delta;s &nbsp;and&nbsp; dt = &Delta;t &nbsp;when &Delta;t is vanishingly small.</em></p>
+            <div class="jee-formula">v(t) &nbsp;=&nbsp; lim (&Delta;t &rarr; 0) &Delta;s/&Delta;t &nbsp;=&nbsp; ds/dt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Race the cars</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 3: Race three cars ─── -->
+<div id="screen-3" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 3 / 19</div>
+    </div>
+    <h1 class="screen-title">Activity 1 — race three cars, watch the readouts</h1>
+  </div>
+  <div class="screen-content s3-layout">
+    <div class="race-canvas-wrap" id="race-canvas-wrap">
+      <svg id="c-race" width="860" height="210" viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="metric-cards-row">
+      <div class="metric-card blue-border" id="car-a-card">
+        <div class="metric-label blue-label">CAR A — distance</div>
+        <div class="metric-value" id="dist-a">0 m</div>
+        <div class="metric-sub" id="sub-a">uniform &nbsp;·&nbsp; v = 4 m/s</div>
+      </div>
+      <div class="metric-card red-border" id="car-b-card">
+        <div class="metric-label red-label">CAR B — distance</div>
+        <div class="metric-value" id="dist-b">0 m</div>
+        <div class="metric-sub" id="sub-b">non-uniform &nbsp;·&nbsp; slowing</div>
+      </div>
+      <div class="metric-card red-border" id="car-c-card">
+        <div class="metric-label red-label">CAR C — distance</div>
+        <div class="metric-value" id="dist-c">0 m</div>
+        <div class="metric-sub" id="sub-c">non-uniform &nbsp;·&nbsp; accelerating</div>
+      </div>
+    </div>
+    <div class="race-controls">
+      <span class="race-time" id="race-time">Time elapsed: 0.0 s / 6.0 s</span>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Avg vs Instant speed</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 5: Instantaneous vs average speed ─── -->
+<div id="screen-5" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 4 / 19</div>
+    </div>
+    <h1 class="screen-title">Instantaneous vs average speed</h1>
+  </div>
+  <div class="screen-content s5-layout">
+    <div class="chord-canvas-wrap" id="chord-tangent-canvas">
+      <svg id="c-chord" width="480" height="360" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="two-speeds-card">
+      <div class="two-speeds-title">THE TWO SPEEDS</div>
+      <div id="avg-speed-section" class="speed-section">
+        <div class="speed-name blue-name">Average speed</div>
+        <div class="speed-formula">v_avg = &Delta;s / &Delta;t = (s&#8322; &minus; s&#8321;) / (t&#8322; &minus; t&#8321;)</div>
+      </div>
+      <div id="inst-speed-section" class="speed-section">
+        <div class="speed-name green-name">Instantaneous speed</div>
+        <div class="speed-formula">v_inst = lim (&Delta;t &rarr; 0) &Delta;s / &Delta;t &nbsp;=&nbsp; ds / dt</div>
+      </div>
+      <p class="speed-note"><em>Average is a chord; instantaneous is a tangent. JEE problems use both.</em></p>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="nextScreen()">Next &rarr; Try MCQ 1</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 6: MCQ 1 ─── -->
+<div id="screen-6" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 5 / 19</div>
+    </div>
+    <h1 class="screen-title">MCQ 1 — Spot the uniform car</h1>
+  </div>
+  <div class="screen-content s6-layout">
+    <div class="mcq-left">
+      <p class="mcq-stem" id="q1-table"><strong>Q1.</strong> Three cars A, B, C are tracked over half-hour intervals. Distances travelled (km):</p>
+      <table class="data-table mcq-table">
+        <thead><tr><th>Time</th><th>Car A</th><th>Car B</th><th>Car C</th></tr></thead>
+        <tbody>
+          <tr><td>1:00 PM</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1:30 PM</td><td>2</td><td>2</td><td>1</td></tr>
+          <tr><td>2:00 PM</td><td>5</td><td>4</td><td>3</td></tr>
+          <tr><td>2:30 PM</td><td>7</td><td>6</td><td>4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mcq-right" id="q1-options">
+      <label class="mcq-option" data-val="a"><span class="mcq-radio"></span><strong>(a)</strong>&nbsp; Uniform: A, B &nbsp;·&nbsp; Non-uniform: C</label>
+      <label class="mcq-option" data-val="b"><span class="mcq-radio"></span><strong>(b)</strong>&nbsp; Uniform: B &nbsp;·&nbsp; Non-uniform: A, C</label>
+      <label class="mcq-option" data-val="c"><span class="mcq-radio"></span><strong>(c)</strong>&nbsp; Uniform: A &nbsp;·&nbsp; Non-uniform: B, C</label>
+      <label class="mcq-option" data-val="d"><span class="mcq-radio"></span><strong>(d)</strong>&nbsp; Uniform: B, C &nbsp;·&nbsp; Non-uniform: A</label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ1()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq1-next" disabled onclick="goToScreen('screen-7')">Next &rarr; Explanation</button>
+    <span class="mcq-feedback" id="mcq1-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 7: MCQ 1 explanation ─── -->
+<div id="screen-7" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 6 / 19</div>
+    </div>
+    <h1 class="screen-title">MCQ 1 — explanation</h1>
+  </div>
+  <div class="screen-content s7-layout">
+    <div class="correct-banner" id="correct-banner">
+      <div class="correct-tag">CORRECT &nbsp;·&nbsp; Option (b)</div>
+      <div class="correct-answer">Uniform: B &nbsp;·&nbsp; Non-uniform: A, C</div>
+    </div>
+    <div class="expl-two-col">
+      <div class="delta-table-wrap" id="delta-table">
+        <div class="delta-table-title">&Delta;d PER 30-MIN INTERVAL</div>
+        <table class="data-table">
+          <thead><tr><th>Interval</th><th>Car A</th><th class="highlight-col">Car B</th><th>Car C</th></tr></thead>
+          <tbody>
+            <tr><td>1:00 &rarr; 1:30</td><td>+2</td><td class="highlight-col">+2</td><td>+1</td></tr>
+            <tr><td>1:30 &rarr; 2:00</td><td>+3</td><td class="highlight-col">+2</td><td>+2</td></tr>
+            <tr><td>2:00 &rarr; 2:30</td><td>+2</td><td class="highlight-col">+2</td><td>+1</td></tr>
+          </tbody>
+        </table>
+        <p class="delta-note"><em>Car B: &Delta;d = +2 km every interval &rarr; equal &Delta;d in equal &Delta;t &rarr; uniform.</em></p>
+      </div>
+      <div class="reasoning" id="reasoning">
+        <div class="reasoning-title">THE REASONING</div>
+        <ol class="reasoning-steps">
+          <li>Compute &Delta;d between consecutive rows for each car.</li>
+          <li>Car A: +2, +3, +2. Not constant &rarr; non-uniform.</li>
+          <li>Car B: +2, +2, +2. Constant &rarr; <strong>uniform.</strong></li>
+          <li>Car C: +1, +2, +1. Not constant &rarr; non-uniform.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="common-trap" id="common-trap">
+      <div class="trap-label">COMMON TRAP</div>
+      <p>Don't confuse 'always moving forward' with 'uniform'. Cars A and C kept moving — but their &Delta;d was unequal between intervals. Uniform motion needs equal &Delta;d in equal &Delta;t, not just non-zero motion.</p>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-8')">Next &rarr; MCQ 2</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 8: MCQ 2 ─── -->
+<div id="screen-8" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 7 / 19</div>
+    </div>
+    <h1 class="screen-title">MCQ 2 — round-trip average speed</h1>
+  </div>
+  <div class="screen-content s8-layout">
+    <p class="mcq-stem"><strong>Q2.</strong> A car covers 3 km from home to school in 10 minutes. On the return trip, it covers the same 3 km in 15 minutes. What is the average speed for the entire journey?</p>
+    <div class="roundtrip-visual" id="q2-visual">
+      <svg id="c-trip" width="700" height="90" viewBox="0 0 700 90" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="mcq-options-col" id="q2-options">
+      <label class="mcq-option" data-val="a"><span class="mcq-radio"></span><strong>(a)</strong>&nbsp; 3 m/s</label>
+      <label class="mcq-option" data-val="b"><span class="mcq-radio"></span><strong>(b)</strong>&nbsp; 4 m/s</label>
+      <label class="mcq-option" data-val="c"><span class="mcq-radio"></span><strong>(c)</strong>&nbsp; 5 m/s &nbsp;<em style="color:#64748b">— (avg of 5 and 3.33, the trap)</em></label>
+      <label class="mcq-option" data-val="d"><span class="mcq-radio"></span><strong>(d)</strong>&nbsp; 6 m/s</label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitMCQ2()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq2-next" disabled onclick="goToScreen('screen-9')">Next &rarr; Explanation</button>
+    <span class="mcq-feedback" id="mcq2-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 9: MCQ 2 explanation ─── -->
+<div id="screen-9" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 8 / 19</div>
+    </div>
+    <h1 class="screen-title">MCQ 2 — explanation &amp; the harmonic shortcut</h1>
+  </div>
+  <div class="screen-content s9-layout">
+    <div class="correct-banner" id="correct-banner2">
+      <div class="correct-tag">CORRECT &nbsp;·&nbsp; Option (b)</div>
+      <div class="correct-answer">Average speed = 4 m/s</div>
+    </div>
+    <div class="expl-two-col">
+      <div class="step-by-step" id="step-by-step">
+        <div class="reasoning-title">STEP-BY-STEP</div>
+        <ol class="step-list">
+          <li><div class="step-num">1</div><div class="step-text">Total distance = 3 + 3 = 6 km = 6000 m</div></li>
+          <li><div class="step-num">2</div><div class="step-text">Total time = 10 + 15 = 25 min = 1500 s</div></li>
+          <li><div class="step-num">3</div><div class="step-text">v_avg = total distance &divide; total time</div></li>
+          <li><div class="step-num">4</div><div class="step-text">v_avg = 6000 / 1500 = <strong>4 m/s</strong></div></li>
+        </ol>
+      </div>
+      <div class="jee-shortcut-box" id="jee-shortcut">
+        <div class="jee-shortcut-title">JEE SHORTCUT &nbsp;·&nbsp; EQUAL DISTANCES</div>
+        <div class="shortcut-formula">v_avg &nbsp;=&nbsp; 2&middot;v&#8321;&middot;v&#8322; / (v&#8321; + v&#8322;)</div>
+        <p class="shortcut-explain">When the same distance is travelled at two speeds, the average speed is the <em>harmonic mean</em> of the two speeds — never the arithmetic mean.</p>
+        <p class="shortcut-check"><strong>Check with our values:</strong><br>
+          v&#8321; = 3000/600 = 5 m/s &nbsp;&nbsp; v&#8322; = 3000/900 &asymp; 3.33 m/s<br>
+          <span class="shortcut-result">v_avg = 2(5)(3.33) / 8.33 &asymp; 4 m/s &nbsp;&#10003;</span>
+        </p>
+        <p class="shortcut-wrong"><em>(Arithmetic mean would give (5 + 3.33)/2 &asymp; 4.17 m/s — wrong.)</em></p>
+      </div>
+    </div>
+    <div class="concept-callback" id="concept-callback2">
+      <div class="callback-label">CONCEPT CALLBACK</div>
+      <p><em>Average speed is the chord on the d-t graph — it cares only about endpoints, not the path in between.</em></p>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-11')">Next &rarr; Speed-Time MCQs</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 10: Module complete ─── -->
+<div id="screen-10" class="screen screen-dark">
+  <button class="btn-back btn-back-dark screen-corner-back" onclick="prevScreen()">&#8592; Back</button>
+  <div class="complete-body">
+    <div class="complete-tag">SECTION 19 / 19</div>
+    <h1 class="complete-title">Module Complete</h1>
+    <p class="complete-sub">You've covered all the core concepts.</p>
+    <div class="summary-cards">
+      <div class="summary-item">&#10003;&nbsp; Uniform vs non-uniform motion</div>
+      <div class="summary-item">&#10003;&nbsp; Reading d-t graph shapes</div>
+      <div class="summary-item">&#10003;&nbsp; Average vs instantaneous speed</div>
+      <div class="summary-item">&#10003;&nbsp; The harmonic mean shortcut</div>
+      <div class="summary-item">&#10003;&nbsp; s&#8211;t graph: ball thrown up (V-shape)</div>
+      <div class="summary-item">&#10003;&nbsp; s&#8211;t graph: frictionless incline (linear rise)</div>
+      <div class="summary-item">&#10003;&nbsp; s&#8211;t graph: car phases (rise-flat-fall)</div>
+      <div class="summary-item">&#10003;&nbsp; s&#8211;t graph: bouncing ball (decaying sawtooth)</div>
+      <div class="summary-item">&#10003;&nbsp; s&#8211;t graph: pendulum (|sine| bumps)</div>
+    </div>
+    <button class="btn-primary" onclick="goToScreen('screen-intro')">&#8635; Start Over</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 11: Speed-Time MCQ 1 Question — Ball thrown up ─── -->
+<div id="screen-11" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 9 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball thrown vertically upwards</h1>
+    <p class="screen-subtitle">Returns to the thrower's hand. Air resistance is negligible. Speed (not velocity) is on the y-axis.</p>
+  </div>
+  <div class="screen-content stq-layout">
+    <div class="stq-scenario" id="s11-scenario">
+      <div class="stq-scenario-label">SCENARIO</div>
+      <p class="stq-question">Which s&#8211;t graph below matches this motion?</p>
+      <svg id="c-s11-scene" width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="stq-grid" id="s11-options">
+      <label class="stq-option" data-val="a"><div class="stq-badge">A</div><svg class="stq-graph" id="s11-ga" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rises, then stays at 0</div></label>
+      <label class="stq-option" data-val="b"><div class="stq-badge">B</div><svg class="stq-graph" id="s11-gb" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">constant non-zero speed</div></label>
+      <label class="stq-option" data-val="c"><div class="stq-badge">C</div><svg class="stq-graph" id="s11-gc" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">symmetric V-shape</div></label>
+      <label class="stq-option" data-val="d"><div class="stq-badge">D</div><svg class="stq-graph" id="s11-gd" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rises throughout</div></label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitSTMCQ1()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-stmcq1-next" disabled onclick="goToScreen('screen-12')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="stmcq1-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 12: Speed-Time MCQ 1 Answer — symmetric V-shape ─── -->
+<div id="screen-12" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 10 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball thrown vertically upwards</h1>
+    <p class="screen-subtitle">Answer: C &#8212; symmetric V-shape. Speed dips to zero at the apex, then rises again.</p>
+  </div>
+  <div class="screen-content sta-layout">
+    <div class="sta-scenario" id="s12-scenario">
+      <div class="sta-scenario-label">SCENARIO &middot; WITH STEPS</div>
+      <p class="sta-scenario-desc">Same motion &#8212; now numbered 1 &#8594; 2 &#8594; 3.</p>
+      <svg id="c-s12-scene" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="sta-graph-panel" id="s12-graph">
+      <div class="sta-graph-label">CORRECT ANSWER</div>
+      <svg id="c-s12-graph" width="430" height="270" viewBox="0 0 430 270" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="sta-graph-caption">Option C &middot; symmetric V-shape</p>
+    </div>
+    <div class="sta-steps" id="s12-steps">
+      <div class="sta-step-card" id="s12-step1">
+        <div class="sta-step-header"><div class="sta-step-num">1</div><div class="sta-step-title">Leaves the hand</div></div>
+        <div class="sta-step-body">At t = 0 the ball has its full launch speed. That's the height of the curve at the y-axis.</div>
+      </div>
+      <div class="sta-step-card" id="s12-step2">
+        <div class="sta-step-header"><div class="sta-step-num">2</div><div class="sta-step-title">At the apex</div></div>
+        <div class="sta-step-body">Gravity decelerates the ball uniformly. Speed reaches exactly zero for an instant &#8212; the lowest point of the V.</div>
+      </div>
+      <div class="sta-step-card" id="s12-step3">
+        <div class="sta-step-header"><div class="sta-step-num">3</div><div class="sta-step-title">Back at the hand</div></div>
+        <div class="sta-step-body">The ball falls and accelerates symmetrically. It returns with the same speed it left &#8212; the V is symmetric.</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-13')">Next &rarr; MCQ 2</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 13: Speed-Time MCQ 2 Question — Frictionless incline ─── -->
+<div id="screen-13" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 11 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball released on a frictionless incline</h1>
+    <p class="screen-subtitle">It slides down with constant acceleration g&middot;sin&#952;. Sketch its speed vs. time.</p>
+  </div>
+  <div class="screen-content stq-layout">
+    <div class="stq-scenario" id="s13-scenario">
+      <div class="stq-scenario-label">SCENARIO</div>
+      <p class="stq-question">Which s&#8211;t graph below matches this motion?</p>
+      <svg id="c-s13-scene" width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="stq-grid" id="s13-options">
+      <label class="stq-option" data-val="a"><div class="stq-badge">A</div><svg class="stq-graph" id="s13-ga" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">constant non-zero speed</div></label>
+      <label class="stq-option" data-val="b"><div class="stq-badge">B</div><svg class="stq-graph" id="s13-gb" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">linear rise from 0</div></label>
+      <label class="stq-option" data-val="c"><div class="stq-badge">C</div><svg class="stq-graph" id="s13-gc" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rises, then levels off</div></label>
+      <label class="stq-option" data-val="d"><div class="stq-badge">D</div><svg class="stq-graph" id="s13-gd" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rises then falls</div></label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitSTMCQ2()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-stmcq2-next" disabled onclick="goToScreen('screen-14')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="stmcq2-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 14: Speed-Time MCQ 2 Answer — linear rise from 0 ─── -->
+<div id="screen-14" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 12 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball released on a frictionless incline</h1>
+    <p class="screen-subtitle">Answer: B &#8212; linear rise from zero. Constant acceleration produces a straight line.</p>
+  </div>
+  <div class="screen-content sta-layout">
+    <div class="sta-scenario" id="s14-scenario">
+      <div class="sta-scenario-label">SCENARIO &middot; WITH STEPS</div>
+      <p class="sta-scenario-desc">Same motion &#8212; now numbered 1 &#8594; 2 &#8594; 3.</p>
+      <svg id="c-s14-scene" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="sta-graph-panel" id="s14-graph">
+      <div class="sta-graph-label">CORRECT ANSWER</div>
+      <svg id="c-s14-graph" width="430" height="270" viewBox="0 0 430 270" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="sta-graph-caption">Option B &middot; linear rise from 0</p>
+    </div>
+    <div class="sta-steps" id="s14-steps">
+      <div class="sta-step-card" id="s14-step1">
+        <div class="sta-step-header"><div class="sta-step-num">1</div><div class="sta-step-title">At rest</div></div>
+        <div class="sta-step-body">Released from rest, so s = 0 at t = 0. The graph must start at the origin.</div>
+      </div>
+      <div class="sta-step-card" id="s14-step2">
+        <div class="sta-step-header"><div class="sta-step-num">2</div><div class="sta-step-title">Steady acceleration</div></div>
+        <div class="sta-step-body">Down-slope force is constant (no friction), so acceleration is constant. Speed grows by the same amount each second.</div>
+      </div>
+      <div class="sta-step-card" id="s14-step3">
+        <div class="sta-step-header"><div class="sta-step-num">3</div><div class="sta-step-title">No upper limit</div></div>
+        <div class="sta-step-body">Without friction or air drag there's nothing to flatten the curve. It keeps climbing as a straight line.</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-15')">Next &rarr; MCQ 3</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 15: Speed-Time MCQ 3 Question — Car phases ─── -->
+<div id="screen-15" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 13 / 19</div>
+    </div>
+    <h1 class="screen-title">Car: accelerate, cruise, then brake</h1>
+    <p class="screen-subtitle">Three distinct phases. Starts from rest and ends at rest.</p>
+  </div>
+  <div class="screen-content stq-layout">
+    <div class="stq-scenario" id="s15-scenario">
+      <div class="stq-scenario-label">SCENARIO</div>
+      <p class="stq-question">Which s&#8211;t graph below matches this motion?</p>
+      <svg id="c-s15-scene" width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="stq-grid" id="s15-options">
+      <label class="stq-option" data-val="a"><div class="stq-badge">A</div><svg class="stq-graph" id="s15-ga" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rise, flat, fall</div></label>
+      <label class="stq-option" data-val="b"><div class="stq-badge">B</div><svg class="stq-graph" id="s15-gb" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">rises continuously</div></label>
+      <label class="stq-option" data-val="c"><div class="stq-badge">C</div><svg class="stq-graph" id="s15-gc" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">constant throughout</div></label>
+      <label class="stq-option" data-val="d"><div class="stq-badge">D</div><svg class="stq-graph" id="s15-gd" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">curved rise then fall</div></label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitSTMCQ3()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-stmcq3-next" disabled onclick="goToScreen('screen-16')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="stmcq3-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 16: Speed-Time MCQ 3 Answer — rise, flat, fall ─── -->
+<div id="screen-16" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 14 / 19</div>
+    </div>
+    <h1 class="screen-title">Car: accelerate, cruise, then brake</h1>
+    <p class="screen-subtitle">Answer: A &#8212; rise, flat, fall back to zero. Three phases give three distinct segments.</p>
+  </div>
+  <div class="screen-content sta-layout">
+    <div class="sta-scenario" id="s16-scenario">
+      <div class="sta-scenario-label">SCENARIO &middot; WITH STEPS</div>
+      <p class="sta-scenario-desc">Same motion &#8212; now numbered 1 &#8594; 2 &#8594; 3.</p>
+      <svg id="c-s16-scene" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="sta-graph-panel" id="s16-graph">
+      <div class="sta-graph-label">CORRECT ANSWER</div>
+      <svg id="c-s16-graph" width="430" height="270" viewBox="0 0 430 270" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="sta-graph-caption">Option A &middot; rise, flat, fall</p>
+    </div>
+    <div class="sta-steps" id="s16-steps">
+      <div class="sta-step-card" id="s16-step1">
+        <div class="sta-step-header"><div class="sta-step-num">1</div><div class="sta-step-title">Accelerating</div></div>
+        <div class="sta-step-body">Engine drives the car from rest. Speed rises linearly from 0 to cruising speed.</div>
+      </div>
+      <div class="sta-step-card" id="s16-step2">
+        <div class="sta-step-header"><div class="sta-step-num">2</div><div class="sta-step-title">Cruising</div></div>
+        <div class="sta-step-body">Throttle balances drag and friction. Speed stays constant &#8212; a flat plateau on the graph.</div>
+      </div>
+      <div class="sta-step-card" id="s16-step3">
+        <div class="sta-step-header"><div class="sta-step-num">3</div><div class="sta-step-title">Braking</div></div>
+        <div class="sta-step-body">Brakes apply a constant retarding force. Speed falls linearly to zero, mirroring the acceleration phase.</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-17')">Next &rarr; MCQ 4</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 17: Speed-Time MCQ 4 Question — Ball dropped ─── -->
+<div id="screen-17" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 15 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball dropped onto a hard floor</h1>
+    <p class="screen-subtitle">It bounces several times. Each bounce is shorter than the last because energy is lost.</p>
+  </div>
+  <div class="screen-content stq-layout">
+    <div class="stq-scenario" id="s17-scenario">
+      <div class="stq-scenario-label">SCENARIO</div>
+      <p class="stq-question">Which s&#8211;t graph below matches this motion?</p>
+      <svg id="c-s17-scene" width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="stq-grid" id="s17-options">
+      <label class="stq-option" data-val="a"><div class="stq-badge">A</div><svg class="stq-graph" id="s17-ga" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">linear rise then fall</div></label>
+      <label class="stq-option" data-val="b"><div class="stq-badge">B</div><svg class="stq-graph" id="s17-gb" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">constant speed</div></label>
+      <label class="stq-option" data-val="c"><div class="stq-badge">C</div><svg class="stq-graph" id="s17-gc" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">decaying sawtooth</div></label>
+      <label class="stq-option" data-val="d"><div class="stq-badge">D</div><svg class="stq-graph" id="s17-gd" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">smooth oscillation</div></label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitSTMCQ4()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-stmcq4-next" disabled onclick="goToScreen('screen-18')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="stmcq4-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 18: Speed-Time MCQ 4 Answer — decaying sawtooth ─── -->
+<div id="screen-18" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 16 / 19</div>
+    </div>
+    <h1 class="screen-title">Ball dropped onto a hard floor</h1>
+    <p class="screen-subtitle">Answer: C &#8212; decaying sawtooth. Each fall builds speed; each impact wipes it out.</p>
+  </div>
+  <div class="screen-content sta-layout">
+    <div class="sta-scenario" id="s18-scenario">
+      <div class="sta-scenario-label">SCENARIO &middot; WITH STEPS</div>
+      <p class="sta-scenario-desc">Same motion &#8212; now numbered 1 &#8594; 2 &#8594; 3.</p>
+      <svg id="c-s18-scene" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="sta-graph-panel" id="s18-graph">
+      <div class="sta-graph-label">CORRECT ANSWER</div>
+      <svg id="c-s18-graph" width="430" height="270" viewBox="0 0 430 270" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="sta-graph-caption">Option C &middot; decaying sawtooth</p>
+    </div>
+    <div class="sta-steps" id="s18-steps">
+      <div class="sta-step-card" id="s18-step1">
+        <div class="sta-step-header"><div class="sta-step-num">1</div><div class="sta-step-title">First fall</div></div>
+        <div class="sta-step-body">Released from rest, gravity pulls the ball down. Speed climbs linearly until it hits the floor &#8212; that first peak is the tallest.</div>
+      </div>
+      <div class="sta-step-card" id="s18-step2">
+        <div class="sta-step-header"><div class="sta-step-num">2</div><div class="sta-step-title">First bounce</div></div>
+        <div class="sta-step-body">Impact flips the velocity. Some energy is lost, so the rebound speed is lower than the impact speed &#8212; the cycle starts again from a smaller peak.</div>
+      </div>
+      <div class="sta-step-card" id="s18-step3">
+        <div class="sta-step-header"><div class="sta-step-num">3</div><div class="sta-step-title">Decaying peaks</div></div>
+        <div class="sta-step-body">Each bounce loses a fraction of kinetic energy. Peaks shrink and cycles shorten &#8212; the classic sawtooth decay.</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-19')">Next &rarr; MCQ 5</button>
+  </div>
+</div>
+
+<!-- ─── SCREEN 19: Speed-Time MCQ 5 Question — Pendulum ─── -->
+<div id="screen-19" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 17 / 19</div>
+    </div>
+    <h1 class="screen-title">Pendulum released from one extreme</h1>
+    <p class="screen-subtitle">It swings back and forth. Speed is zero at the extremes, maximum at the bottom.</p>
+  </div>
+  <div class="screen-content stq-layout">
+    <div class="stq-scenario" id="s19-scenario">
+      <div class="stq-scenario-label">SCENARIO</div>
+      <p class="stq-question">Which s&#8211;t graph below matches this motion?</p>
+      <svg id="c-s19-scene" width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="stq-grid" id="s19-options">
+      <label class="stq-option" data-val="a"><div class="stq-badge">A</div><svg class="stq-graph" id="s19-ga" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">smooth sinusoid (signed)</div></label>
+      <label class="stq-option" data-val="b"><div class="stq-badge">B</div><svg class="stq-graph" id="s19-gb" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">constant non-zero speed</div></label>
+      <label class="stq-option" data-val="c"><div class="stq-badge">C</div><svg class="stq-graph" id="s19-gc" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">|sine| &#8212; bumps above axis</div></label>
+      <label class="stq-option" data-val="d"><div class="stq-badge">D</div><svg class="stq-graph" id="s19-gd" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg"></svg><div class="stq-caption">decaying sawtooth</div></label>
+    </div>
+  </div>
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="submitSTMCQ5()">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-stmcq5-next" disabled onclick="goToScreen('screen-20')">Next &rarr; Answer</button>
+    <span class="mcq-feedback" id="stmcq5-feedback"></span>
+  </div>
+</div>
+
+<!-- ─── SCREEN 20: Speed-Time MCQ 5 Answer — |sine| bumps ─── -->
+<div id="screen-20" class="screen">
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <button class="btn-back" onclick="prevScreen()">&#8592; Back</button>
+      <div class="section-label">SECTION 18 / 19</div>
+    </div>
+    <h1 class="screen-title">Pendulum released from one extreme</h1>
+    <p class="screen-subtitle">Answer: C &#8212; |sine|, bumps above the t-axis. Speed peaks at the bottom and dies at each extreme.</p>
+  </div>
+  <div class="screen-content sta-layout">
+    <div class="sta-scenario" id="s20-scenario">
+      <div class="sta-scenario-label">SCENARIO &middot; WITH STEPS</div>
+      <p class="sta-scenario-desc">Same motion &#8212; now numbered 1 &#8594; 2 &#8594; 3.</p>
+      <svg id="c-s20-scene" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="sta-graph-panel" id="s20-graph">
+      <div class="sta-graph-label">CORRECT ANSWER</div>
+      <svg id="c-s20-graph" width="430" height="270" viewBox="0 0 430 270" xmlns="http://www.w3.org/2000/svg"></svg>
+      <p class="sta-graph-caption">Option C &middot; |sine| &#8212; bumps above axis</p>
+    </div>
+    <div class="sta-steps" id="s20-steps">
+      <div class="sta-step-card" id="s20-step1">
+        <div class="sta-step-header"><div class="sta-step-num">1</div><div class="sta-step-title">Released from rest</div></div>
+        <div class="sta-step-body">At the extreme, all energy is potential. Speed is exactly zero &#8212; the curve touches the t-axis.</div>
+      </div>
+      <div class="sta-step-card" id="s20-step2">
+        <div class="sta-step-header"><div class="sta-step-num">2</div><div class="sta-step-title">Through the bottom</div></div>
+        <div class="sta-step-body">Halfway through the swing, all potential energy has become kinetic. Speed peaks here &#8212; the top of the first hump.</div>
+      </div>
+      <div class="sta-step-card" id="s20-step3">
+        <div class="sta-step-header"><div class="sta-step-num">3</div><div class="sta-step-title">Other extreme</div></div>
+        <div class="sta-step-body">The bob momentarily stops at the far side. Speed drops to zero, and the cycle repeats. Speed never goes below the t-axis.</div>
+      </div>
+    </div>
+  </div>
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="goToScreen('screen-10')">Next &rarr; Module complete</button>
+  </div>
+</div>
+
+<!-- ─── GLOBAL NARRATION BAR ─── -->
+<div id="narration-bar" class="narration-bar">
+  <div class="narr-progress-track">
+    <div class="narr-progress-fill" id="narr-progress-fill"></div>
+  </div>
+  <div class="narr-main">
+    <span class="narr-text" id="narr-text"></span>
+    <div class="narr-buttons">
+      <button class="btn-narr" id="btn-narr-toggle" onclick="narrToggle()">&#9654; Play</button>
+      <button class="btn-narr" id="btn-narr-restart" onclick="narrRestart()">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="uniform_nonuniform_motion.js"></script>
+</body>
+</html>
