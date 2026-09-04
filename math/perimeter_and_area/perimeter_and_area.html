@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perimeter</title>
+  <link rel="stylesheet" href="perimeter_and_area.css">
+</head>
+<body>
+
+<div id="screen-intro" class="screen screen-intro">
+  <div class="intro-eyebrow">FOUNDATION MATHS &middot; INTERACTIVE LESSON</div>
+  <h1 class="intro-title">Perimeter<br>and Area</h1>
+  <p class="intro-subtitle">An interactive lesson that teaches perimeter and area through animated shapes and live simulations.</p>
+  <button class="btn-start" onclick="showMain()">Start &rarr;</button>
+</div>
+
+<div id="screen-main" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 1 / 10</div>
+    <h1 class="screen-title">Perimeter</h1>
+    <div class="screen-subtitle">The total length around a shape's border</div>
+  </div>
+
+  <div class="screen-content">
+
+    <!-- Shape selector -->
+    <div class="shape-tabs">
+      <button class="shape-tab active" data-shape="square" onclick="setShape('square')">Square</button>
+      <button class="shape-tab" data-shape="triangle" onclick="setShape('triangle')">Equilateral Triangle</button>
+      <button class="shape-tab" data-shape="rectangle" onclick="setShape('rectangle')">Rectangle</button>
+    </div>
+
+    <!-- Main grid: animation + formulas -->
+    <div class="perim-grid">
+
+      <!-- Left: animated SVG -->
+      <div class="anim-panel" id="anim-panel">
+        <div class="anim-panel-label">Watch the insect walk the perimeter</div>
+        <div class="svg-wrap">
+          <svg id="shape-svg" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" aria-label="Animated shape with insect tracing the perimeter"></svg>
+        </div>
+      </div>
+
+      <!-- Right: formula cards -->
+      <div class="formula-panel">
+        <div class="formula-panel-title">Perimeter Formulas</div>
+
+        <div class="formula-card active-card" id="formula-square" onclick="setShape('square')">
+          <div class="formula-shape-name">Square</div>
+          <div class="formula-expr">P = 4a</div>
+          <div class="formula-note">All four sides are equal, each of length <em>a</em>.</div>
+        </div>
+
+        <div class="formula-card" id="formula-triangle" onclick="setShape('triangle')">
+          <div class="formula-shape-name">Equilateral Triangle</div>
+          <div class="formula-expr">P = 3a</div>
+          <div class="formula-note">All three sides are equal, each of length <em>a</em>.</div>
+        </div>
+
+        <div class="formula-card" id="formula-rectangle" onclick="setShape('rectangle')">
+          <div class="formula-shape-name">Rectangle</div>
+          <div class="formula-expr">P = 2(a + b)</div>
+          <div class="formula-note">Length <em>a</em> and width <em>b</em> — two of each.</div>
+        </div>
+
+        <div class="special-note" id="special-case-note">
+          <div class="special-note-title">Special Case</div>
+          <div class="special-note-text">
+            The square formula <strong>P = 4a</strong> is a special case of the rectangle formula <strong>P = 2(a + b)</strong>.<br><br>
+            When <em>a = b</em>:&nbsp; 2(a + b) = 2(a + a) = 2 × 2a = <strong>4a</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="showIntro()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showMCQ1()">Next &rarr; Practice Question</button>
+  </div>
+</div>
+
+<div id="screen-2" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 2 / 10</div>
+    <h1 class="screen-title">Practice Question</h1>
+    <div class="screen-subtitle">Apply what you've learned about perimeter</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="mcq-grid">
+
+      <!-- Left: L-shape diagram -->
+      <div class="mcq-diagram-panel" id="mcq1-diagram">
+        <div class="mcq-diagram-label">L-shaped figure &mdash; all sides are labelled</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="L-shaped figure with six labelled sides">
+          <title>L-shaped figure</title>
+
+          <!-- Shape fill -->
+          <path d="M 80,220 L 280,220 L 280,170 L 205,170 L 205,70 L 80,70 Z" class="mcq-shape-bg"/>
+
+          <!-- Right-angle marker at inner corner -->
+          <path d="M 213,170 L 213,162 L 205,162" class="mcq-corner-mark"/>
+
+          <!-- Dimension labels -->
+          <!-- Bottom: 8 cm -->
+          <text x="180" y="242" class="dim-label" text-anchor="middle" dominant-baseline="middle">8 cm</text>
+          <!-- Left: 6 cm (rotated) -->
+          <text x="52" y="145" class="dim-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90,52,145)">6 cm</text>
+          <!-- Top partial: 5 cm -->
+          <text x="142" y="52" class="dim-label" text-anchor="middle" dominant-baseline="middle">5 cm</text>
+          <!-- Right short: 2 cm -->
+          <text x="300" y="195" class="dim-label" text-anchor="middle" dominant-baseline="middle">2 cm</text>
+          <!-- Inner horizontal: 3 cm (inside notch, below edge) -->
+          <text x="242" y="186" class="dim-label" text-anchor="middle" dominant-baseline="middle">3 cm</text>
+          <!-- Inner vertical: 4 cm (inside notch, right of edge) -->
+          <text x="224" y="120" class="dim-label" text-anchor="middle" dominant-baseline="middle">4 cm</text>
+        </svg>
+      </div>
+
+      <!-- Right: Question + options -->
+      <div class="mcq-question-panel" id="mcq1-question-panel">
+        <p class="mcq-question-text" id="mcq1-question">
+          What is the perimeter of this L-shaped figure?
+        </p>
+        <div class="mcq-options" id="mcq1-options">
+          <button class="mcq-opt" data-value="21" onclick="selectMCQ(1, this, '21')">21 cm</button>
+          <button class="mcq-opt" data-value="32" onclick="selectMCQ(1, this, '32')">32 cm</button>
+          <button class="mcq-opt" data-value="36" onclick="selectMCQ(1, this, '36')">36 cm</button>
+          <button class="mcq-opt" data-value="28" onclick="selectMCQ(1, this, '28')">28 cm</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="backFromMCQ()">&#8592; Back</button>
+    <button class="btn-primary" onclick="submitMCQ(1)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq1-next" disabled onclick="showMCQ2()">Next &rarr; See Solution</button>
+    <span class="mcq-feedback" id="mcq1-feedback"></span>
+  </div>
+
+</div>
+
+<div id="screen-expl" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 3 / 10</div>
+    <h1 class="screen-title">Solution Explained</h1>
+    <div class="screen-subtitle">Step-by-step working for the L-shape perimeter</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="expl-grid">
+
+      <!-- Left: annotated L-shape diagram with numbered sides -->
+      <div class="mcq-diagram-panel" id="expl-diagram">
+        <div class="mcq-diagram-label">L-shaped figure &mdash; sides numbered &#9312;&#8211;&#9317; clockwise</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="L-shaped figure with six sides numbered one to six clockwise from the bottom">
+          <title>L-shaped figure &mdash; solution explained</title>
+
+          <!-- Shape fill -->
+          <path d="M 80,220 L 280,220 L 280,170 L 205,170 L 205,70 L 80,70 Z" class="mcq-shape-bg"/>
+
+          <!-- Right-angle marker at inner corner -->
+          <path d="M 213,170 L 213,162 L 205,162" class="mcq-corner-mark"/>
+
+          <!-- Numbered dimension labels (clockwise from bottom) -->
+          <!-- ① Bottom: 8 cm -->
+          <text x="180" y="242" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9312; 8 cm</text>
+          <!-- ② Right short: 2 cm -->
+          <text x="302" y="195" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9313; 2 cm</text>
+          <!-- ③ Step horizontal: 3 cm -->
+          <text x="242" y="186" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9314; 3 cm</text>
+          <!-- ④ Step vertical: 4 cm (rotated) -->
+          <text x="226" y="120" class="dim-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90,226,120)">&#9315; 4 cm</text>
+          <!-- ⑤ Top: 5 cm -->
+          <text x="142" y="52" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9316; 5 cm</text>
+          <!-- ⑥ Left: 6 cm (rotated) -->
+          <text x="52" y="145" class="dim-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90,52,145)">&#9317; 6 cm</text>
+        </svg>
+      </div>
+
+      <!-- Right: step-by-step working -->
+      <div class="expl-working-panel">
+        <div class="expl-panel-title">Step-by-Step Working</div>
+        <div class="expl-steps" id="expl-workings">
+          <div class="expl-step"><span class="expl-num">&#9312;</span><span class="expl-side">Bottom</span><span class="expl-val">8 cm</span></div>
+          <div class="expl-step"><span class="expl-num">&#9313;</span><span class="expl-side">Right (short)</span><span class="expl-val">2 cm</span></div>
+          <div class="expl-step"><span class="expl-num">&#9314;</span><span class="expl-side">Step (horizontal)</span><span class="expl-val">3 cm</span></div>
+          <div class="expl-step"><span class="expl-num">&#9315;</span><span class="expl-side">Step (vertical)</span><span class="expl-val">4 cm</span></div>
+          <div class="expl-step"><span class="expl-num">&#9316;</span><span class="expl-side">Top</span><span class="expl-val">5 cm</span></div>
+          <div class="expl-step"><span class="expl-num">&#9317;</span><span class="expl-side">Left</span><span class="expl-val">6 cm</span></div>
+        </div>
+        <div class="expl-sum-row">
+          <span class="expl-sum-eq">8 + 2 + 3 + 4 + 5 + 6</span>
+        </div>
+        <div class="expl-total-box" id="expl-total">
+          <span class="expl-total-label">Perimeter</span>
+          <span class="expl-total-val">= 28 cm</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="backFromExpl()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showStaircase()">Next &rarr; Staircase Challenge</button>
+  </div>
+
+</div>
+
+<div id="screen-3" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 4 / 10</div>
+    <h1 class="screen-title">Staircase Challenge</h1>
+    <div class="screen-subtitle">A 20-step staircase &mdash; only total width and height are given</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="mcq-grid">
+
+      <!-- Left: 20-step staircase diagram -->
+      <div class="mcq-diagram-panel" id="mcq2-diagram">
+        <div class="mcq-diagram-label">20-step staircase &mdash; individual step and total dimensions labelled</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="20-step staircase with individual step dimensions 0.45 cm wide and 0.3 cm tall, total width 9 cm and total height 6 cm labelled">
+          <title>20-step staircase figure</title>
+
+          <!-- Shape fill: 20-step staircase path (x0=80,y0=60, W=220px=9cm, H=160px=6cm, sw=11, sh=8) -->
+          <path d="M 80,60 L 91,60 L 91,68 L 102,68 L 102,76 L 113,76 L 113,84 L 124,84 L 124,92 L 135,92 L 135,100 L 146,100 L 146,108 L 157,108 L 157,116 L 168,116 L 168,124 L 179,124 L 179,132 L 190,132 L 190,140 L 201,140 L 201,148 L 212,148 L 212,156 L 223,156 L 223,164 L 234,164 L 234,172 L 245,172 L 245,180 L 256,180 L 256,188 L 267,188 L 267,196 L 278,196 L 278,204 L 289,204 L 289,212 L 300,212 L 300,220 L 80,220 Z" class="mcq-shape-bg"/>
+
+          <!-- Right-angle marker at top-left and bottom-left only -->
+          <path d="M 80,68 L 88,68 L 88,60" class="mcq-corner-mark"/>
+          <path d="M 80,212 L 88,212 L 88,220" class="mcq-corner-mark"/>
+
+          <!-- Individual step dimension callout: first tread (80,60)→(91,60), width = 0.45 cm -->
+          <line x1="80" y1="53" x2="91" y2="53" stroke="#f97316" stroke-width="1"/>
+          <line x1="80" y1="53" x2="80" y2="60" stroke="#f97316" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="91" y1="53" x2="91" y2="60" stroke="#f97316" stroke-width="1" stroke-dasharray="2 2"/>
+          <text x="85" y="46" class="step-dim-label" text-anchor="middle">0.45 cm</text>
+
+          <!-- Individual step dimension callout: first riser (91,60)→(91,68), height = 0.3 cm -->
+          <line x1="97" y1="60" x2="97" y2="68" stroke="#3b82f6" stroke-width="1"/>
+          <line x1="91" y1="60" x2="97" y2="60" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="91" y1="68" x2="97" y2="68" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2 2"/>
+          <text x="115" y="66" class="step-dim-label" text-anchor="middle">0.3 cm</text>
+
+          <!-- Total width: 9 cm (bottom edge) -->
+          <text x="190" y="240" class="dim-label" text-anchor="middle" dominant-baseline="middle">9 cm</text>
+          <!-- Total height: 6 cm (left edge, rotated) -->
+          <text x="58" y="140" class="dim-label" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90,58,140)">6 cm</text>
+
+          <!-- Brace lines for total width -->
+          <line x1="80" y1="232" x2="300" y2="232" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+          <!-- Brace lines for total height -->
+          <line x1="68" y1="60" x2="68" y2="220" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>
+        </svg>
+      </div>
+
+      <!-- Right: question + options -->
+      <div class="mcq-question-panel" id="mcq2-question-panel">
+        <p class="mcq-question-text" id="mcq2-question">
+          What is the perimeter of this 20-step staircase?
+        </p>
+        <div class="mcq-options" id="mcq2-options">
+          <button class="mcq-opt" data-value="24" onclick="selectMCQ(2, this, '24')">24 cm</button>
+          <button class="mcq-opt" data-value="26" onclick="selectMCQ(2, this, '26')">26 cm</button>
+          <button class="mcq-opt" data-value="28" onclick="selectMCQ(2, this, '28')">28 cm</button>
+          <button class="mcq-opt" data-value="30" onclick="selectMCQ(2, this, '30')">30 cm</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="backFromMCQ2()">&#8592; Back</button>
+    <button class="btn-primary" onclick="submitMCQ(2)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq2-next" disabled onclick="showInsight()">Next &rarr; Staircase Insight</button>
+    <span class="mcq-feedback" id="mcq2-feedback"></span>
+  </div>
+
+</div>
+
+<div id="screen-4" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <div class="section-label">SECTION 5 / 10</div>
+    </div>
+    <h1 class="screen-title">The Staircase Insight</h1>
+    <div class="screen-subtitle">Why the step count never changes the perimeter</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="insight-grid">
+
+      <!-- Left: animated SVG -->
+      <div class="insight-anim-panel" id="insight-anim-panel">
+        <div class="insight-anim-label">Press Animate to see the proof</div>
+        <svg id="insight-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-label="Staircase steps collapsing into a rectangle to show perimeter equals 2 times width plus height"></svg>
+        <button class="btn-animate" id="btn-animate" onclick="runInsightAnimation()">&#9654; Animate</button>
+      </div>
+
+      <!-- Right: explanation cards -->
+      <div class="insight-expl-panel">
+
+        <div class="insight-card insight-card-blue" id="insight-horiz-label">
+          <div class="insight-card-title">&#10230; Horizontal treads (blue)</div>
+          <div class="insight-card-text">All horizontal step-edges together span exactly the total width: <strong>W&nbsp;=&nbsp;9&nbsp;cm</strong>. They add up to W no matter how many steps there are.</div>
+        </div>
+
+        <div class="insight-card insight-card-orange" id="insight-vert-label">
+          <div class="insight-card-title">&#8597; Vertical risers (orange)</div>
+          <div class="insight-card-text">All vertical step-edges together span exactly the total height: <strong>H&nbsp;=&nbsp;6&nbsp;cm</strong>. They add up to H regardless of step count.</div>
+        </div>
+
+        <div class="insight-card insight-card-formula" id="insight-formula-card">
+          <div class="insight-card-title">So the perimeter is always&hellip;</div>
+          <div class="insight-formula-steps">
+            <div class="insight-formula-line">P&nbsp;=&nbsp;<span class="insight-blue">W</span>&nbsp;+&nbsp;<span class="insight-orange">H</span>&nbsp;+&nbsp;<span class="insight-blue">W</span>&nbsp;+&nbsp;<span class="insight-orange">H</span></div>
+            <div class="insight-formula-line">&nbsp;&nbsp;=&nbsp;2(<span class="insight-blue">W</span>&nbsp;+&nbsp;<span class="insight-orange">H</span>)</div>
+            <div class="insight-formula-line">&nbsp;&nbsp;=&nbsp;2(9&nbsp;+&nbsp;6)&nbsp;=&nbsp;<strong>30&nbsp;cm</strong></div>
+          </div>
+        </div>
+
+        <div class="insight-card insight-card-result" id="insight-result-card">
+          <div class="insight-card-title">General rule</div>
+          <div class="insight-card-text">This works for <em>any</em> number of steps. As long as the total width and height stay the same, the perimeter stays the same: <strong>P&nbsp;=&nbsp;2(W&nbsp;+&nbsp;H)</strong>.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="backFromInsight()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showCircles()">Next &rarr; Circle Perimeter</button>
+  </div>
+
+</div>
+
+<div id="screen-circles" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 6 / 10</div>
+    <h1 class="screen-title">Perimeter of Circles</h1>
+    <div class="screen-subtitle">Circle, semi-circle and sector &mdash; when the boundary curves</div>
+  </div>
+
+  <div class="screen-content">
+
+    <div class="shape-tabs">
+      <button class="shape-tab active" data-cshape="circle" onclick="setCircleShape('circle')">Circle</button>
+      <button class="shape-tab" data-cshape="semicircle" onclick="setCircleShape('semicircle')">Semi-circle</button>
+      <button class="shape-tab" data-cshape="sector" onclick="setCircleShape('sector')">Sector (angle &theta;)</button>
+    </div>
+
+    <div class="perim-grid">
+
+      <div class="anim-panel" id="circle-anim-panel">
+        <div class="anim-panel-label" id="circle-diagram-label">Circle with radius r</div>
+        <div class="svg-wrap">
+          <svg id="circle-svg" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" aria-label="Circle perimeter diagram"></svg>
+        </div>
+      </div>
+
+      <div class="formula-panel">
+        <div class="formula-panel-title">Perimeter Formulas</div>
+
+        <div class="formula-card active-card" id="cformula-circle" onclick="setCircleShape('circle')">
+          <div class="formula-shape-name">Circle</div>
+          <div class="formula-expr">P = 2&pi;r</div>
+          <div class="formula-note">Also called the <em>circumference</em>. <em>r</em> is the radius; &pi; &approx; 3.14159.</div>
+        </div>
+
+        <div class="formula-card" id="cformula-semicircle" onclick="setCircleShape('semicircle')">
+          <div class="formula-shape-name">Semi-circle</div>
+          <div class="formula-expr">P = &pi;r + 2r</div>
+          <div class="formula-note">Half the circumference (&pi;r) plus the straight diameter (2r).</div>
+        </div>
+
+        <div class="formula-card" id="cformula-sector" onclick="setCircleShape('sector')">
+          <div class="formula-shape-name">Sector (angle &theta;&deg;)</div>
+          <div class="formula-expr formula-expr-long">P = (&theta;/360)&times;2&pi;r + 2r</div>
+          <div class="formula-note">Arc = (&theta;/360)&times;2&pi;r, plus two radii r each. In radians: P = &theta;r + 2r.</div>
+        </div>
+
+        <div class="special-note" id="circle-special-note">
+          <div class="special-note-title">Special Case</div>
+          <div class="special-note-text">
+            A semi-circle is a sector with &theta; = 180&deg;:<br><br>
+            arc = (180/360)&times;2&pi;r = &pi;r<br>
+            P = &pi;r + 2r &nbsp;&#10003;
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="backFromCircles()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showMCQ3()">Next &rarr; Running Track Challenge</button>
+  </div>
+
+</div>
+
+<div id="screen-mcq3" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 7 / 10</div>
+    <h1 class="screen-title">Running Track Challenge</h1>
+    <div class="screen-subtitle">Combine straight and curved boundaries</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="mcq-grid">
+
+      <!-- Left: running track diagram -->
+      <div class="mcq-diagram-panel" id="mcq3-diagram">
+        <div class="mcq-diagram-label">Running track &mdash; two straight sections and two semicircular ends</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="Running track with two straight sections of 36 m each and two semicircular ends with radius 7 m">
+          <title>Running track figure</title>
+
+          <!-- Track fill -->
+          <path d="M 100,110 L 280,110 A 35,35 0 0 1 280,180 L 100,180 A 35,35 0 0 1 100,110 Z" class="mcq-shape-bg"/>
+
+          <!-- Top straight section label: 36 m -->
+          <text x="190" y="96" class="dim-label" text-anchor="middle" dominant-baseline="middle">36 m</text>
+
+          <!-- Bottom straight section label: 36 m -->
+          <text x="190" y="194" class="dim-label" text-anchor="middle" dominant-baseline="middle">36 m</text>
+
+          <!-- Radius callout on right semicircle -->
+          <line x1="280" y1="145" x2="318" y2="145" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <circle cx="280" cy="145" r="3" fill="#64748b"/>
+          <text x="322" y="145" class="dim-label" text-anchor="start" dominant-baseline="middle">r = 7 m</text>
+        </svg>
+      </div>
+
+      <!-- Right: question + options -->
+      <div class="mcq-question-panel" id="mcq3-question-panel">
+        <p class="mcq-question-text" id="mcq3-question">
+          What is the total perimeter of this running track? (Use &pi;&nbsp;=&nbsp;22/7)
+        </p>
+        <div class="mcq-options" id="mcq3-options">
+          <button class="mcq-opt" data-value="94"  onclick="selectMCQ(3, this, '94')">94 m</button>
+          <button class="mcq-opt" data-value="100" onclick="selectMCQ(3, this, '100')">100 m</button>
+          <button class="mcq-opt" data-value="116" onclick="selectMCQ(3, this, '116')">116 m</button>
+          <button class="mcq-opt" data-value="160" onclick="selectMCQ(3, this, '160')">160 m</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="backFromMCQ3()">&#8592; Back</button>
+    <button class="btn-primary" onclick="submitMCQ(3)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq3-next" disabled onclick="showMCQ3Expl()">Next &rarr; See Solution</button>
+    <span class="mcq-feedback" id="mcq3-feedback"></span>
+  </div>
+
+</div>
+
+<div id="screen-mcq3-expl" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="section-label">SECTION 8 / 10</div>
+    <h1 class="screen-title">Solution Explained</h1>
+    <div class="screen-subtitle">Step-by-step working for the running track perimeter</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="expl-grid">
+
+      <!-- Left: colour-coded track diagram -->
+      <div class="mcq-diagram-panel" id="mcq3-expl-diagram">
+        <div class="mcq-diagram-label">Running track &mdash; straight sections &#9312;&#9313; (orange) and semicircular ends &#9314; (green)</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="Running track with straight sections numbered one and two in orange, and semicircular ends numbered three in green">
+          <title>Running track solution explained</title>
+
+          <!-- Track fill -->
+          <path d="M 100,110 L 280,110 A 35,35 0 0 1 280,180 L 100,180 A 35,35 0 0 1 100,110 Z" class="mcq-shape-bg"/>
+
+          <!-- ① Top straight section: orange -->
+          <line x1="100" y1="110" x2="280" y2="110" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- ② Bottom straight section: orange -->
+          <line x1="280" y1="180" x2="100" y2="180" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- ③ Right semicircle: green -->
+          <path d="M 280,110 A 35,35 0 0 1 280,180" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- ③ Left semicircle: green -->
+          <path d="M 100,180 A 35,35 0 0 1 100,110" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>
+
+          <!-- Labels -->
+          <text x="190" y="96"  class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9312; 36 m</text>
+          <text x="190" y="194" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9313; 36 m</text>
+          <text x="328" y="123" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9314;</text>
+          <text x="52"  y="123" class="dim-label" text-anchor="middle" dominant-baseline="middle">&#9314;</text>
+
+          <!-- Radius callout -->
+          <line x1="280" y1="145" x2="318" y2="145" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <circle cx="280" cy="145" r="3" fill="#64748b"/>
+          <text x="322" y="155" class="dim-label" text-anchor="start" dominant-baseline="middle">r = 7 m</text>
+        </svg>
+      </div>
+
+      <!-- Right: step-by-step working -->
+      <div class="expl-working-panel">
+        <div class="expl-panel-title">Step-by-Step Working</div>
+        <div class="expl-steps" id="mcq3-expl-steps">
+          <div class="expl-step" id="mcq3-straight-row">
+            <span class="expl-num">&#9312;&#9313;</span>
+            <span class="expl-side">Two straight sections</span>
+            <span class="expl-val">2 &times; 36 = 72 m</span>
+          </div>
+          <div class="expl-step" id="mcq3-circle-row">
+            <span class="expl-num">&#9314;</span>
+            <span class="expl-side">2 semicircles = 1 full circle (2&pi;r)</span>
+            <span class="expl-val">2 &times; <sup>22</sup>&frasl;<sub>7</sub> &times; 7 = 44 m</span>
+          </div>
+        </div>
+        <div class="expl-sum-row">
+          <span class="expl-sum-eq">72 + 44</span>
+        </div>
+        <div class="expl-total-box" id="mcq3-total-box">
+          <span class="expl-total-label">Perimeter</span>
+          <span class="expl-total-val">= 116 m</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="backFromMCQ3Expl()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showMCQ4()">Next &rarr; Half Ring Question</button>
+  </div>
+
+</div>
+
+<!-- ─── SCREEN 9/10: Modified Half Ring MCQ ─── -->
+<div id="screen-mcq4" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <div class="section-label">SECTION 9 / 10</div>
+    </div>
+    <h1 class="screen-title">Modified Half Ring</h1>
+    <div class="screen-subtitle">Apply circle perimeter concepts to a combined shape</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="mcq-grid">
+
+      <!-- Left: shape diagram -->
+      <div class="mcq-diagram-panel" id="mcq4-diagram">
+        <div class="mcq-diagram-label">Modified half ring &mdash; outer diameter and slanted sides labelled</div>
+        <svg viewBox="0 0 380 290" xmlns="http://www.w3.org/2000/svg" aria-label="Modified half ring with outer diameter 28 cm and two slanted sides of length 7 root 2 cm each at 45 degrees">
+          <title>Modified half ring perimeter question</title>
+          <defs>
+            <marker id="arr4L" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+              <path d="M6,0 L0,3 L6,6 Z" fill="#374151"/>
+            </marker>
+            <marker id="arr4R" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#374151"/>
+            </marker>
+          </defs>
+
+          <!-- Shape fill (no stroke — arcs and slants drawn separately) -->
+          <path d="M 290,215 A 100,100 0 0 0 90,215 L 140,165 A 70.71,70.71 0 0 1 240,165 L 290,215 Z"
+                fill="#dbeafe" stroke="none"/>
+
+          <!-- Outer arc (blue) -->
+          <path d="M 290,215 A 100,100 0 0 0 90,215" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round"/>
+          <!-- Inner arc (blue) -->
+          <path d="M 140,165 A 70.71,70.71 0 0 1 240,165" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Left slant (orange) -->
+          <line x1="90" y1="215" x2="140" y2="165" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Right slant (orange) -->
+          <line x1="240" y1="165" x2="290" y2="215" stroke="#f97316" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- Outer diameter dimension line with arrows -->
+          <line x1="92" y1="245" x2="288" y2="245" stroke="#374151" stroke-width="1.5"
+                marker-start="url(#arr4L)" marker-end="url(#arr4R)"/>
+          <text x="190" y="261" text-anchor="middle" font-size="13" fill="#374151" font-family="sans-serif">28 cm</text>
+
+          <!-- Slant side labels -->
+          <text x="78" y="185" text-anchor="end" font-size="12" fill="#f97316" font-family="sans-serif">7&#8730;2 cm</text>
+          <text x="302" y="185" text-anchor="start" font-size="12" fill="#f97316" font-family="sans-serif">7&#8730;2 cm</text>
+
+          <!-- Horizontal reference lines at base corners (show what 45° is measured from) -->
+          <line x1="70" y1="215" x2="112" y2="215" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 2"/>
+          <line x1="268" y1="215" x2="310" y2="215" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 2"/>
+
+          <!-- 45° angle arcs at base corners -->
+          <path d="M 272,215 A 18,18 0 0 1 277,202" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <text x="268" y="208" text-anchor="end" font-size="10" fill="#64748b" font-family="sans-serif">45°</text>
+
+          <path d="M 103,202 A 18,18 0 0 1 108,215" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <text x="112" y="208" text-anchor="start" font-size="10" fill="#64748b" font-family="sans-serif">45°</text>
+
+          <!-- Hint -->
+          <text x="190" y="282" text-anchor="middle" font-size="11" fill="#64748b" font-family="sans-serif">(Use &#960; = 22/7, &#8730;2 = 1.4)</text>
+        </svg>
+      </div>
+
+      <!-- Right: question + options -->
+      <div class="mcq-question-panel" id="mcq4-question-panel">
+        <p class="mcq-question-text">What is the perimeter of this shape?</p>
+        <div class="mcq-options" id="mcq4-options">
+          <button class="mcq-opt" data-value="79" onclick="selectMCQ(4, this, '79')">A&nbsp;&nbsp;79 cm</button>
+          <button class="mcq-opt" data-value="80" onclick="selectMCQ(4, this, '80')">B&nbsp;&nbsp;80 cm</button>
+          <button class="mcq-opt" data-value="69" onclick="selectMCQ(4, this, '69')">C&nbsp;&nbsp;69 cm</button>
+          <button class="mcq-opt" data-value="58" onclick="selectMCQ(4, this, '58')">D&nbsp;&nbsp;58 cm</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mcq-controls">
+    <button class="btn-primary" onclick="backFromMCQ4()">&#8592; Back</button>
+    <button class="btn-primary" onclick="submitMCQ(4)">&#10003; Submit</button>
+    <button class="btn-secondary" id="btn-mcq4-next" disabled onclick="showMCQ4Expl()">Next &rarr; See Solution</button>
+    <span class="mcq-feedback" id="mcq4-feedback"></span>
+  </div>
+
+</div>
+
+<!-- ─── SCREEN 10/10: Modified Half Ring Explanation ─── -->
+<div id="screen-mcq4-expl" class="screen" style="display:none">
+
+  <div class="screen-header">
+    <div class="screen-header-row">
+      <div class="section-label">SECTION 10 / 10</div>
+    </div>
+    <h1 class="screen-title">Solution Explained</h1>
+    <div class="screen-subtitle">Step-by-step working for the modified half ring perimeter</div>
+  </div>
+
+  <div class="screen-content">
+    <div class="expl-grid">
+
+      <!-- Left: annotated diagram with animation -->
+      <div class="mcq-diagram-panel" id="mcq4-expl-diagram">
+        <div class="mcq-diagram-label">Perimeter traced: right slant &rarr; outer arc &rarr; left slant &rarr; inner arc</div>
+        <svg viewBox="0 0 380 270" xmlns="http://www.w3.org/2000/svg" aria-label="Modified half ring with animated perimeter tracing">
+          <title>Modified half ring perimeter solution</title>
+
+          <!-- Shape fill (no stroke — segments drawn separately) -->
+          <path d="M 290,205 A 100,100 0 0 0 90,205 L 140,155 A 70.71,70.71 0 0 1 240,155 L 290,205 Z"
+                fill="#dbeafe" stroke="none"/>
+
+          <!-- Static light outline -->
+          <path d="M 290,205 A 100,100 0 0 0 90,205 L 140,155 A 70.71,70.71 0 0 1 240,155 L 290,205 Z"
+                fill="none" stroke="#93c5fd" stroke-width="1.2"/>
+
+          <!-- Horizontal reference lines at base corners (show what 45° is measured from) -->
+          <line x1="268" y1="205" x2="310" y2="205" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 2"/>
+          <line x1="70" y1="205" x2="112" y2="205" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4 2"/>
+
+          <!-- 45° angle arcs at base corners -->
+          <path d="M 272,205 A 18,18 0 0 1 277,192" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <text x="268" y="198" text-anchor="end" font-size="10" fill="#64748b" font-family="sans-serif">45°</text>
+          <path d="M 103,192 A 18,18 0 0 1 108,205" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <text x="112" y="198" text-anchor="start" font-size="10" fill="#64748b" font-family="sans-serif">45°</text>
+
+          <!-- Animated perimeter segments (initially hidden via dashoffset, revealed by narration) -->
+          <path id="mcq4-anim-rs" d="M 240,155 L 290,205"
+                fill="none" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+          <path id="mcq4-anim-oa" d="M 290,205 A 100,100 0 0 0 90,205"
+                fill="none" stroke="#1e40af" stroke-width="3.5" stroke-linecap="round"/>
+          <path id="mcq4-anim-ls" d="M 90,205 L 140,155"
+                fill="none" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+          <path id="mcq4-anim-ia" d="M 140,155 A 70.71,70.71 0 0 1 240,155"
+                fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>
+
+          <!-- Static outer diameter annotation -->
+          <line x1="90" y1="232" x2="290" y2="232" stroke="#94a3b8" stroke-width="1.2"/>
+          <line x1="90" y1="228" x2="90" y2="236" stroke="#94a3b8" stroke-width="1.2"/>
+          <line x1="290" y1="228" x2="290" y2="236" stroke="#94a3b8" stroke-width="1.2"/>
+          <text x="190" y="248" text-anchor="middle" font-size="11" fill="#64748b" font-family="sans-serif">28 cm (R = 14 cm)</text>
+
+          <!-- Segment labels (revealed by animation) -->
+          <text id="mcq4-lbl-rs" x="296" y="176" text-anchor="start" font-size="11" fill="#92400e" font-weight="600" font-family="sans-serif" visibility="hidden">7&#8730;2 cm</text>
+          <text id="mcq4-lbl-oa" x="190" y="96" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="600" font-family="sans-serif" visibility="hidden">44 cm</text>
+          <text id="mcq4-lbl-ls" x="84" y="176" text-anchor="end" font-size="11" fill="#92400e" font-weight="600" font-family="sans-serif" visibility="hidden">7&#8730;2 cm</text>
+          <text id="mcq4-lbl-ia" x="190" y="137" text-anchor="middle" font-size="11" fill="#065f46" font-weight="600" font-family="sans-serif" visibility="hidden">11&#8730;2 cm</text>
+          <text id="mcq4-lbl-tot" x="190" y="265" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="700" font-family="sans-serif" visibility="hidden">P = 44 + 19.6 + 15.4 = 79 cm</text>
+        </svg>
+      </div>
+
+      <!-- Right: step-by-step working -->
+      <div class="expl-working-panel">
+        <div class="expl-panel-title">Step-by-Step Working</div>
+        <div class="expl-steps">
+
+          <div class="expl-step" id="mcq4-pyth-row">
+            <span class="expl-num">&#9312;</span>
+            <span class="expl-side">Legs of each slanted side (45&deg; &rArr; legs equal)</span>
+            <span class="expl-val">leg = 7 cm</span>
+          </div>
+
+          <div class="expl-step" id="mcq4-outer-arc-row">
+            <span class="expl-num">&#9313;</span>
+            <span class="expl-side">Outer arc (&pi;R = <sup>22</sup>&frasl;<sub>7</sub> &times; 14)</span>
+            <span class="expl-val">= 44 cm</span>
+          </div>
+
+          <div class="expl-step" id="mcq4-sides-row">
+            <span class="expl-num">&#9314;</span>
+            <span class="expl-side">Two slanted sides (2 &times; 7&#8730;2 = 2 &times; 9.8)</span>
+            <span class="expl-val">= 19.6 cm</span>
+          </div>
+
+          <div class="expl-step" id="mcq4-inner-arc-row">
+            <span class="expl-num">&#9315;</span>
+            <span class="expl-side">Inner arc (r = 7&#8730;2, angle = 90&deg;; <sup>&pi;</sup>&frasl;<sub>2</sub> &times; 7&#8730;2 = 11 &times; 1.4)</span>
+            <span class="expl-val">= 15.4 cm</span>
+          </div>
+
+        </div>
+        <div class="expl-sum-row">
+          <span class="expl-sum-eq">44 + 19.6 + 15.4</span>
+        </div>
+        <div class="expl-total-box" id="mcq4-total-box">
+          <span class="expl-total-label">Perimeter</span>
+          <span class="expl-total-val">= 79 cm</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="expl-nav">
+    <button class="btn-primary" onclick="backFromMCQ4Expl()">&#8592; Back</button>
+    <button class="btn-primary" onclick="showIntro()">&#8635; Start Over</button>
+  </div>
+
+</div>
+
+<!-- ─── GLOBAL NARRATION BAR ─── -->
+<div id="narration-bar" class="narration-bar">
+  <div class="narr-progress-track">
+    <div class="narr-progress-fill" id="narr-progress-fill"></div>
+  </div>
+  <div class="narr-main">
+    <span class="narr-text" id="narr-text"></span>
+    <div class="narr-buttons">
+      <button class="btn-narr" id="btn-narr-toggle" onclick="narrToggle()">&#9654; Play</button>
+      <button class="btn-narr" id="btn-narr-restart" onclick="narrRestart()">&#8635; Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="perimeter_and_area.js"></script>
+</body>
+</html>
